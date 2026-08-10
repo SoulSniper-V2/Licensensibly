@@ -76,7 +76,7 @@ export default function Navbar() {
                         className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm ${
                           active
                             ? "bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 font-medium"
-                            : "text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-800/60"
+                            : "text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:bg-zinc-800 dark:hover:bg-zinc-800/60"
                         }`}
                       >
                         <Icon size={16} weight="bold" />
@@ -98,7 +98,7 @@ export default function Navbar() {
           <ThemeToggle />
           <Link
             href="/check"
-            className="bg-zinc-900 text-white text-sm font-semibold px-4 py-1.5 rounded-full hover:bg-black dark:bg-white dark:text-zinc-900 transition-colors"
+            className="bg-zinc-900 text-white text-sm font-semibold px-4 py-1.5 rounded-full hover:bg-black dark:bg-white dark:bg-zinc-900 dark:text-zinc-900 transition-colors"
           >
             Run check →
           </Link>

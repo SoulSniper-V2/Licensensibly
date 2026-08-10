@@ -33,7 +33,7 @@ export default function Dashboard() {
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
               <Link href="/check" className="rounded-full bg-zinc-900 text-white font-semibold px-7 py-3 hover:bg-black transition-colors">Run eligibility check →</Link>
-              <Link href="/settings" className="rounded-full border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 font-medium px-6 py-3 hover:bg-zinc-50">Company in Settings</Link>
+              <Link href="/settings" className="rounded-full border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 font-medium px-6 py-3 hover:bg-zinc-50 dark:bg-zinc-800">Company in Settings</Link>
             </div>
             <div className="mt-4 flex gap-6 mono text-xs text-zinc-500 dark:text-zinc-400">
               <span>• Try it free</span><span>• Works on your phone</span><span>• Shows what you need</span>
@@ -44,7 +44,7 @@ export default function Dashboard() {
                 { k: "22k+", v: "Filings benchmark", sub: "Harbor" },
                 { k: "NC SC VA", v: "Narrow vertical", sub: "Day-one moat" },
               ].map(s=> (
-                <div key={s.k} className="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 p-4">
+                <div key={s.k} className="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-800 p-4">
                   <div className="text-xl font-bold tracking-tight">{s.k}</div>
                   <div className="mono text-[11px] text-zinc-600 dark:text-zinc-400 leading-tight">{s.v}</div>
                   <div className="mono text-[10px] text-zinc-400">{s.sub}</div>
@@ -72,7 +72,7 @@ export default function Dashboard() {
                     </select>
                   </label>
                 </div>
-                <div className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 p-3 mono text-xs">
+                <div className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-800 p-3 mono text-xs">
                   <div className="font-semibold text-zinc-900 dark:text-zinc-100">{project.title}</div>
                   <div className="text-zinc-500 dark:text-zinc-400">{project.city}, {project.state} • {project.trade} • ${project.contractValue.toLocaleString()}</div>
                   <div className="mt-2 flex flex-wrap gap-1.5">
@@ -83,7 +83,7 @@ export default function Dashboard() {
                 </div>
                 <div className="flex gap-2">
                   <Link href={`/check?projectId=${project.id}&companyId=${company.id}`} className="flex-1 rounded-full bg-zinc-900 text-white mono text-xs font-semibold py-2.5 text-center hover:bg-black">Open in Check →</Link>
-                  <Link href="/calendar" className="rounded-full border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 mono text-xs font-semibold px-4 py-2.5 hover:bg-zinc-50">Calendar</Link>
+                  <Link href="/calendar" className="rounded-full border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 mono text-xs font-semibold px-4 py-2.5 hover:bg-zinc-50 dark:bg-zinc-800">Calendar</Link>
                 </div>
                 <div className="mono text-[11px] text-zinc-500 dark:text-zinc-400">Engine runs on every keystroke. No LLM in decision path.</div>
               </div>
@@ -107,7 +107,7 @@ export default function Dashboard() {
             <span className="mono text-xs text-zinc-500 dark:text-zinc-400 dark:text-zinc-400">For contractors, not paperwork experts</span>
           </div>
           <div className="mt-6 grid md:grid-cols-12 gap-4">
-            <div className="md:col-span-7 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 p-6">
+            <div className="md:col-span-7 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-800 p-6">
               <div className="mono text-xs tracking-[0.14em] text-zinc-500 dark:text-zinc-400 dark:text-zinc-400">01 — SIMPLE ANSWER</div>
               <div className="text-lg font-bold mt-1 dark:text-white">Get a clear answer.</div>
               <p className="mono text-sm text-zinc-600 dark:text-zinc-400 mt-2 leading-relaxed">Licensensibly tells you <span className="font-semibold text-zinc-900 dark:text-zinc-100 dark:text-white">yes, no, or what to fix</span> before you bid. No guessing.</p>
@@ -136,7 +136,7 @@ export default function Dashboard() {
 
       {/* PRICING — kept but with more air, not compact */}
       <section className="mx-auto max-w-[1200px] px-6 pb-12">
-        <div className="rounded-[24px] border border-zinc-200 dark:border-zinc-800 bg-zinc-50 p-6 md:p-8">
+        <div className="rounded-[24px] border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-800 p-6 md:p-8">
           <h2 className="text-xl font-bold tracking-tight text-center">Pricing — start narrow, expand later</h2>
           <p className="mono text-xs text-zinc-500 dark:text-zinc-400 text-center mt-1">Hundreds/mo — not $10 consumer. Validates wedge ROI.</p>
           <div className="mt-8 grid md:grid-cols-3 gap-6 max-w-[900px] mx-auto">

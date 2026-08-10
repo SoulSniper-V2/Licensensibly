@@ -23,7 +23,7 @@ export default function AIAssistant() {
       <button onClick={()=>setOpen(v=>!v)} className="fixed bottom-4 right-4 z-50 bg-zinc-900 text-white px-5 py-3 rounded-full text-sm font-semibold shadow-lg hover:bg-black">{open ? "× Close AINSIDE" : "◐ AINSIDE"}</button>
       {open && (
         <div className="fixed bottom-20 right-4 z-50 w-[380px] max-w-[calc(100vw-24px)] rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 shadow-xl flex flex-col overflow-hidden">
-          <div className="px-4 py-3 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50 flex items-center gap-2">
+          <div className="px-4 py-3 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-800 flex items-center gap-2">
             <span className="h-2 w-2 rounded-full bg-white dark:bg-zinc-900 animate-pulse" />
             <span className="text-sm font-bold">AINSIDE</span><span className="mono text-[11px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-full px-2 py-0.5">ag/gemini-3.6-flash-high</span><span className="ml-auto mono text-[11px] text-zinc-500 dark:text-zinc-400">NC SC VA</span>
           </div>

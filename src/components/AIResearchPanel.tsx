@@ -64,7 +64,7 @@ export default function AIResearchPanel({ result, city, state, trade, value }: {
 
   return (
     <div className="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 overflow-hidden">
-      <div className="flex items-center gap-2 px-5 py-3 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50">
+      <div className="flex items-center gap-2 px-5 py-3 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-800">
         <span className="h-2 w-2 rounded-full bg-white dark:bg-zinc-900 animate-pulse" />
         <h3 className="mono text-xs tracking-[0.14em] font-semibold">AINSIDE — REGULATORY RESEARCH</h3>
         <span className="mono text-[11px] border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 rounded-full px-2 py-0.5 text-zinc-500 dark:text-zinc-400">ag/gemini-3.6-flash-high</span>
@@ -87,7 +87,7 @@ export default function AIResearchPanel({ result, city, state, trade, value }: {
         {!error && text && <div className="space-y-1">{renderMarkdown(text)}</div>}
         {!error && !loading && !text && <div className="mono text-xs text-zinc-400">No output.</div>}
       </div>
-      <div className="px-5 py-2 bg-zinc-50 border-t border-zinc-200 dark:border-zinc-800 mono text-[11px] text-zinc-500 dark:text-zinc-400">Model ag/gemini-3.6-flash-high via http://192.168.1.204:20128/v1 • Streaming • Not legal advice</div>
+      <div className="px-5 py-2 bg-zinc-50 dark:bg-zinc-800 border-t border-zinc-200 dark:border-zinc-800 mono text-[11px] text-zinc-500 dark:text-zinc-400">Model ag/gemini-3.6-flash-high via http://192.168.1.204:20128/v1 • Streaming • Not legal advice</div>
     </div>
   );
 }

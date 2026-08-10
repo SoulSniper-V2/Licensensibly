@@ -39,18 +39,18 @@ export default function SettingsPage() {
               <div className="mt-3 text-zinc-600 dark:text-zinc-400">Qualifiers: {company.qualifiers.map(q=> `${q.name} (${q.states.join("/")})`).join(", ")}</div>
               <button onClick={()=>setShowCompanyPanel(true)} className="mt-4 w-full rounded-full bg-zinc-900 text-white mono text-xs font-semibold py-2.5 hover:bg-black">Open as panel →</button>
             </div>
-            <div className="rounded-xl border border-dashed border-zinc-300 bg-zinc-50 p-4 mono text-xs text-zinc-500 dark:text-zinc-400">Check now opens this as a popup instead of showing it statically — consolidates the surface per your request.</div>
+            <div className="rounded-xl border border-dashed border-zinc-300 bg-zinc-50 dark:bg-zinc-800 p-4 mono text-xs text-zinc-500 dark:text-zinc-400">Check now opens this as a popup instead of showing it statically — consolidates the surface per your request.</div>
           </div>
           <div className="space-y-4">
             <div className="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-6 space-y-3">
               <h3 className="text-sm font-bold">Edit company (panel demo)</h3>
               <p className="mono text-xs text-zinc-600 dark:text-zinc-400">Previously this form lived inline on /check left column and crowded the intake. Now it is a slide-over panel triggered from Check → reduces static chrome by ~40%.</p>
               <div className="grid md:grid-cols-2 gap-3">
-                <label className="block mono text-xs font-semibold text-zinc-700">Legal name<input defaultValue={company.legalName} className="mt-1 w-full rounded-xl border border-zinc-200 dark:border-zinc-800 px-3 py-2 text-sm bg-zinc-50" readOnly /></label>
-                <label className="block mono text-xs font-semibold text-zinc-700">Entity type<input defaultValue={company.entityType} className="mt-1 w-full rounded-xl border border-zinc-200 dark:border-zinc-800 px-3 py-2 text-sm bg-zinc-50" readOnly /></label>
+                <label className="block mono text-xs font-semibold text-zinc-700">Legal name<input defaultValue={company.legalName} className="mt-1 w-full rounded-xl border border-zinc-200 dark:border-zinc-800 px-3 py-2 text-sm bg-zinc-50 dark:bg-zinc-800" readOnly /></label>
+                <label className="block mono text-xs font-semibold text-zinc-700">Entity type<input defaultValue={company.entityType} className="mt-1 w-full rounded-xl border border-zinc-200 dark:border-zinc-800 px-3 py-2 text-sm bg-zinc-50 dark:bg-zinc-800" readOnly /></label>
               </div>
               <div className="flex gap-2 pt-2">
-                <Link href="/companies" className="rounded-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 mono text-xs font-semibold px-4 py-2 hover:bg-zinc-50">Manage all → Companies</Link>
+                <Link href="/companies" className="rounded-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 mono text-xs font-semibold px-4 py-2 hover:bg-zinc-50 dark:bg-zinc-800">Manage all → Companies</Link>
                 <Link href="/check" className="rounded-full bg-zinc-900 text-white mono text-xs font-semibold px-4 py-2 hover:bg-black">Back to Check</Link>
               </div>
             </div>
@@ -79,7 +79,7 @@ export default function SettingsPage() {
           <div className="w-[420px] max-w-[90vw] bg-white dark:bg-zinc-900 border-l border-zinc-200 dark:border-zinc-800 shadow-2xl p-6 space-y-4 overflow-auto">
             <div className="flex items-center justify-between">
               <h3 className="mono text-xs tracking-[0.14em] text-zinc-500 dark:text-zinc-400 font-semibold">COMPANY PANEL</h3>
-              <button onClick={()=>setShowCompanyPanel(false)} className="rounded-full border border-zinc-200 dark:border-zinc-800 mono text-xs px-3 py-1.5 hover:bg-zinc-50">Close</button>
+              <button onClick={()=>setShowCompanyPanel(false)} className="rounded-full border border-zinc-200 dark:border-zinc-800 mono text-xs px-3 py-1.5 hover:bg-zinc-50 dark:bg-zinc-800">Close</button>
             </div>
             <div className="rounded-xl bg-zinc-900 text-white p-4">
               <div className="font-bold text-sm">{company.legalName}</div>

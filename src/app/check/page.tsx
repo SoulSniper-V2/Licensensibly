@@ -29,21 +29,21 @@ function CheckPageInner() {
           <h1 className="text-3xl font-bold tracking-tight">Eligibility check</h1>
           <p className="mono text-sm text-zinc-600 dark:text-zinc-400 mt-1">Job-level go/no-go — deterministic engine runs on every keystroke. <span className="font-semibold text-zinc-900 dark:text-zinc-100">AINSIDE explains below.</span></p>
         </div>
-        <Link href="/settings" className="mono text-xs border border-zinc-200 dark:border-zinc-800 rounded-full px-3 py-1.5 bg-white dark:bg-zinc-900 hover:bg-zinc-50">Settings →</Link>
+        <Link href="/settings" className="mono text-xs border border-zinc-200 dark:border-zinc-800 rounded-full px-3 py-1.5 bg-white dark:bg-zinc-900 hover:bg-zinc-50 dark:bg-zinc-800">Settings →</Link>
       </div>
 
       {/* Consolidated header bar — replaces static Company Profile card */}
       <div className="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-4 flex flex-wrap gap-3 items-center justify-between">
         <div className="flex flex-wrap gap-3 items-center">
           <span className="mono text-xs tracking-[0.14em] text-zinc-500 dark:text-zinc-400 font-semibold">COMPANY</span>
-          <select value={companyId} onChange={e=> setCompanyId(e.target.value)} className="rounded-full border border-zinc-200 dark:border-zinc-800 bg-zinc-50 px-3 py-1.5 text-sm font-medium">
+          <select value={companyId} onChange={e=> setCompanyId(e.target.value)} className="rounded-full border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-800 px-3 py-1.5 text-sm font-medium">
             {MOCK_COMPANIES.map(c=> <option key={c.id} value={c.id}>{c.legalName}</option>)}
           </select>
           <span className="mono text-xs text-zinc-500 dark:text-zinc-400 hidden sm:inline">{company.licenses.length} licenses • {company.licenses.map(l=> `${l.state} ${l.classification}`).join(" • ")}</span>
         </div>
         <div className="flex gap-2">
           <button onClick={()=> setShowCompanyPanel(true)} className="mono text-xs bg-zinc-900 text-white rounded-full px-4 py-1.5 hover:bg-black">View company panel</button>
-          <button onClick={()=> setShowIntakePanel(true)} className="mono text-xs border border-zinc-200 dark:border-zinc-800 rounded-full px-4 py-1.5 bg-white dark:bg-zinc-900 hover:bg-zinc-50">Edit intake → panel</button>
+          <button onClick={()=> setShowIntakePanel(true)} className="mono text-xs border border-zinc-200 dark:border-zinc-800 rounded-full px-4 py-1.5 bg-white dark:bg-zinc-900 hover:bg-zinc-50 dark:bg-zinc-800">Edit intake → panel</button>
         </div>
       </div>
 
@@ -93,7 +93,7 @@ function CheckPageInner() {
           <div className="w-[480px] max-w-[90vw] bg-white dark:bg-zinc-900 border-l border-zinc-200 dark:border-zinc-800 shadow-2xl p-6 space-y-4 overflow-auto">
             <div className="flex items-center justify-between">
               <h3 className="mono text-xs tracking-[0.14em] text-zinc-500 dark:text-zinc-400 font-semibold">COMPANY PROFILE — PANEL</h3>
-              <button onClick={()=>setShowCompanyPanel(false)} className="rounded-full border border-zinc-200 dark:border-zinc-800 mono text-xs px-3 py-1.5 hover:bg-zinc-50">Close</button>
+              <button onClick={()=>setShowCompanyPanel(false)} className="rounded-full border border-zinc-200 dark:border-zinc-800 mono text-xs px-3 py-1.5 hover:bg-zinc-50 dark:bg-zinc-800">Close</button>
             </div>
             <div className="rounded-2xl bg-zinc-900 text-white p-5 space-y-2">
               <div className="font-bold">{company.legalName}</div>
@@ -118,7 +118,7 @@ function CheckPageInner() {
               <div className="mt-3 font-semibold text-zinc-900 dark:text-zinc-100">Insurance</div>
               <div className="mt-1">GL ${company.insurance.generalLiability.amount.toLocaleString()} exp {company.insurance.generalLiability.expiry} • Workers comp: {company.insurance.workersComp ? "yes" : "no"}</div>
             </div>
-            <Link href="/settings" onClick={()=>setShowCompanyPanel(false)} className="block text-center rounded-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 mono text-xs font-semibold py-2.5 hover:bg-zinc-50">Open full Settings →</Link>
+            <Link href="/settings" onClick={()=>setShowCompanyPanel(false)} className="block text-center rounded-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 mono text-xs font-semibold py-2.5 hover:bg-zinc-50 dark:bg-zinc-800">Open full Settings →</Link>
             <p className="mono text-xs text-zinc-500 dark:text-zinc-400">This panel consolidates the previously static Company Profile card into a popup per your 4:41 AM request. Same data, ~60% less vertical chrome on Check.</p>
           </div>
         </div>
@@ -130,7 +130,7 @@ function CheckPageInner() {
           <div className="w-[520px] max-w-[90vw] bg-white dark:bg-zinc-900 border-l border-zinc-200 dark:border-zinc-800 shadow-2xl p-6 space-y-4 overflow-auto">
             <div className="flex items-center justify-between">
               <h3 className="mono text-xs tracking-[0.14em] text-zinc-500 dark:text-zinc-400 font-semibold">PROJECT INTAKE — PANEL</h3>
-              <button onClick={()=>setShowIntakePanel(false)} className="rounded-full border border-zinc-200 dark:border-zinc-800 mono text-xs px-3 py-1.5 hover:bg-zinc-50">Close</button>
+              <button onClick={()=>setShowIntakePanel(false)} className="rounded-full border border-zinc-200 dark:border-zinc-800 mono text-xs px-3 py-1.5 hover:bg-zinc-50 dark:bg-zinc-800">Close</button>
             </div>
             <p className="mono text-xs text-zinc-600 dark:text-zinc-400">Full intake as a slide-over — proves the “everything in popups/panels” direction. You can keep the inline form or switch to panel-only later.</p>
             <label className="block mono text-xs font-semibold text-zinc-700">Project title<input value={form.title} onChange={e=> setForm({...form, title:e.target.value})} className="mt-1 w-full rounded-xl border border-zinc-200 dark:border-zinc-800 px-3 py-2 text-sm" /></label>
