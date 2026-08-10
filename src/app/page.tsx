@@ -14,28 +14,28 @@ export default function Dashboard() {
   const result = useMemo(()=> evaluateEligibility(company, project), [company, project]);
 
   return (
-    <div className="bg-white">
+    <div className="bg-white dark:bg-zinc-950">
       {/* HERO — anti-slop: left-aligned editorial, not centered hero over dark mesh. Asymmetric split, large type, no purple gradient */}
       <section className="mx-auto max-w-[1200px] px-6 pt-14 md:pt-20 pb-10">
         <div className="grid lg:grid-cols-[1.15fr_0.85fr] gap-10 items-start">
           <div>
             <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-3 py-1 mono text-[11px] tracking-[0.14em] text-zinc-600">
-              <span className="h-2 w-2 rounded-full bg-emerald-500" /> DETERMINISTIC • NO LLM DECISION • NC SC VA
+              <span className="h-2 w-2 rounded-full bg-emerald-500" /> FOR CONTRACTORS • NC SC VA
             </div>
             <h1 className="mt-5 text-[46px] md:text-[68px] font-[800] tracking-[-0.05em] leading-[0.88]">
               <span className="block text-zinc-900">Can we</span>
               <span className="block text-zinc-900 -mt-2">legally bid</span>
               <span className="inline-block bg-zinc-900 text-white px-4 py-1 rounded-[14px] mt-1 text-[44px] md:text-[60px]">this job?</span>
             </h1>
-            <p className="mt-5 text-[16px] leading-[1.6] text-zinc-600 max-w-[52ch]">
-              <span className="font-semibold text-zinc-900">Gooner</span> is the pre-bid compliance OS for electrical, HVAC & fire. Drop address, value, trade & company — get <span className="font-semibold text-zinc-900">Eligible / Conditional / Not eligible</span> with blockers, reciprocity, checklist & citations. <span className="underline decoration-zinc-300 underline-offset-4">Engine decides, AINSIDE explains.</span>
+            <p className="mt-5 text-[16px] leading-[1.6] text-zinc-600 dark:text-zinc-400 max-w-[52ch]">
+              <span className="font-semibold text-zinc-900 dark:text-white">Gooner</span> checks if you can take a job. Pick your company and the job — get a clear <span className="font-semibold text-zinc-900 dark:text-white">Yes / Maybe / No</span> and a simple checklist of what to fix before you bid.
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
               <Link href="/check" className="rounded-full bg-zinc-900 text-white font-semibold px-7 py-3 hover:bg-black transition-colors">Run eligibility check →</Link>
               <Link href="/settings" className="rounded-full border border-zinc-200 bg-white font-medium px-6 py-3 hover:bg-zinc-50">Company in Settings</Link>
             </div>
             <div className="mt-4 flex gap-6 mono text-xs text-zinc-500">
-              <span>• No signup to try</span><span>• Engine runs locally</span><span>• Citations to the board</span>
+              <span>• Try it free</span><span>• Works on your phone</span><span>• Shows what you need</span>
             </div>
             <div className="mt-8 grid grid-cols-3 gap-3 max-w-[560px]">
               {[
@@ -52,10 +52,10 @@ export default function Dashboard() {
             </div>
           </div>
           {/* Right — live deterministic preview, not a mesh-gradient card */}
-          <div className="rounded-[24px] border border-zinc-200 bg-zinc-50 p-4 shadow-sm">
+          <div className="rounded-[24px] border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 p-4 shadow-sm">
             <div className="rounded-2xl bg-white border border-zinc-200 overflow-hidden">
               <div className="px-5 py-3 flex items-center justify-between bg-zinc-900 text-white">
-                <span className="mono text-[11px] tracking-[0.14em]">LIVE ENGINE</span>
+                <span className="mono text-[11px] tracking-[0.14em]">CHECK A JOB</span>
                 <span className={`mono text-xs font-bold px-2.5 py-1 rounded-full ${result.status==='eligible'?'bg-emerald-500':result.status==='conditional'?'bg-amber-500':'bg-red-500'}`}>{result.status.toUpperCase()}</span>
               </div>
               <div className="p-5 space-y-4">
@@ -88,7 +88,7 @@ export default function Dashboard() {
               </div>
             </div>
             <div className="mt-3 rounded-xl bg-white border border-zinc-200 p-3 mono text-xs text-zinc-600">
-              <span className="font-semibold text-zinc-900">AINSIDE:</span> streams blockers, reciprocity & citations to the board. Deterministic.
+              <span className="font-semibold text-zinc-900 dark:text-white">What you get:</span> Yes/Maybe/No + what to fix, with links to the state board.
             </div>
           </div>
         </div>
@@ -98,33 +98,33 @@ export default function Dashboard() {
 
       {/* VALUE — horizontal bento, not 3 equal cards */}
       <section className="mx-auto max-w-[1200px] px-6 py-10">
-        <div className="rounded-[24px] border border-zinc-200 bg-white p-6 md:p-8">
+        <div className="rounded-[24px] border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-6 md:p-8">
           <div className="flex flex-wrap items-baseline justify-between gap-4">
-            <h2 className="text-xl font-bold tracking-tight">Why pre-bid, not post-hold</h2>
-            <span className="mono text-xs text-zinc-500">Wedge: jurisdiction × trade × value × credentials → eligibility</span>
+            <h2 className="text-xl font-bold tracking-tight dark:text-white">How it works — simple</h2>
+            <span className="mono text-xs text-zinc-500 dark:text-zinc-400">For contractors, not paperwork experts</span>
           </div>
           <div className="mt-6 grid md:grid-cols-12 gap-4">
             <div className="md:col-span-7 rounded-2xl border border-zinc-200 bg-zinc-50 p-6">
-              <div className="mono text-xs tracking-[0.14em] text-zinc-500">01 — DETERMINISTIC</div>
-              <div className="text-lg font-bold mt-1">Engine decides. LLM never does.</div>
-              <p className="mono text-sm text-zinc-600 mt-2 leading-relaxed">Harbor wins renewal tracking. Gooner owns the <span className="font-semibold text-zinc-900">job-level go/no-go</span> before you bid. Embed at decision point — switching costs compound.</p>
+              <div className="mono text-xs tracking-[0.14em] text-zinc-500 dark:text-zinc-400">01 — SIMPLE ANSWER</div>
+              <div className="text-lg font-bold mt-1 dark:text-white">Get a clear answer.</div>
+              <p className="mono text-sm text-zinc-600 mt-2 leading-relaxed">Gooner tells you <span className="font-semibold text-zinc-900 dark:text-white">yes, no, or what to fix</span> before you bid. No guessing.</p>
             </div>
             <div className="md:col-span-5 rounded-2xl border border-zinc-200 bg-zinc-900 text-white p-6">
-              <div className="mono text-xs tracking-[0.14em] text-amber-300">02 — CITATIONS</div>
-              <div className="text-lg font-bold mt-1">Every requirement cites the board</div>
-              <p className="mono text-sm text-zinc-300 mt-2">gov sources: NCBEEC, LLR, DPOR, SOS. No hallucinated rules.</p>
+              <div className="mono text-xs tracking-[0.14em] text-amber-300">02 — TRUSTED LINKS</div>
+              <div className="text-lg font-bold mt-1">Links to the state board</div>
+              <p className="mono text-sm text-zinc-300 mt-2">Every rule links to the real state website. No guesswork.</p>
             </div>
             <div className="md:col-span-5 rounded-2xl border border-zinc-200 p-6">
-              <div className="mono text-xs tracking-[0.14em] text-zinc-500">03 — NARROW VERTICAL</div>
-              <div className="text-sm font-semibold mt-1">Electrical + HVAC + Fire • NC SC VA only in v1</div>
-              <p className="mono text-xs text-zinc-500 mt-1">Nationwide on day one kills credibility. Data moat is the wedge.</p>
+              <div className="mono text-xs tracking-[0.14em] text-zinc-500 dark:text-zinc-400">03 — MADE FOR YOU</div>
+              <div className="text-sm font-semibold mt-1 dark:text-white">Electrical, HVAC & Fire in NC, SC, VA</div>
+              <p className="mono text-xs text-zinc-500 dark:text-zinc-400 mt-1">We keep it simple and focused on your trades.</p>
             </div>
             <div className="md:col-span-7 rounded-2xl border border-zinc-200 bg-white p-6">
               <div className="mono text-xs tracking-[0.14em] text-zinc-500">HOW IT WORKS</div>
               <div className="mt-3 grid grid-cols-3 gap-4 mono text-xs">
-                <div><span className="font-bold">01 Drop job</span><br/><span className="text-zinc-500">Address, value, trade</span></div>
-                <div><span className="font-bold">02 Engine decides</span><br/><span className="text-zinc-500">Jurisdiction × credentials</span></div>
-                <div><span className="font-bold">03 AINSIDE explains</span><br/><span className="text-zinc-500">Blockers & citations</span></div>
+                <div><span className="font-bold dark:text-white">01 Pick job</span><br/><span className="text-zinc-500 dark:text-zinc-400">Address & price</span></div>
+                <div><span className="font-bold dark:text-white">02 Check</span><br/><span className="text-zinc-500 dark:text-zinc-400">We check your license</span></div>
+                <div><span className="font-bold dark:text-white">03 Get list</span><br/><span className="text-zinc-500 dark:text-zinc-400">What to fix to bid</span></div>
               </div>
             </div>
           </div>

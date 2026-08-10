@@ -14,11 +14,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col bg-white text-zinc-900">
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`} suppressHydrationWarning>
+      <body className="min-h-full flex flex-col bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100">
         <Navbar />
-        <main className="flex-1 bg-white">{children}</main>
-        <footer className="border-t border-zinc-200 bg-white">
+        <main className="flex-1 bg-white dark:bg-zinc-950">{children}</main>
+        <footer className="border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950">
           <div className="mx-auto max-w-[1200px] px-6 py-8 mono text-[11px] tracking-wide text-zinc-500 flex flex-wrap gap-4">
             <span>© 2026 GOONER — NC • SC • VA narrow vertical. Nationwide is post-PMF.</span>
             <span className="ml-auto">Deterministic engine • LLM explains, never decides • <a className="underline hover:text-zinc-900" href="https://github.com/SoulSniper-V2/gooner" target="_blank">GitHub</a></span>

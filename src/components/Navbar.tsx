@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import ThemeToggle from "./ThemeToggle";
 
 const links = [
   { href: "/", label: "Home" },
@@ -16,7 +17,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   return (
-    <header className="sticky top-0 z-40 bg-white/80 backdrop-blur-xl border-b border-zinc-200">
+    <header className="sticky top-0 z-40 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-xl border-b border-zinc-200 dark:border-zinc-800">
       <div className="mx-auto max-w-[1200px] px-6 h-[64px] flex items-center gap-8">
         <Link href="/" className="flex items-center gap-2">
           <div className="h-7 w-7 bg-zinc-900 flex items-center justify-center rounded-md">
@@ -34,14 +35,15 @@ export default function Navbar() {
         </nav>
 
         <div className="ml-auto hidden md:flex items-center gap-3">
-          <span className="mono text-xs text-zinc-500 hidden lg:inline">Deterministic • <span className="text-zinc-900 font-semibold">engine decides</span></span>
-          <Link href="/check" className="bg-zinc-900 text-white text-sm font-semibold px-5 py-2 rounded-full hover:bg-black">Run check →</Link>
+          <span className="mono text-xs text-zinc-500 hidden lg:inline">Ready to bid?</span>
+          <ThemeToggle />
+          <Link href="/check" className="bg-zinc-900 text-white text-sm font-semibold px-5 py-2 rounded-full hover:bg-black dark:bg-white dark:text-zinc-900">Run check →</Link>
         </div>
 
         <button onClick={()=> setOpen(v=>!v)} className="md:hidden ml-auto text-sm border border-zinc-200 rounded-full px-4 py-1.5">{open ? "Close" : "Menu"}</button>
       </div>
       {open && (
-        <div className="md:hidden border-t border-zinc-200 bg-white px-6 py-4 grid gap-2">
+        <div className="md:hidden border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 px-6 py-4 grid gap-2">
           {links.map(l=> <Link key={l.href} href={l.href} onClick={()=>setOpen(false)} className={`text-sm px-3 py-2.5 rounded-full border ${pathname===l.href ? "bg-zinc-900 text-white border-zinc-900" : "border-zinc-200 text-zinc-600"}`}>{l.label}</Link>)}
         </div>
       )}
