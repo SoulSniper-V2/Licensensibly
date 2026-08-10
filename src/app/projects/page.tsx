@@ -19,9 +19,9 @@ export default function ProjectsPage() {
 
   function badgeFor(p: typeof MOCK_PROJECTS[number]) {
     const res = evaluateEligibility(company, p);
-    if(res.status==="eligible") return {label:"ELIGIBLE", cls:"bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 text-emerald-700"};
-    if(res.status==="conditional") return {label:"CONDITIONAL", cls:"bg-white dark:bg-zinc-900 border-amber-300 text-amber-700"};
-    return {label:"NOT ELIGIBLE", cls:"bg-red-50 border-red-300 text-red-700"};
+    if(res.status==="eligible") return {label:"ELIGIBLE", cls:"bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 text-emerald-700 dark:text-emerald-300"};
+    if(res.status==="conditional") return {label:"CONDITIONAL", cls:"bg-white dark:bg-zinc-900 border-amber-300 text-zinc-700 dark:text-zinc-300"};
+    return {label:"NOT ELIGIBLE", cls:"bg-red-50 dark:bg-red-950 border-red-300 text-red-700 dark:text-red-300"};
   }
 
   const daysUntil = (iso?:string)=> {
@@ -76,7 +76,7 @@ export default function ProjectsPage() {
                 <h3 className="text-[15px] font-bold leading-tight mt-3 line-clamp-2">{p.title}</h3>
                 <p className="text-xs text-zinc-600 dark:text-zinc-400 mt-1 line-clamp-2">{p.scope}</p>
                 <div className="mt-3 flex flex-wrap gap-1.5 text-[11px] font-semibold">
-                  <span className="border bg-white dark:bg-zinc-900 text-black px-2.5 py-1">{p.trade}</span>
+                  <span className="border bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 px-2.5 py-1">{p.trade}</span>
                   <span className="border bg-zinc-800 border border-zinc-200 dark:border-zinc-800 px-2.5 py-1">${p.contractValue.toLocaleString()}</span>
                   <span className="border bg-zinc-800 border border-zinc-200 dark:border-zinc-800 px-2.5 py-1">{p.role}</span>
                   {p.isPublicWorks ? <span className="border bg-violet-50 border border-violet-200 text-violet-700 px-2.5 py-1">Public works</span> : <span className="border bg-black border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 px-2.5 py-1">Private</span>}
@@ -88,12 +88,12 @@ export default function ProjectsPage() {
                 <div className="text-xs text-zinc-600 dark:text-zinc-400 mt-1">{res.estimatedReadiness.label} • {res.blockers.length} blocker(s){res.reciprocityOpportunities.length?` • ${res.reciprocityOpportunities.length} reciprocity`:""}</div>
               </div>
               <div className="px-5 py-3 flex items-center gap-2 text-xs">
-                <span className={`font-bold ${overdue?"text-red-600":urgent?"text-amber-600":"text-zinc-600 dark:text-zinc-400"}`}>{p.bidDate ? (overdue?`Bid was ${Math.abs(d!)}d ago`: urgent?`Bid in ${d}d — urgent`:`Bid ${p.bidDate}`): "No bid date"}</span>
+                <span className={`font-bold ${overdue?"text-red-600":urgent?"text-zinc-700 dark:text-zinc-300":"text-zinc-600 dark:text-zinc-400"}`}>{p.bidDate ? (overdue?`Bid was ${Math.abs(d!)}d ago`: urgent?`Bid in ${d}d — urgent`:`Bid ${p.bidDate}`): "No bid date"}</span>
                 <span className="text-slate-300">•</span>
                 <span className="text-zinc-500 dark:text-zinc-400 truncate">{p.address}</span>
               </div>
               <div className="mt-auto border-t border-slate-100 p-4 flex gap-2">
-                <Link href={`/check?projectId=${p.id}&companyId=${company.id}`} className="flex-1 border bg-white dark:bg-zinc-900 text-black text-sm font-bold py-2.5 text-center hover:bg-slate-800">Check eligibility →</Link>
+                <Link href={`/check?projectId=${p.id}&companyId=${company.id}`} className="flex-1 border bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 text-sm font-bold py-2.5 text-center hover:bg-slate-800">Check eligibility →</Link>
                 <a href={`https://www.google.com/maps/search/${encodeURIComponent(p.address+", "+p.city+", "+p.state)}`} target="_blank" className="border border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-4 py-2.5 text-xs font-bold">Map</a>
               </div>
             </div>
@@ -108,7 +108,7 @@ export default function ProjectsPage() {
         </div>
       )}
 
-      <div className="border bg-white dark:bg-zinc-900 text-black p-6 flex flex-wrap gap-6">
+      <div className="border bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 p-6 flex flex-wrap gap-6">
         <div className="min-w-[260px] flex-1">
           <div className="text-amber-300 text-xs font-black tracking-wide">NARROW VERTICAL • NC + SC + VA</div>
           <div className="text-sm leading-relaxed text-slate-300 mt-2">Commercial electrical + HVAC + fire-protection only. Thresholds enforced deterministically: NC {"<"} $40k exempt, SC {"<"} $5k, VA Class C {"<"} $30k / B {"<"} $120k / A unlimited. Going nationwide too early collapses the data moat.</div>

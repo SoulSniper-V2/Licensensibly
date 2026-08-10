@@ -76,7 +76,7 @@ export default function AIResearchPanel({ result, city, state, trade, value }: {
         {loading && !text && <div className="mono text-sm text-zinc-500 dark:text-zinc-400">Asking AINSIDE… <span className="inline-block w-2 h-2 bg-zinc-300 rounded-full animate-bounce" /></div>}
         {error && (
           <div className="space-y-3">
-            <div className="mono text-sm font-medium text-amber-800 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-3">AINSIDE unreachable — showing deterministic fallback.</div>
+            <div className="mono text-sm font-medium text-zinc-700 dark:text-zinc-300 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-3">AINSIDE unreachable — showing deterministic fallback.</div>
             <div className="mono text-xs text-zinc-500 dark:text-zinc-400 break-all">{error}</div>
             <div className="rounded-xl bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 p-4 text-sm leading-relaxed text-zinc-700">
               For a <span className="font-semibold">${value.toLocaleString()} {trade}</span> job in <span className="font-semibold">{city}, {state}</span>, engine determined <span className="font-semibold uppercase">{result.status}</span>. Primary blocker: <span className="font-semibold">{result.blockers[0]?.requirement.label || "none — ready to bid"}</span>.

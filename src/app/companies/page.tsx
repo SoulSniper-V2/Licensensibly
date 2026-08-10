@@ -42,7 +42,7 @@ export default function CompaniesPage() {
           <h1 className="text-[20px] font-black tracking-[-0.02em]">Company Compliance Profiles</h1>
           <p className="text-sm text-zinc-600 dark:text-zinc-400 mt-1">MVP #1 — The credential graph: <code className="bg-zinc-800 px-1 rounded">jurisdiction × trade × value × credentials → eligibility</code>. Licenses, qualifiers, insurance, foreign qualifications. Engine reads this on every check.</p>
         </div>
-        <button onClick={()=> setShowAdd(v=>!v)} className="border bg-white dark:bg-zinc-900 text-black px-5 py-2.5 text-sm font-bold hover:bg-slate-800">+ Add Company</button>
+        <button onClick={()=> setShowAdd(v=>!v)} className="border bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 px-5 py-2.5 text-sm font-bold hover:bg-slate-800">+ Add Company</button>
       </div>
 
       {showAdd && (
@@ -69,7 +69,7 @@ export default function CompaniesPage() {
         {/* list */}
         <div className="space-y-3">
           {companies.map(c=> (
-            <button key={c.id} onClick={()=> setSelectedId(c.id)} className={`w-full text-left border border p-4 transition ${selectedId===c.id ? "bg-white dark:bg-zinc-900 text-black border-slate-900" : "bg-white dark:bg-zinc-900 border-slate-200 hover:border-slate-300"}`}>
+            <button key={c.id} onClick={()=> setSelectedId(c.id)} className={`w-full text-left border border p-4 transition ${selectedId===c.id ? "bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 border-slate-900" : "bg-white dark:bg-zinc-900 border-slate-200 hover:border-slate-300"}`}>
               <div className="text-sm font-bold truncate">{c.legalName}</div>
               <div className={`text-xs mt-1 ${selectedId===c.id ? "text-slate-300" : "text-zinc-500 dark:text-zinc-400"}`}>{c.entityType.toUpperCase()} • {c.incorporatedStates.join(", ")} {c.foreignQualifications.length ? `→ ${c.foreignQualifications.join(", ")}` : ""}</div>
               <div className="mt-2 flex flex-wrap gap-1">
@@ -79,7 +79,7 @@ export default function CompaniesPage() {
               <div className={`text-[11px] mt-2 ${selectedId===c.id ? "text-slate-400" : "text-slate-400"}`}>{c.licenses.length} licenses • QI: {c.qualifiers.map(q=> q.name).join(", ") || "—"}</div>
             </button>
           ))}
-          <div className="border bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-4 text-xs leading-relaxed text-amber-900">
+          <div className="border bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-4 text-xs leading-relaxed text-zinc-900 dark:text-zinc-100">
             <span className="font-bold">Data moat hint:</span> This profile + the regulatory DB is the proprietary mapping. Harbor has 22k requirements; your edge is wiring them to <em>this company’s live credentials</em> for a job-level answer.
           </div>
         </div>
@@ -110,7 +110,7 @@ export default function CompaniesPage() {
                         <div className="text-sm font-black">{l.classification}</div>
                         <div className="text-xs font-mono mt-1">{l.licenseNumber}</div>
                         <div className="text-xs text-zinc-600 dark:text-zinc-400 mt-1">Qualifier: <span className="font-semibold text-zinc-900 dark:text-zinc-100">{l.qualifier}</span></div>
-                        <div className="text-xs text-zinc-600 dark:text-zinc-400">Issued {l.issuedDate} • Expires <span className={nearExpiry ? "font-bold text-amber-700" : "font-semibold"}>{l.expiryDate} {nearExpiry ? `(${daysLeft}d)` : ""}</span></div>
+                        <div className="text-xs text-zinc-600 dark:text-zinc-400">Issued {l.issuedDate} • Expires <span className={nearExpiry ? "font-bold text-zinc-700 dark:text-zinc-300" : "font-semibold"}>{l.expiryDate} {nearExpiry ? `(${daysLeft}d)` : ""}</span></div>
                       </div>
                     );
                   })}
@@ -140,7 +140,7 @@ export default function CompaniesPage() {
             </div>
           </div>
 
-          <div className="border bg-white dark:bg-zinc-900 text-black p-5">
+          <div className="border bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 p-5">
             <div className="text-xs tracking-[0.14em] font-bold text-amber-300">UPSell PLACEHOLDER — New-Jurisdiction Intelligence Report</div>
             <p className="text-sm text-slate-300 mt-2 leading-relaxed">For a state/city the company has never operated in: one-click packet with every license, registration, qualifier exam, insurance, bonding, and lead-time requirement + application links and prefilled forms. <span className="text-zinc-900 dark:text-zinc-100 font-semibold">Usage-priced $149–$399/report</span>.</p>
           </div>

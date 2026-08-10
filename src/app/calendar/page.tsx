@@ -8,7 +8,7 @@ type Filter = "all" | "bid-deadline" | "renewal" | "application";
 
 function typeBadge(t: string) {
   if (t === "bid-deadline") return { label: "BID DEADLINE", cls: "bg-amber-400 text-zinc-900 dark:text-zinc-100 border-amber-400" };
-  if (t === "renewal") return { label: "RENEWAL", cls: "bg-red-50 text-red-700 border-red-200" };
+  if (t === "renewal") return { label: "RENEWAL", cls: "bg-red-50 dark:bg-red-950 text-red-700 dark:text-red-300 border-red-200" };
   return { label: "APPLICATION", cls: "bg-white dark:bg-zinc-900 text-sky-700 border-zinc-200 dark:border-zinc-800" };
 }
 
@@ -20,7 +20,7 @@ function colorFor(e: { type: string; date: string }) {
   const d = daysUntil(e.date);
   if (e.type === "bid-deadline") return d < 14 ? "border-amber-300 bg-white dark:bg-zinc-900" : "border-slate-200 bg-white dark:bg-zinc-900";
   if (e.type === "renewal") {
-    if (d < 0) return "border-red-300 bg-red-50";
+    if (d < 0) return "border-red-300 bg-red-50 dark:bg-red-950";
     if (d < 60) return "border-amber-300 bg-white dark:bg-zinc-900";
     return "border-slate-200 bg-white dark:bg-zinc-900";
   }
@@ -69,7 +69,7 @@ export default function CalendarPage() {
           <button
             key={v}
             onClick={() => setFilter(v)}
-            className={`border border px-3 py-1.5 text-xs font-bold ${filter === v ? "bg-white dark:bg-zinc-900 text-black border-slate-900" : "bg-white dark:bg-zinc-900 text-zinc-700 border-slate-200 hover:bg-black"}`}
+            className={`border border px-3 py-1.5 text-xs font-bold ${filter === v ? "bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 border-slate-900" : "bg-white dark:bg-zinc-900 text-zinc-700 border-slate-200 hover:bg-black"}`}
           >
             {l} <span className="opacity-60">({v === "all" ? all.length : all.filter((e) => e.type === v).length})</span>
           </button>
@@ -79,7 +79,7 @@ export default function CalendarPage() {
             <span className="h-3 w-3 border bg-amber-400 border border-amber-500" /> bid
           </span>
           <span className="inline-flex items-center gap-1.5">
-            <span className="h-3 w-3 border bg-red-500" /> renewal
+            <span className="h-3 w-3 border bg-red-50 dark:bg-red-9500" /> renewal
           </span>
           <span className="inline-flex items-center gap-1.5">
             <span className="h-3 w-3 border bg-sky-400" /> application
@@ -88,7 +88,7 @@ export default function CalendarPage() {
       </div>
 
       {/* Upcoming strip */}
-      <div className="border bg-white dark:bg-zinc-900 text-black p-5">
+      <div className="border bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 p-5">
         <div className="text-xs tracking-[0.14em] font-black text-amber-300">UP NEXT — {filter === "all" ? "ALL EVENTS" : filter.toUpperCase()}</div>
         {upcoming.length ? (
           <div className="mt-3 grid md:grid-cols-3 gap-3">
@@ -99,7 +99,7 @@ export default function CalendarPage() {
                 <div key={e.id} className="border bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 p-3 border border-white/10">
                   <div className="flex items-center gap-2">
                     <span className={`border border px-2 py-0.5 text-[10px] font-black tracking-wide ${b.cls}`}>{b.label}</span>
-                    <span className={`text-xs font-bold ${d < 0 ? "text-red-600" : d < 14 ? "text-amber-600" : "text-zinc-500 dark:text-zinc-400"}`}>{d < 0 ? `${Math.abs(d)}d overdue` : d === 0 ? "today" : `${d}d`}</span>
+                    <span className={`text-xs font-bold ${d < 0 ? "text-red-600" : d < 14 ? "text-zinc-700 dark:text-zinc-300" : "text-zinc-500 dark:text-zinc-400"}`}>{d < 0 ? `${Math.abs(d)}d overdue` : d === 0 ? "today" : `${d}d`}</span>
                   </div>
                   <div className="text-sm font-semibold leading-tight mt-1.5 line-clamp-2">{e.title}</div>
                   <div className="text-xs font-mono text-zinc-500 dark:text-zinc-400 mt-1">{e.date}</div>
@@ -128,7 +128,7 @@ export default function CalendarPage() {
               <div key={ym}>
                 <div className="flex items-baseline gap-3">
                   <h2 className="text-sm font-black tracking-[0.12em] text-zinc-500 dark:text-zinc-400">{label.toUpperCase()}</h2>
-                  <span className="text-xs font-bold bg-white dark:bg-zinc-900 text-black border px-2 py-0.5">{evts.length}</span>
+                  <span className="text-xs font-bold bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 border px-2 py-0.5">{evts.length}</span>
                   <div className="h-px flex-1 bg-slate-200" />
                 </div>
                 <div className="mt-3 grid md:grid-cols-2 gap-3">
@@ -182,7 +182,7 @@ export default function CalendarPage() {
           <span className="font-mono text-[11px] bg-zinc-800 border border-zinc-200 dark:border-zinc-800 rounded px-1.5 py-0.5">eventsByMonth()</span> groups by <span className="font-mono">YYYY-MM</span>. Renewals &lt;60 days get an amber warning in eligibility results too.
         </p>
         <div className="mt-3 flex flex-wrap gap-2 text-xs">
-          <Link href="/projects" className="border bg-white dark:bg-zinc-900 text-black px-4 py-2 font-bold">
+          <Link href="/projects" className="border bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 px-4 py-2 font-bold">
             Browse projects
           </Link>
           <Link href="/companies" className="border bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 px-4 py-2 font-bold">

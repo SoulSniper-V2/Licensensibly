@@ -56,7 +56,7 @@ export default function Dashboard() {
             <div className="rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 overflow-hidden">
               <div className="px-5 py-3 flex items-center justify-between bg-zinc-900 text-white">
                 <span className="mono text-[11px] tracking-[0.14em]">CHECK A JOB</span>
-                <span className={`mono text-xs font-bold px-2.5 py-1 rounded-full ${result.status==='eligible'?'bg-white dark:bg-zinc-9000':result.status==='conditional'?'bg-white dark:bg-zinc-9000':'bg-red-500'}`}>{result.status.toUpperCase()}</span>
+                <span className={`mono text-xs font-bold px-2.5 py-1 rounded-full ${result.status==='eligible'?'bg-white dark:bg-zinc-9000':result.status==='conditional'?'bg-white dark:bg-zinc-9000':'bg-red-50 dark:bg-red-9500'}`}>{result.status.toUpperCase()}</span>
               </div>
               <div className="p-5 space-y-4">
                 <div className="grid grid-cols-2 gap-3">
@@ -75,7 +75,7 @@ export default function Dashboard() {
                   <div className="font-semibold text-zinc-900 dark:text-zinc-100">{project.title}</div>
                   <div className="text-zinc-500 dark:text-zinc-400">{project.city}, {project.state} • {project.trade} • ${project.contractValue.toLocaleString()}</div>
                   <div className="mt-2 flex flex-wrap gap-1.5">
-                    <span className={`rounded-full px-2.5 py-1 text-xs font-medium border ${result.status==='eligible'?'bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 text-emerald-700':result.status==='conditional'?'bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 text-amber-700':'bg-red-50 border-red-200 text-red-700'}`}>{result.status}</span>
+                    <span className={`rounded-full px-2.5 py-1 text-xs font-medium border ${result.status==='eligible'?'bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 text-emerald-700 dark:text-emerald-300':result.status==='conditional'?'bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300':'bg-red-50 dark:bg-red-950 border-red-200 text-red-700 dark:text-red-300'}`}>{result.status}</span>
                     <span className="rounded-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 px-2.5 py-1 text-xs">{result.blockers.length} blockers</span>
                     <span className="rounded-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 px-2.5 py-1 text-xs">{result.estimatedReadiness.label}</span>
                   </div>
