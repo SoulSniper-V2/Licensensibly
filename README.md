@@ -1,11 +1,11 @@
-# Gooner — Pre-Bid Compliance OS
+# Licensensibly — Pre-Bid Compliance OS
 
-> **The wedge: pre-bid, not post-hold.** Gooner answers one question deterministically:  
+> **The wedge: pre-bid, not post-hold.** Licensensibly answers one question deterministically:  
 > **“Can my company legally bid and perform this job, and if not, exactly what must happen first?”**
 
 ![NC • SC • VA](https://img.shields.io/badge/jurisdiction-NC_%E2%80%A2_SC_%E2%80%A2_VA-slate) ![Trades: Electrical + HVAC + Fire](https://img.shields.io/badge/trades-electrical%20%E2%80%A2%20HVAC%20%E2%80%A2%20fire-amber) ![Engine: Deterministic](https://img.shields.io/badge/engine-deterministic-emerald) ![Not legal advice](https://img.shields.io/badge/not-legal_advice-red)
 
-Live spec: background is the startup-design skill's Pre-Flight → Research Gate for an **AI-native pre-bid licensing and compliance workflow** for specialty contractors. Harbor Compliance and Copliancy already win renewal-tracking; Gooner owns the **job-level go/no-go** (`jurisdiction × trade × project value × credentials → eligibility`).
+Live spec: background is the startup-design skill's Pre-Flight → Research Gate for an **AI-native pre-bid licensing and compliance workflow** for specialty contractors. Harbor Compliance and Copliancy already win renewal-tracking; Licensensibly owns the **job-level go/no-go** (`jurisdiction × trade × project value × credentials → eligibility`).
 
 ---
 
@@ -125,8 +125,8 @@ If ≥several independently describe calls to boards, spreadsheets, consultants,
 
 ## Repo & invite
 
-- **Repo:** https://github.com/SoulSniper-V2/gooner (public)
-- **Invite:** `chanatunkohsuwan` (ID 236490829) — `write` invite sent 2026-08-10, pending acceptance (verify with `gh api repos/SoulSniper-V2/gooner/invitations`)
+- **Repo:** https://github.com/SoulSniper-V2/Licensensibly (public)
+- **Invite:** `chanatunkohsuwan` (ID 236490829) — `write` invite sent 2026-08-10, pending acceptance (verify with `gh api repos/SoulSniper-V2/Licensensibly/invitations`)
 - **Auth:** `SoulSniper-V2` via `gh` keyring
 
 ## Disclaimer

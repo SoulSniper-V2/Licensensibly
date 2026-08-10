@@ -23,7 +23,7 @@ export default function Navbar() {
           <div className="h-7 w-7 bg-zinc-900 flex items-center justify-center rounded-md">
             <span className="text-white text-[13px] font-black">G</span>
           </div>
-          <span className="text-[15px] font-bold tracking-tight">gooner</span>
+          <span className="text-[15px] font-bold tracking-tight">licensensibly</span>
           <span className="mono text-[10px] tracking-[0.14em] text-zinc-400 border border-zinc-200 dark:border-zinc-800 rounded-full px-2 py-0.5">NC SC VA</span>
         </Link>
 

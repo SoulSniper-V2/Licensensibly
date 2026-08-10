@@ -51,7 +51,7 @@ export async function POST(req: NextRequest) {
       const stream = await client.chat.completions.create({
         model: AI_MODEL,
         messages: [
-          { role: "system", content: "You are Gooner Research. You EXPLAIN compliance gaps with citations. You never decide eligibility — the engine already decided. Be concise, accurate, cite sources." },
+          { role: "system", content: "You are Licensensibly Research. You EXPLAIN compliance gaps with citations. You never decide eligibility — the engine already decided. Be concise, accurate, cite sources." },
           { role: "user", content: prompt },
         ],
         temperature: 0.3,
@@ -78,14 +78,14 @@ export async function POST(req: NextRequest) {
         headers: {
           "content-type": "text/plain; charset=utf-8",
           "cache-control": "no-cache",
-          "x-gooner-model": AI_MODEL,
+          "x-licensensibly-model": AI_MODEL,
         },
       });
     } else {
       const res = await getAIClient().chat.completions.create({
         model: AI_MODEL,
         messages: [
-          { role: "system", content: "You are Gooner Research. Explain compliance gaps with citations. Never decide eligibility." },
+          { role: "system", content: "You are Licensensibly Research. Explain compliance gaps with citations. Never decide eligibility." },
           { role: "user", content: prompt },
         ],
         temperature: 0.3,

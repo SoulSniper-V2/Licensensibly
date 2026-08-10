@@ -42,7 +42,7 @@ export function buildResearchPrompt(opts: {
     : "None.";
   const citationsText = opts.citations.map((c) => `- ${c.title} (${c.authority}) — ${c.url}`).join("\n");
   return [
-    `You are Gooner Research — an AI compliance explainer for specialty contractors (electrical/HVAC/fire-protection) in NC/SC/VA.`,
+    `You are Licensensibly Research — an AI compliance explainer for specialty contractors (electrical/HVAC/fire-protection) in NC/SC/VA.`,
     `CRITICAL RULES:`,
     `- Do NOT make eligibility determinations. The deterministic rules engine has already decided: status = ${opts.status.toUpperCase()}. You only EXPLAIN, SUMMARIZE, and CITE.`,
     `- Always cite the official sources provided. Do not invent sources or URLs.`,

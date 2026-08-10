@@ -3,8 +3,8 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { ONBOARDING_STEPS, getOnboardingProgress } from "@/lib/onboarding";
 
-const STORAGE_KEY = "gooner_onboarding_dismissed";
-const COMPLETED_KEY = "gooner_onboarding_completed";
+const STORAGE_KEY = "licensensibly_onboarding_dismissed";
+const COMPLETED_KEY = "licensensibly_onboarding_completed";
 
 export default function OnboardingPanel() {
   const [dismissed, setDismissed] = useState(false);
@@ -61,7 +61,7 @@ export default function OnboardingPanel() {
               <span className="h-2 w-2 rounded-full bg-white dark:bg-zinc-9000 animate-pulse" /> ONBOARDING — START HERE
               <span className="hidden sm:inline">• auto-updates when new features ship</span>
             </div>
-            <h2 className="mt-2 text-xl md:text-2xl font-bold tracking-tight">Every step to use Gooner</h2>
+            <h2 className="mt-2 text-xl md:text-2xl font-bold tracking-tight">Every step to use Licensensibly</h2>
             <p className="mt-2 mono text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
               Follow in order. Each step links to the real page where you do it. Check a box when you have tried it — progress saves locally.
               <span className="font-semibold text-zinc-900 dark:text-zinc-100"> Adding a new feature? Just add it to <code className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded px-1">ONBOARDING_STEPS</code> in <code className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded px-1">src/lib/onboarding.ts</code> — this panel updates automatically.</span>

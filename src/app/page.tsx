@@ -28,7 +28,7 @@ export default function Dashboard() {
               <span className="inline-block bg-zinc-900 text-white px-4 py-1 rounded-[14px] mt-1 text-[44px] md:text-[60px]">this job?</span>
             </h1>
             <p className="mt-5 text-[16px] leading-[1.6] text-zinc-600 dark:text-zinc-400 dark:text-zinc-400 max-w-[52ch]">
-              <span className="font-semibold text-zinc-900 dark:text-zinc-100 dark:text-white">Gooner</span> checks if you can take a job. Pick your company and the job — get a clear <span className="font-semibold text-zinc-900 dark:text-zinc-100 dark:text-white">Yes / Maybe / No</span> and a simple checklist of what to fix before you bid.
+              <span className="font-semibold text-zinc-900 dark:text-zinc-100 dark:text-white">Licensensibly</span> checks if you can take a job. Pick your company and the job — get a clear <span className="font-semibold text-zinc-900 dark:text-zinc-100 dark:text-white">Yes / Maybe / No</span> and a simple checklist of what to fix before you bid.
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
               <Link href="/check" className="rounded-full bg-zinc-900 text-white font-semibold px-7 py-3 hover:bg-black transition-colors">Run eligibility check →</Link>
@@ -107,7 +107,7 @@ export default function Dashboard() {
             <div className="md:col-span-7 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 p-6">
               <div className="mono text-xs tracking-[0.14em] text-zinc-500 dark:text-zinc-400 dark:text-zinc-400">01 — SIMPLE ANSWER</div>
               <div className="text-lg font-bold mt-1 dark:text-white">Get a clear answer.</div>
-              <p className="mono text-sm text-zinc-600 dark:text-zinc-400 mt-2 leading-relaxed">Gooner tells you <span className="font-semibold text-zinc-900 dark:text-zinc-100 dark:text-white">yes, no, or what to fix</span> before you bid. No guessing.</p>
+              <p className="mono text-sm text-zinc-600 dark:text-zinc-400 mt-2 leading-relaxed">Licensensibly tells you <span className="font-semibold text-zinc-900 dark:text-zinc-100 dark:text-white">yes, no, or what to fix</span> before you bid. No guessing.</p>
             </div>
             <div className="md:col-span-5 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-zinc-900 text-white p-6">
               <div className="mono text-xs tracking-[0.14em] text-amber-300">02 — TRUSTED LINKS</div>
