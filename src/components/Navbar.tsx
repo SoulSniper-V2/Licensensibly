@@ -22,6 +22,7 @@ const menuGroups = [
       { href: "/companies", label: "Companies", icon: BuildingOffice },
       { href: "/projects", label: "Projects", icon: FolderOpen },
       { href: "/calendar", label: "Calendar", icon: Calendar },
+      { href: "/processes", label: "Processes", icon: SquaresFour },
     ],
   },
   {
