@@ -60,7 +60,7 @@ export default function EligibilityCard({ result }: { result: EligibilityResult 
             <div className="mt-3 space-y-2">
               {result.checklist.map(item=> (
                 <div key={item.id} className="flex gap-3 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-3">
-                  <div className={`mt-0.5 h-2.5 w-2.5 rounded-full shrink-0 ${item.status==="done" ? "bg-emerald-50 dark:bg-emerald-9500" : item.status==="blocked" ? "bg-red-50 dark:bg-red-9500" : "bg-zinc-300"}`} />
+                  <div className={`mt-0.5 h-2.5 w-2.5 rounded-full shrink-0 ${item.status==="done" ? "bg-emerald-50 dark:bg-emerald-9500" : item.status==="blocked" ? "bg-red-50 dark:bg-red-950" : "bg-zinc-300"}`} />
                   <div className="min-w-0">
                     <div className="text-xs font-semibold leading-tight">{item.title}</div>
                     <div className="mono text-[11px] text-zinc-500 dark:text-zinc-400">{item.dueDate ? new Date(item.dueDate).toLocaleDateString() : "no due date"} • {item.status}</div>

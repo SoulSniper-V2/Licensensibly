@@ -4,6 +4,7 @@ import { useState, useMemo } from "react";
 import { MOCK_COMPANIES, MOCK_PROJECTS } from "@/lib/mock-data";
 import { evaluateEligibility } from "@/lib/eligibility-engine";
 import OnboardingPanel from "@/components/OnboardingPanel";
+import DashboardPanel from "@/components/DashboardPanel";
 
 // Design Read: B2B SaaS landing for specialty contractors (technical buyers/procurement), trust-first deterministic language, leaning toward Tailwind v4 + Geist + Radix-like tokens, restrained motion. Dials: VARIANCE 4 / MOTION 3 / DENSITY 4
 export default function Dashboard() {
@@ -20,7 +21,7 @@ export default function Dashboard() {
         <div className="grid lg:grid-cols-[1.15fr_0.85fr] gap-10 items-start">
           <div>
             <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-3 py-1 mono text-[11px] tracking-[0.14em] text-zinc-600 dark:text-zinc-400">
-              <span className="h-2 w-2 rounded-full bg-white dark:bg-zinc-9000" /> FOR CONTRACTORS • NC SC VA
+              <span className="h-2 w-2 rounded-full bg-white dark:bg-zinc-900" /> FOR CONTRACTORS • NC SC VA
             </div>
             <h1 className="mt-5 text-[46px] md:text-[68px] font-[800] tracking-[-0.05em] leading-[0.88]">
               <span className="block text-zinc-900 dark:text-zinc-100">Can we</span>
@@ -56,7 +57,7 @@ export default function Dashboard() {
             <div className="rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 overflow-hidden">
               <div className="px-5 py-3 flex items-center justify-between bg-zinc-900 text-white">
                 <span className="mono text-[11px] tracking-[0.14em]">CHECK A JOB</span>
-                <span className={`mono text-xs font-bold px-2.5 py-1 rounded-full ${result.status==='eligible'?'bg-white dark:bg-zinc-9000':result.status==='conditional'?'bg-white dark:bg-zinc-9000':'bg-red-50 dark:bg-red-9500'}`}>{result.status.toUpperCase()}</span>
+                <span className={`mono text-xs font-bold px-2.5 py-1 rounded-full ${result.status==='eligible'?'bg-white dark:bg-zinc-900':result.status==='conditional'?'bg-white dark:bg-zinc-900':'bg-red-50 dark:bg-red-950'}`}>{result.status.toUpperCase()}</span>
               </div>
               <div className="p-5 space-y-4">
                 <div className="grid grid-cols-2 gap-3">
@@ -95,6 +96,8 @@ export default function Dashboard() {
       </section>
 
       <OnboardingPanel />
+
+      <DashboardPanel />
 
       {/* VALUE — horizontal bento, not 3 equal cards */}
       <section className="mx-auto max-w-[1200px] px-6 py-10">

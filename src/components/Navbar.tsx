@@ -2,51 +2,127 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import {
+  House, MagnifyingGlass, BuildingOffice, FolderOpen, Calendar,
+  Gear, Sun, Moon, SquaresFour, ChartBar, Plus,
+} from "@phosphor-icons/react";
 import ThemeToggle from "./ThemeToggle";
 
-const links = [
-  { href: "/", label: "Home" },
-  { href: "/check", label: "Check" },
-  { href: "/companies", label: "Companies" },
-  { href: "/projects", label: "Projects" },
-  { href: "/calendar", label: "Calendar" },
-  { href: "/settings", label: "Settings" },
+const menuGroups = [
+  {
+    label: "File",
+    items: [
+      { href: "/", label: "Home", icon: House },
+      { href: "/check", label: "New check", icon: Plus },
+    ],
+  },
+  {
+    label: "View",
+    items: [
+      { href: "/companies", label: "Companies", icon: BuildingOffice },
+      { href: "/projects", label: "Projects", icon: FolderOpen },
+      { href: "/calendar", label: "Calendar", icon: Calendar },
+    ],
+  },
+  {
+    label: "Tools",
+    items: [
+      { href: "/check", label: "Eligibility check", icon: MagnifyingGlass },
+      { href: "/settings", label: "Settings", icon: Gear },
+    ],
+  },
 ];
 
 export default function Navbar() {
   const pathname = usePathname();
-  const [open, setOpen] = useState(false);
+  const [openMenu, setOpenMenu] = useState<string | null>(null);
+
   return (
     <header className="sticky top-0 z-40 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-xl border-b border-zinc-200 dark:border-zinc-800">
-      <div className="mx-auto max-w-[1200px] px-6 h-[64px] flex items-center gap-8">
-        <Link href="/" className="flex items-center gap-2">
+      <div className="mx-auto max-w-[1200px] px-4 md:px-6 h-[52px] flex items-center gap-2 md:gap-4">
+        {/* Logo */}
+        <Link href="/" className="flex items-center gap-2 shrink-0">
           <div className="h-7 w-7 bg-zinc-900 flex items-center justify-center rounded-md">
             <span className="text-white text-[13px] font-black">G</span>
           </div>
-          <span className="text-[15px] font-bold tracking-tight">gooner</span>
-          <span className="mono text-[10px] tracking-[0.14em] text-zinc-400 border border-zinc-200 dark:border-zinc-800 rounded-full px-2 py-0.5">NC SC VA</span>
+          <span className="text-[15px] font-bold tracking-tight hidden sm:inline">gooner</span>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-1">
-          {links.map(l => {
-            const active = pathname === l.href;
-            return <Link key={l.href} href={l.href} className={`text-sm px-3 py-1.5 rounded-full ${active ? "bg-zinc-900 text-white" : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:text-zinc-100 hover:bg-zinc-100"}`}>{l.label}</Link>
-          })}
+        {/* Canvas-like menubar (desktop) */}
+        <nav className="hidden md:flex items-center gap-0.5">
+          {menuGroups.map((g) => (
+            <div key={g.label} className="relative">
+              <button
+                onClick={() => setOpenMenu(openMenu === g.label ? null : g.label)}
+                onMouseEnter={() => setOpenMenu(g.label)}
+                className={`text-sm px-3 py-1.5 rounded-md transition-colors ${
+                  openMenu === g.label
+                    ? "bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100"
+                    : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100"
+                }`}
+              >
+                {g.label}
+              </button>
+              {openMenu === g.label && (
+                <div className="absolute left-0 top-full mt-1 w-52 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 shadow-xl p-1.5 z-50">
+                  {g.items.map((it) => {
+                    const Icon = it.icon;
+                    const active = pathname === it.href;
+                    return (
+                      <Link
+                        key={it.label}
+                        href={it.href}
+                        className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm ${
+                          active
+                            ? "bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 font-medium"
+                            : "text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-800/60"
+                        }`}
+                      >
+                        <Icon size={16} weight="bold" />
+                        {it.label}
+                      </Link>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          ))}
         </nav>
 
-        <div className="ml-auto hidden md:flex items-center gap-3">
-          <span className="mono text-xs text-zinc-500 dark:text-zinc-400 hidden lg:inline">Ready to bid?</span>
+        {/* Right cluster */}
+        <div className="ml-auto flex items-center gap-2">
+          <span className="mono text-[10px] tracking-[0.14em] text-zinc-400 border border-zinc-200 dark:border-zinc-800 rounded-full px-2 py-0.5 hidden lg:inline">
+            NC SC VA
+          </span>
           <ThemeToggle />
-          <Link href="/check" className="bg-zinc-900 text-white text-sm font-semibold px-5 py-2 rounded-full hover:bg-black dark:bg-white dark:bg-zinc-900 dark:text-zinc-900 dark:text-zinc-100">Run check →</Link>
+          <Link
+            href="/check"
+            className="bg-zinc-900 text-white text-sm font-semibold px-4 py-1.5 rounded-full hover:bg-black dark:bg-white dark:text-zinc-900 transition-colors"
+          >
+            Run check →
+          </Link>
         </div>
-
-        <button onClick={()=> setOpen(v=>!v)} className="md:hidden ml-auto text-sm border border-zinc-200 dark:border-zinc-800 rounded-full px-4 py-1.5">{open ? "Close" : "Menu"}</button>
       </div>
-      {open && (
-        <div className="md:hidden border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 px-6 py-4 grid gap-2">
-          {links.map(l=> <Link key={l.href} href={l.href} onClick={()=>setOpen(false)} className={`text-sm px-3 py-2.5 rounded-full border ${pathname===l.href ? "bg-zinc-900 text-white border-zinc-900" : "border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400"}`}>{l.label}</Link>)}
-        </div>
-      )}
+
+      {/* Mobile menu */}
+      <div className="md:hidden border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 px-4 py-3 grid gap-1">
+        {menuGroups.flatMap((g) => g.items).map((it) => {
+          const Icon = it.icon;
+          const active = pathname === it.href;
+          return (
+            <Link
+              key={it.label}
+              href={it.href}
+              className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm ${
+                active ? "bg-zinc-100 dark:bg-zinc-800 font-medium" : "text-zinc-600 dark:text-zinc-400"
+              }`}
+            >
+              <Icon size={16} weight="bold" />
+              {it.label}
+            </Link>
+          );
+        })}
+      </div>
     </header>
   );
 }

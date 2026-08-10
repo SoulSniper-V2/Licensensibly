@@ -79,7 +79,7 @@ export default function CalendarPage() {
             <span className="h-3 w-3 border bg-amber-400 border border-amber-500" /> bid
           </span>
           <span className="inline-flex items-center gap-1.5">
-            <span className="h-3 w-3 border bg-red-50 dark:bg-red-9500" /> renewal
+            <span className="h-3 w-3 border bg-red-50 dark:bg-red-950" /> renewal
           </span>
           <span className="inline-flex items-center gap-1.5">
             <span className="h-3 w-3 border bg-sky-400" /> application

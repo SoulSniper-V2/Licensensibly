@@ -65,7 +65,7 @@ export default function AIResearchPanel({ result, city, state, trade, value }: {
   return (
     <div className="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 overflow-hidden">
       <div className="flex items-center gap-2 px-5 py-3 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50">
-        <span className="h-2 w-2 rounded-full bg-white dark:bg-zinc-9000 animate-pulse" />
+        <span className="h-2 w-2 rounded-full bg-white dark:bg-zinc-900 animate-pulse" />
         <h3 className="mono text-xs tracking-[0.14em] font-semibold">AINSIDE — REGULATORY RESEARCH</h3>
         <span className="mono text-[11px] border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 rounded-full px-2 py-0.5 text-zinc-500 dark:text-zinc-400">ag/gemini-3.6-flash-high</span>
         {loading && <span className="ml-auto mono text-xs text-zinc-500 dark:text-zinc-400 animate-pulse">Researching…</span>}

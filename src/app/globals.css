@@ -4,11 +4,21 @@
   --background: #ffffff;
   --foreground: #0a0a0a;
   --muted: #f4f4f5;
+  --muted-foreground: #52525b;
   --border: #e4e4e7;
+  --card: #ffffff;
+  --accent: #18181b;
+  --accent-foreground: #fafafa;
 }
 .dark {
   --background: #0a0a0a;
   --foreground: #fafafa;
+  --muted: #18181b;
+  --muted-foreground: #a1a1aa;
+  --border: #27272a;
+  --card: #111113;
+  --accent: #fafafa;
+  --accent-foreground: #0a0a0a;
 }
 @theme inline {
   --color-background: var(--background);
