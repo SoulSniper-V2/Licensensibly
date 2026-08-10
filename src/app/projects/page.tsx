@@ -30,6 +30,12 @@ export default function ProjectsPage() {
     return d;
   };
 
+  const totalVal = filtered.reduce((s,p)=>s+p.contractValue,0);
+  const eligibleCount = filtered.filter(p=> badgeFor(p).label==="ELIGIBLE").length;
+  const urgentCount = filtered.filter(p=>{
+    const d = daysUntil(p.bidDate); return d!==null && d<=14 && d>=0;
+  }).length;
+
   return (
     <div className="mx-auto max-w-[1200px] px-6 py-8 space-y-6">
       <div className="flex flex-wrap items-start justify-between gap-4">
@@ -56,6 +62,21 @@ export default function ProjectsPage() {
           </select>
         </label>
         <span className="text-xs text-zinc-500 dark:text-zinc-400 ml-auto hidden sm:inline">Showing {filtered.length} of {MOCK_PROJECTS.length} • NC {"<"} $40k exempt • SC {"<"} $5k • VA Class C/B/A thresholds</span>
+      </div>
+
+      {/* KPI strip — research-driven: executive overview like CRM/inventory dashboards */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        {[
+          { k: "Pipeline value", v: `$${(totalVal/1_000_000).toFixed(2)}M`, t: "text-zinc-900 dark:text-zinc-100" },
+          { k: "Opportunities", v: filtered.length, t: "text-zinc-900 dark:text-zinc-100" },
+          { k: "Eligible now", v: eligibleCount, t: "text-emerald-600 dark:text-emerald-400" },
+          { k: "Urgent (≤14d)", v: urgentCount, t: "text-amber-600 dark:text-amber-400" },
+        ].map(s=> (
+          <div className="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-4">
+            <div className="mono text-[11px] tracking-wide text-zinc-500 dark:text-zinc-400">{s.k}</div>
+            <div className={`text-xl font-bold tracking-tight mt-1 ${s.t}`}>{s.v}</div>
+          </div>
+        ))}
       </div>
 
       <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-5">
