@@ -21,7 +21,7 @@ export default function Dashboard() {
         <div className="grid lg:grid-cols-[1.15fr_0.85fr] gap-10 items-start">
           <div>
             <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-3 py-1 mono text-[11px] tracking-[0.14em] text-zinc-600 dark:text-zinc-400">
-              <span className="h-2 w-2 rounded-full bg-white dark:bg-zinc-900" /> FOR CONTRACTORS • NC SC VA
+              <span className="h-2 w-2 rounded-full bg-amber-400" /> FOR CONTRACTORS • NC SC VA
             </div>
             <h1 className="mt-5 text-[46px] md:text-[68px] font-[800] tracking-[-0.05em] leading-[0.88]">
               <span className="block text-zinc-900 dark:text-zinc-100">Can we</span>
@@ -32,8 +32,8 @@ export default function Dashboard() {
               <span className="font-semibold text-zinc-900 dark:text-zinc-100 dark:text-white">Licensensibly</span> checks if you can take a job. Pick your company and the job — get a clear <span className="font-semibold text-zinc-900 dark:text-zinc-100 dark:text-white">Yes / Maybe / No</span> and a simple checklist of what to fix before you bid.
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
-              <Link href="/check" className="rounded-full bg-zinc-900 text-white font-semibold px-7 py-3 hover:bg-zinc-900 transition-colors">Run eligibility check →</Link>
-              <Link href="/settings" className="rounded-full border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 font-medium px-6 py-3 hover:bg-white dark:bg-zinc-900">Company in Settings</Link>
+              <Link href="/check" className="rounded-full bg-zinc-900 text-white font-semibold px-7 py-3 hover:bg-zinc-800 transition-colors">Run eligibility check →</Link>
+              <Link href="/settings" className="rounded-full border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 font-medium px-6 py-3 hover:bg-zinc-50 dark:hover:bg-zinc-800">Company in Settings</Link>
             </div>
             <div className="mt-4 flex gap-6 mono text-xs text-zinc-500 dark:text-zinc-400">
               <span>• Try it free</span><span>• Works on your phone</span><span>• Shows what you need</span>
@@ -45,7 +45,7 @@ export default function Dashboard() {
                 { k: "NC SC VA", v: "Narrow vertical", sub: "Day-one moat" },
               ].map(s=> (
                 <div key={s.k} className="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-4">
-                  <div className="text-xl font-bold tracking-tight">{s.k}</div>
+                  <div className="text-xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">{s.k}</div>
                   <div className="mono text-[11px] text-zinc-900 dark:text-zinc-100 dark:text-zinc-400 leading-tight">{s.v}</div>
                   <div className="mono text-[10px] text-zinc-600 dark:text-zinc-400">{s.sub}</div>
                 </div>
@@ -57,7 +57,7 @@ export default function Dashboard() {
             <div className="rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 overflow-hidden">
               <div className="px-5 py-3 flex items-center justify-between bg-zinc-900 text-white">
                 <span className="mono text-[11px] tracking-[0.14em]">CHECK A JOB</span>
-                <span className={`mono text-xs font-bold px-2.5 py-1 rounded-full ${result.status==='eligible'?'bg-white dark:bg-zinc-900':result.status==='conditional'?'bg-white dark:bg-zinc-900':'bg-red-50 dark:bg-red-950'}`}>{result.status.toUpperCase()}</span>
+                <span className={`mono text-xs font-bold px-2.5 py-1 rounded-full ${result.status==='eligible'?'bg-emerald-50 dark:bg-emerald-950 border-emerald-200 text-emerald-700 dark:text-emerald-300':result.status==='conditional'?'bg-white dark:bg-zinc-900':'bg-red-50 dark:bg-red-950'}`}>{result.status.toUpperCase()}</span>
               </div>
               <div className="p-5 space-y-4">
                 <div className="grid grid-cols-2 gap-3">
@@ -137,7 +137,7 @@ export default function Dashboard() {
       {/* PRICING — kept but with more air, not compact */}
       <section className="mx-auto max-w-[1200px] px-6 pb-12">
         <div className="rounded-[24px] border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-6 md:p-8">
-          <h2 className="text-xl font-bold tracking-tight text-center">Pricing — start narrow, expand later</h2>
+          <h2 className="text-xl font-bold tracking-tight text-center text-zinc-900 dark:text-zinc-100">Pricing — start narrow, expand later</h2>
           <p className="mono text-xs text-zinc-500 dark:text-zinc-400 text-center mt-1">Hundreds/mo — not $10 consumer. Validates wedge ROI.</p>
           <div className="mt-8 grid md:grid-cols-3 gap-6 max-w-[900px] mx-auto">
             {[
