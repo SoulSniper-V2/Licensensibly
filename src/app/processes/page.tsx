@@ -26,7 +26,17 @@ export default function ProcessesPage(){
     }));
   }
   function toggleCheck(runId:string, checkId:string){
-    setRuns(prev=> prev.map(r=> r.id===runId ? {...r, checklist: r.checklist.map(c=> c.id===checkId ? {...c, done: !c.done} : c)} : r));
+    setRuns(prev=> prev.map(r=> {
+      if(r.id!==runId) return r;
+      const nextChecklist = r.checklist.map(c=> c.id===checkId ? {...c, done: !c.done} : c);
+      const allDone = nextChecklist.every(c=> c.done);
+      let nextStage = r.stage;
+      if(allDone && r.stage !== "done"){
+        const idx = STAGES.findIndex(s=> s.id===r.stage);
+        nextStage = STAGES[Math.min(STAGES.length-1, idx+1)].id as any;
+      }
+      return {...r, checklist: nextChecklist, stage: nextStage as any, updatedAt: new Date().toISOString().slice(0,10)};
+    }));
   }
   function createFromTemplate(tid:string){
     const tmpl = PROCESS_TEMPLATES.find(t=> t.id===tid)!;
