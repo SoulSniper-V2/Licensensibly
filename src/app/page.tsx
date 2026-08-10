@@ -20,8 +20,10 @@ export default function Dashboard() {
         <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1 mono text-xs tracking-wide text-zinc-600">
           <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" /> Pre-bid, not post-hold • NC SC VA
         </div>
-        <h1 className="mt-6 text-[44px] md:text-[64px] font-bold tracking-[-0.04em] leading-[0.9]">
-          Can we<br/>legally bid<br/><span className="bg-zinc-900 text-white px-3 rounded-xl">this job?</span>
+        <h1 className="mt-6 text-[44px] md:text-[64px] font-bold tracking-[-0.04em] leading-[0.92]">
+          <span className="block">Can we</span>
+          <span className="block -mt-1">legally bid</span>
+          <span className="inline-block bg-zinc-900 text-white px-4 py-1 rounded-[16px] mt-1">this job?</span>
         </h1>
         <p className="mt-5 text-[16px] leading-relaxed text-zinc-600 max-w-[56ch] mx-auto">
           <span className="font-semibold text-zinc-900">Gooner</span> is the pre-bid compliance OS for specialty contractors.
