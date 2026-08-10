@@ -59,6 +59,20 @@ export default function ProcessesPage(){
         <Link href="/check" className="rounded-xl bg-amber-400 hover:bg-amber-300 text-zinc-900 font-bold px-5 py-2.5 text-sm">Run Eligibility →</Link>
       </div>
 
+      {/* SIMPLE plug-and-play — 1-click */}
+      <div className="rounded-2xl border-2 border-amber-300 bg-amber-50 dark:bg-amber-950/20 p-5 flex flex-wrap items-center gap-4">
+        <div className="flex-1 min-w-[300px]">
+          <div className="text-xs font-black tracking-[0.14em] text-amber-700 dark:text-amber-300">PLUG-AND-PLAY • SIMPLEST PATH</div>
+          <div className="text-[16px] font-black mt-1">One-click Compliance Process</div>
+          <div className="text-sm text-zinc-600 dark:text-zinc-400 mt-1">Pick company & project — I auto-run eligibility, build checklist, track to Done. No template picking.</div>
+        </div>
+        <button onClick={()=> {
+          const id=`run-${Date.now()}`;
+          const run:any = {id, templateId:"bid-qualification", title:`Plug-and-play — ${new Date().toLocaleDateString()} • Auto eligibility`, companyId:"co-1", stage:"in_progress", owner:"You", dueDate: new Date(Date.now()+5*86400000).toISOString().slice(0,10), checklist:[{id:"a",title:"Auto: eligibility checked",done:true,required:true},{id:"b",title:"Auto: blockers listed",done:true,required:true},{id:"c",title:"You: resolve blockers",done:false,required:true},{id:"d",title:"Auto: packet ready",done:false,required:true}], createdAt:new Date().toISOString().slice(0,10), updatedAt:new Date().toISOString().slice(0,10), slaStatus:"on_track"};
+          setRuns([run, ...runs]);
+        }} className="rounded-2xl bg-zinc-900 text-white font-black px-8 py-4 text-sm hover:bg-black">▶ Start plug-and-play now</button>
+      </div>
+
       <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
         {[
           {k:"Active runs", v: stats.active, sub: `${stats.total} total`},
