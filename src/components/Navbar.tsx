@@ -24,27 +24,27 @@ export default function Navbar() {
             <span className="text-white text-[13px] font-black">G</span>
           </div>
           <span className="text-[15px] font-bold tracking-tight">gooner</span>
-          <span className="mono text-[10px] tracking-[0.14em] text-zinc-400 border border-zinc-200 rounded-full px-2 py-0.5">NC SC VA</span>
+          <span className="mono text-[10px] tracking-[0.14em] text-zinc-400 border border-zinc-200 dark:border-zinc-800 rounded-full px-2 py-0.5">NC SC VA</span>
         </Link>
 
         <nav className="hidden md:flex items-center gap-1">
           {links.map(l => {
             const active = pathname === l.href;
-            return <Link key={l.href} href={l.href} className={`text-sm px-3 py-1.5 rounded-full ${active ? "bg-zinc-900 text-white" : "text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100"}`}>{l.label}</Link>
+            return <Link key={l.href} href={l.href} className={`text-sm px-3 py-1.5 rounded-full ${active ? "bg-zinc-900 text-white" : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:text-zinc-100 hover:bg-zinc-100"}`}>{l.label}</Link>
           })}
         </nav>
 
         <div className="ml-auto hidden md:flex items-center gap-3">
-          <span className="mono text-xs text-zinc-500 hidden lg:inline">Ready to bid?</span>
+          <span className="mono text-xs text-zinc-500 dark:text-zinc-400 hidden lg:inline">Ready to bid?</span>
           <ThemeToggle />
-          <Link href="/check" className="bg-zinc-900 text-white text-sm font-semibold px-5 py-2 rounded-full hover:bg-black dark:bg-white dark:text-zinc-900">Run check →</Link>
+          <Link href="/check" className="bg-zinc-900 text-white text-sm font-semibold px-5 py-2 rounded-full hover:bg-black dark:bg-white dark:bg-zinc-900 dark:text-zinc-900 dark:text-zinc-100">Run check →</Link>
         </div>
 
-        <button onClick={()=> setOpen(v=>!v)} className="md:hidden ml-auto text-sm border border-zinc-200 rounded-full px-4 py-1.5">{open ? "Close" : "Menu"}</button>
+        <button onClick={()=> setOpen(v=>!v)} className="md:hidden ml-auto text-sm border border-zinc-200 dark:border-zinc-800 rounded-full px-4 py-1.5">{open ? "Close" : "Menu"}</button>
       </div>
       {open && (
         <div className="md:hidden border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 px-6 py-4 grid gap-2">
-          {links.map(l=> <Link key={l.href} href={l.href} onClick={()=>setOpen(false)} className={`text-sm px-3 py-2.5 rounded-full border ${pathname===l.href ? "bg-zinc-900 text-white border-zinc-900" : "border-zinc-200 text-zinc-600"}`}>{l.label}</Link>)}
+          {links.map(l=> <Link key={l.href} href={l.href} onClick={()=>setOpen(false)} className={`text-sm px-3 py-2.5 rounded-full border ${pathname===l.href ? "bg-zinc-900 text-white border-zinc-900" : "border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400"}`}>{l.label}</Link>)}
         </div>
       )}
     </header>

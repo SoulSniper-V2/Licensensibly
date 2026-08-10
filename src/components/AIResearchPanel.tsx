@@ -54,7 +54,7 @@ export default function AIResearchPanel({ result, city, state, trade, value }: {
     while ((m = re.exec(s))) {
       if (m.index > last) parts.push(<span key={idx++}>{s.slice(last, m.index)}</span>);
       const token = m[0];
-      if (token.startsWith("**")) parts.push(<strong key={idx++} className="font-semibold text-zinc-900">{token.slice(2,-2)}</strong>);
+      if (token.startsWith("**")) parts.push(<strong key={idx++} className="font-semibold text-zinc-900 dark:text-zinc-100">{token.slice(2,-2)}</strong>);
       else { const lm = token.match(/\[(.*?)\]\((.*?)\)/); if (lm) parts.push(<a key={idx++} href={lm[2]} target="_blank" className="underline text-sky-700">{lm[1]}</a>); else parts.push(<span key={idx++}>{token}</span>); }
       last = m.index + token.length;
     }
@@ -63,31 +63,31 @@ export default function AIResearchPanel({ result, city, state, trade, value }: {
   }
 
   return (
-    <div className="rounded-2xl border border-zinc-200 bg-white overflow-hidden">
-      <div className="flex items-center gap-2 px-5 py-3 border-b border-zinc-200 bg-zinc-50">
+    <div className="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 overflow-hidden">
+      <div className="flex items-center gap-2 px-5 py-3 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50">
         <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
         <h3 className="mono text-xs tracking-[0.14em] font-semibold">AINSIDE — REGULATORY RESEARCH</h3>
-        <span className="mono text-[11px] border border-zinc-200 bg-white rounded-full px-2 py-0.5 text-zinc-500">ag/gemini-3.6-flash-high</span>
-        {loading && <span className="ml-auto mono text-xs text-zinc-500 animate-pulse">Researching…</span>}
+        <span className="mono text-[11px] border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 rounded-full px-2 py-0.5 text-zinc-500 dark:text-zinc-400">ag/gemini-3.6-flash-high</span>
+        {loading && <span className="ml-auto mono text-xs text-zinc-500 dark:text-zinc-400 animate-pulse">Researching…</span>}
         {!loading && !error && text && <span className="ml-auto mono text-xs text-emerald-600">● live</span>}
       </div>
-      <div className="px-5 py-2 mono text-xs text-zinc-500 border-b border-zinc-100">Engine decided <span className="text-zinc-900 font-semibold uppercase">{result.status}</span> — AINSIDE explains and cites.</div>
-      <div className="p-5 min-h-[140px] bg-white">
-        {loading && !text && <div className="mono text-sm text-zinc-500">Asking AINSIDE… <span className="inline-block w-2 h-2 bg-zinc-300 rounded-full animate-bounce" /></div>}
+      <div className="px-5 py-2 mono text-xs text-zinc-500 dark:text-zinc-400 border-b border-zinc-100">Engine decided <span className="text-zinc-900 dark:text-zinc-100 font-semibold uppercase">{result.status}</span> — AINSIDE explains and cites.</div>
+      <div className="p-5 min-h-[140px] bg-white dark:bg-zinc-900">
+        {loading && !text && <div className="mono text-sm text-zinc-500 dark:text-zinc-400">Asking AINSIDE… <span className="inline-block w-2 h-2 bg-zinc-300 rounded-full animate-bounce" /></div>}
         {error && (
           <div className="space-y-3">
             <div className="mono text-sm font-medium text-amber-800 bg-amber-50 border border-amber-200 rounded-xl p-3">AINSIDE unreachable — showing deterministic fallback.</div>
-            <div className="mono text-xs text-zinc-500 break-all">{error}</div>
-            <div className="rounded-xl bg-zinc-50 border border-zinc-200 p-4 text-sm leading-relaxed text-zinc-700">
+            <div className="mono text-xs text-zinc-500 dark:text-zinc-400 break-all">{error}</div>
+            <div className="rounded-xl bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 p-4 text-sm leading-relaxed text-zinc-700">
               For a <span className="font-semibold">${value.toLocaleString()} {trade}</span> job in <span className="font-semibold">{city}, {state}</span>, engine determined <span className="font-semibold uppercase">{result.status}</span>. Primary blocker: <span className="font-semibold">{result.blockers[0]?.requirement.label || "none — ready to bid"}</span>.
-              <div className="mono text-xs text-zinc-500 mt-2">Sources: {result.citations.slice(0,2).map(c=>c.authority).join(" • ")} • Verified 2026-08-01</div>
+              <div className="mono text-xs text-zinc-500 dark:text-zinc-400 mt-2">Sources: {result.citations.slice(0,2).map(c=>c.authority).join(" • ")} • Verified 2026-08-01</div>
             </div>
           </div>
         )}
         {!error && text && <div className="space-y-1">{renderMarkdown(text)}</div>}
         {!error && !loading && !text && <div className="mono text-xs text-zinc-400">No output.</div>}
       </div>
-      <div className="px-5 py-2 bg-zinc-50 border-t border-zinc-200 mono text-[11px] text-zinc-500">Model ag/gemini-3.6-flash-high via http://192.168.1.204:20128/v1 • Streaming • Not legal advice</div>
+      <div className="px-5 py-2 bg-zinc-50 border-t border-zinc-200 dark:border-zinc-800 mono text-[11px] text-zinc-500 dark:text-zinc-400">Model ag/gemini-3.6-flash-high via http://192.168.1.204:20128/v1 • Streaming • Not legal advice</div>
     </div>
   );
 }

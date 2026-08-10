@@ -22,17 +22,17 @@ export default function AIAssistant() {
     <>
       <button onClick={()=>setOpen(v=>!v)} className="fixed bottom-4 right-4 z-50 bg-zinc-900 text-white px-5 py-3 rounded-full text-sm font-semibold shadow-lg hover:bg-black">{open ? "× Close AINSIDE" : "◐ AINSIDE"}</button>
       {open && (
-        <div className="fixed bottom-20 right-4 z-50 w-[380px] max-w-[calc(100vw-24px)] rounded-2xl border border-zinc-200 bg-white shadow-xl flex flex-col overflow-hidden">
-          <div className="px-4 py-3 border-b border-zinc-200 bg-zinc-50 flex items-center gap-2">
+        <div className="fixed bottom-20 right-4 z-50 w-[380px] max-w-[calc(100vw-24px)] rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 shadow-xl flex flex-col overflow-hidden">
+          <div className="px-4 py-3 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50 flex items-center gap-2">
             <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="text-sm font-bold">AINSIDE</span><span className="mono text-[11px] bg-white border border-zinc-200 rounded-full px-2 py-0.5">ag/gemini-3.6-flash-high</span><span className="ml-auto mono text-[11px] text-zinc-500">NC SC VA</span>
+            <span className="text-sm font-bold">AINSIDE</span><span className="mono text-[11px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-full px-2 py-0.5">ag/gemini-3.6-flash-high</span><span className="ml-auto mono text-[11px] text-zinc-500 dark:text-zinc-400">NC SC VA</span>
           </div>
-          <div ref={listRef} className="h-[360px] overflow-auto p-3 space-y-3 bg-white">
+          <div ref={listRef} className="h-[360px] overflow-auto p-3 space-y-3 bg-white dark:bg-zinc-900">
             {msgs.map((m,i)=> <div key={i} className={`max-w-[86%] px-3 py-2 rounded-2xl text-sm leading-relaxed ${m.role==="user" ? "ml-auto bg-zinc-900 text-white" : "bg-zinc-100 text-zinc-800"}`}>{m.content}</div>)}
-            {busy && <div className="mono text-xs text-zinc-500 animate-pulse">Thinking…</div>}
+            {busy && <div className="mono text-xs text-zinc-500 dark:text-zinc-400 animate-pulse">Thinking…</div>}
           </div>
-          <div className="p-2 border-t border-zinc-200 bg-white flex gap-2">
-            <input value={input} onChange={e=>setInput(e.target.value)} onKeyDown={e=>e.key==="Enter"&&send()} placeholder="Ask NC/SC/VA scope, reciprocity..." className="flex-1 bg-zinc-50 border border-zinc-200 rounded-full px-3 py-2 text-sm focus:outline-none focus:border-zinc-300" />
+          <div className="p-2 border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 flex gap-2">
+            <input value={input} onChange={e=>setInput(e.target.value)} onKeyDown={e=>e.key==="Enter"&&send()} placeholder="Ask NC/SC/VA scope, reciprocity..." className="flex-1 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-full px-3 py-2 text-sm focus:outline-none focus:border-zinc-300" />
             <button onClick={send} disabled={busy||!input.trim()} className="bg-zinc-900 text-white rounded-full px-4 text-sm font-semibold disabled:opacity-40">Send</button>
           </div>
         </div>
