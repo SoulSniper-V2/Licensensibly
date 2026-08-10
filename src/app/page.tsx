@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useState, useMemo } from "react";
+import { motion } from "motion/react";
 import { MOCK_COMPANIES, MOCK_PROJECTS } from "@/lib/mock-data";
 import { evaluateEligibility } from "@/lib/eligibility-engine";
 import EligibilityCard from "@/components/EligibilityCard";
@@ -13,124 +14,217 @@ export default function Dashboard() {
   const project = MOCK_PROJECTS[projectIdx];
   const result = useMemo(()=> evaluateEligibility(company, project), [company, project]);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const stats = {
-    checks: 127,
-    blocked: 34,
-    avgLead: "18 days",
-  };
-
   return (
-    <div className="mx-auto max-w-[1320px] px-6 py-8 space-y-8">
-      {/* Hero — wedge explanation */}
-      <div className="rounded-[28px] bg-slate-900 text-white overflow-hidden">
-        <div className="grid lg:grid-cols-[1.15fr_0.85fr] gap-0">
-          <div className="p-8 lg:p-10">
-            <div className="inline-flex items-center gap-2 rounded-full bg-amber-400 text-slate-900 px-3 py-1 text-xs font-black tracking-wide">THE WEDGE • PRE-BID, NOT POST-HOLD</div>
-            <h1 className="mt-4 text-[40px] font-black leading-[0.9] tracking-tight">Can we <span className="text-amber-400">legally bid</span> this job?</h1>
-            <p className="mt-4 text-[15px] leading-relaxed text-slate-300 max-w-[62ch]">
-              Gooner is an <span className="text-white font-semibold">AI-native pre-bid licensing & compliance OS</span> for specialty contractors. Drop an address, value, trade, and company profile — get a deterministic <span className="text-white">Eligible / Conditional / Ineligible</span> judgment with blockers, reciprocity, lead time, checklists, and citations to the issuing board. Built narrow: <span className="text-amber-300 font-semibold">Electrical + HVAC in NC • SC • VA + major municipalities</span>. LLM explains, <span className="underline decoration-amber-400">engine decides</span>.
-            </p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Link href="/check" className="rounded-full bg-amber-400 text-slate-900 font-black px-6 py-3 hover:bg-amber-300">Run Eligibility Check →</Link>
-              <Link href="/companies" className="rounded-full bg-white text-slate-900 font-bold px-6 py-3">Manage Company Profile</Link>
-            </div>
-            <div className="mt-6 grid grid-cols-3 gap-3 max-w-[560px]">
-              {[
-                { k: "521k", v: "Specialty establishments (Census)" },
-                { k: "22k+", v: "Regulatory requirements tracked (Harbor benchmark)" },
-                { k: "$499", v: "Multi-state pricing validates wedge ROI" },
-              ].map(s=> (
-                <div key={s.k} className="rounded-2xl bg-white/10 border border-white/10 p-3">
-                  <div className="text-xl font-black">{s.k}</div>
-                  <div className="text-xs leading-tight text-slate-300">{s.v}</div>
+    <div className="bg-[#09090b]">
+      {/* HERO - ASYMMETRIC SPLIT like freebuff but industrial */}
+      <section className="relative overflow-hidden border-b border-zinc-800 bg-[#09090b]">
+        <div className="absolute inset-0 bg-grid opacity-40" />
+        {/* scanline */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#09090b]" />
+        
+        <div className="relative mx-auto max-w-[1400px] px-4 md:px-6 pt-10 md:pt-14 pb-8">
+          <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-8 lg:gap-6 items-start">
+            {/* LEFT: editorial */}
+            <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: [0.16,1,0.3,1] }} className="min-w-0">
+              <div className="inline-flex items-center gap-2 border border-[#facc15] bg-[#facc15] text-black mono text-[10px] tracking-[0.18em] px-3 py-1 font-black">
+                <span className="h-2 w-2 bg-black animate-pulse" /> THE WEDGE — PRE-BID, NOT POST-HOLD
+              </div>
+              <h1 className="mt-5 text-[42px] md:text-[64px] font-black leading-[0.85] tracking-[-0.04em]">
+                CAN WE<br/>
+                <span className="bg-[#facc15] text-black px-2 inline-block -rotate-[0.5deg]">LEGALLY BID</span><br/>
+                THIS JOB?
+              </h1>
+              <p className="mt-5 mono text-[13px] leading-relaxed text-zinc-400 max-w-[52ch] border-l-2 border-zinc-800 pl-4">
+                Gooner is an <span className="text-white font-bold">AI-native pre-bid compliance OS</span> for specialty contractors.
+                Drop address, value, trade, company profile — get deterministic <span className="text-white bg-zinc-800 px-1">ELIGIBLE / CONDITIONAL / INELIGIBLE</span> with blockers, reciprocity, lead time, checklist, citations. Built narrow: <span className="text-[#facc15] font-bold">Electrical + HVAC • NC SC VA</span> — LLM explains, <span className="underline decoration-[#facc15] underline-offset-4">engine decides</span>.
+              </p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <Link href="/check" className="mono text-[13px] tracking-[0.12em] font-black bg-[#facc15] text-black px-7 py-3 hover:bg-yellow-300 border border-[#facc15] shadow-[4px_4px_0px_0px_rgba(250,204,21,0.2)] hover:shadow-[6px_6px_0px_0px_rgba(250,204,21,0.25)] transition-all">RUN ELIGIBILITY CHECK →</Link>
+                <Link href="/companies" className="mono text-[13px] tracking-[0.12em] font-bold border border-zinc-700 text-zinc-300 px-7 py-3 hover:bg-zinc-900 hover:text-white">COMPANY PROFILE</Link>
+              </div>
+
+              {/* stats - brutalist grid */}
+              <div className="mt-8 grid grid-cols-3 gap-0 border border-zinc-800 max-w-[560px] bg-black">
+                {[
+                  { k: "521K", v: "Specialty trade establishments", sub: "Census 2023" },
+                  { k: "22K+", v: "Regulatory filings", sub: "Harbor benchmark" },
+                  { k: "$499", v: "Multi-state tier", sub: "Wedge validates ROI" },
+                ].map(s=> (
+                  <div key={s.k} className="p-4 border-r last:border-r-0 border-zinc-800">
+                    <div className="text-[22px] font-black tracking-tighter leading-none">{s.k}</div>
+                    <div className="mono text-[10px] tracking-[0.08em] leading-tight text-zinc-400 mt-1">{s.v}</div>
+                    <div className="mono text-[9px] text-zinc-600 mt-1">{s.sub}</div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-4 mono text-[10px] tracking-[0.14em] text-zinc-600 flex gap-4">
+                <span>521,315 employer establishments</span>
+                <span className="hidden sm:inline">•</span>
+                <span className="hidden sm:inline">Deterministic • No LLM decision</span>
+              </div>
+            </motion.div>
+
+            {/* RIGHT: live terminal - the working AI shit */}
+            <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1, ease: [0.16,1,0.3,1] }} className="border border-zinc-800 bg-black overflow-hidden">
+              {/* terminal chrome */}
+              <div className="flex items-center gap-2 px-4 py-3 border-b border-zinc-800 bg-zinc-900">
+                <div className="flex gap-1.5"><span className="h-2.5 w-2.5 bg-red-500" /><span className="h-2.5 w-2.5 bg-yellow-500" /><span className="h-2.5 w-2.5 bg-green-500" /></div>
+                <span className="mono text-[10px] tracking-[0.14em] text-zinc-500 ml-2">gooner --deterministic --live</span>
+                <span className="ml-auto mono text-[10px] bg-emerald-500 text-black px-2 py-0.5 font-bold animate-pulse">● LIVE ENGINE</span>
+              </div>
+
+              <div className="p-4 space-y-4">
+                <div>
+                  <div className="mono text-[10px] tracking-[0.14em] text-zinc-500">COMPANY</div>
+                  <select value={companyIdx} onChange={e=> setCompanyIdx(Number(e.target.value))} className="mt-1 w-full bg-zinc-900 border border-zinc-800 mono text-xs font-bold text-white px-3 py-2.5 focus:outline-none focus:border-zinc-600">
+                    {MOCK_COMPANIES.map((c,i)=> <option key={c.id} value={i}>{c.legalName} — {c.licenses.map(l=> `${l.state}:${l.classification}`).join(", ")}</option>)}
+                  </select>
                 </div>
-              ))}
-            </div>
-          </div>
-          <div className="bg-white text-slate-900 p-6 lg:p-8 flex flex-col">
-            <div className="text-[11px] tracking-[0.14em] font-black text-slate-500">TODAY&apos;S EXAMPLE — DETERMINISTIC</div>
-            <div className="mt-3 rounded-2xl border border-slate-200 bg-slate-50 p-4">
-              <div className="text-xs font-bold text-slate-500">COMPANY</div>
-              <select value={companyIdx} onChange={e=> setCompanyIdx(Number(e.target.value))} className="mt-1 w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-semibold">
-                {MOCK_COMPANIES.map((c,i)=> <option key={c.id} value={i}>{c.legalName} — {c.licenses.map(l=> `${l.state}:${l.classification}`).join(", ")}</option>)}
-              </select>
-              <div className="text-xs font-bold text-slate-500 mt-3">PROJECT (JOB OPPORTUNITY)</div>
-              <select value={projectIdx} onChange={e=> setProjectIdx(Number(e.target.value))} className="mt-1 w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm font-semibold">
-                {MOCK_PROJECTS.map((p,i)=> <option key={p.id} value={i}>{p.state} • ${p.contractValue.toLocaleString()} • {p.trade} — {p.title.slice(0,40)}</option>)}
-              </select>
-              <div className="mt-3 grid grid-cols-2 gap-2 text-xs">
-                <div className="rounded-xl bg-white border border-slate-200 p-2">
-                  <div className="font-bold text-slate-500">Classification needed</div>
-                  <div className="font-bold">{classificationNeeded(project.state, project.trade, project.contractValue)}</div>
+                <div>
+                  <div className="mono text-[10px] tracking-[0.14em] text-zinc-500">PROJECT</div>
+                  <select value={projectIdx} onChange={e=> setProjectIdx(Number(e.target.value))} className="mt-1 w-full bg-zinc-900 border border-zinc-800 mono text-xs font-bold text-white px-3 py-2.5 focus:outline-none focus:border-zinc-600">
+                    {MOCK_PROJECTS.map((p,i)=> <option key={p.id} value={i}>{p.state} • ${p.contractValue.toLocaleString()} • {p.trade} — {p.title.slice(0,42)}</option>)}
+                  </select>
                 </div>
-                <div className="rounded-xl bg-white border border-slate-200 p-2">
-                  <div className="font-bold text-slate-500">Jurisdiction</div>
-                  <div className="font-bold">{project.city}, {project.state} • {project.county}</div>
+
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="border border-zinc-800 bg-[#0a0a0b] p-3">
+                    <div className="mono text-[10px] tracking-[0.14em] text-zinc-500">CLASS NEEDED</div>
+                    <div className="mono text-xs font-black text-white mt-1 leading-tight">{classificationNeeded(project.state, project.trade, project.contractValue)}</div>
+                  </div>
+                  <div className="border border-zinc-800 bg-[#0a0a0b] p-3">
+                    <div className="mono text-[10px] tracking-[0.14em] text-zinc-500">JURISDICTION</div>
+                    <div className="mono text-xs font-black text-white mt-1">{project.city}, {project.state}</div>
+                    <div className="mono text-[10px] text-zinc-600">${project.contractValue.toLocaleString()} • {project.trade}</div>
+                  </div>
+                </div>
+
+                <div className="border border-zinc-800 p-3 bg-zinc-950">
+                  <div className="flex items-center justify-between">
+                    <span className={`mono text-[11px] tracking-[0.12em] font-black px-2 py-1 border ${result.status==="eligible" ? "bg-emerald-500 text-black border-emerald-600" : result.status==="conditional" ? "bg-[#facc15] text-black border-yellow-600" : "bg-red-600 text-white border-red-700"}`}>{result.status.toUpperCase()}</span>
+                    <span className="mono text-[11px] font-bold border border-zinc-800 bg-black px-2 py-1">{result.estimatedReadiness.label}</span>
+                  </div>
+                  <div className="mono text-[11px] text-zinc-500 mt-2">Blockers: <span className="text-red-400 font-bold">{result.blockers.length}</span> • Warnings: {result.warnings.length} • Satisfied: {result.satisfied.length}</div>
+                  {result.blockers[0] && (
+                    <div className="mono text-xs text-zinc-300 mt-2 leading-relaxed border-l-2 border-[#facc15] pl-2">
+                      → {result.blockers[0].requirement.label}: <span className="text-zinc-500">{result.blockers[0].reason.slice(0,90)}</span>
+                    </div>
+                  )}
+                </div>
+
+                <Link href={`/check?projectId=${project.id}&companyId=${company.id}`} className="block text-center mono text-xs tracking-[0.14em] font-black bg-white text-black py-3 hover:bg-zinc-200 border border-white">OPEN FULL CHECK →</Link>
+
+                <div className="mono text-[10px] leading-relaxed text-zinc-500 border border-amber-900/50 bg-amber-950/20 p-2">
+                  Not another renewal tracker. Harbor wins <span className="text-amber-200">maintain what you have</span>. Gooner wins <span className="text-white">$800k Charlotte electrical — are we legal?</span>
                 </div>
               </div>
-              <div className="mt-3 flex gap-2">
-                <span className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-black border ${result.status==="eligible"?"bg-emerald-500 text-white border-emerald-600": result.status==="conditional"?"bg-amber-400 text-slate-900 border-amber-500":"bg-red-600 text-white border-red-700"}`}>{result.status.toUpperCase()}</span>
-                <span className="inline-flex items-center rounded-full bg-slate-900 text-white px-3 py-1 text-xs font-bold">{result.estimatedReadiness.label}</span>
-              </div>
-              <div className="text-xs text-slate-600 mt-2">Blockers: <span className="font-bold text-red-600">{result.blockers.length}</span> • Warnings: {result.warnings.length} • Satisfied: {result.satisfied.length}</div>
-            </div>
-            <div className="mt-4 rounded-xl bg-amber-50 border border-amber-200 p-3 text-xs leading-relaxed text-amber-900">
-              <span className="font-bold">Not another renewal tracker.</span> Harbor & Copliancy already win “maintain what you have.” Gooner wins the job-level go/no-go: <span className="font-semibold">“We just got this $800k Charlotte electrical job — are we legal to bid, and what’s missing?”</span>
-            </div>
+            </motion.div>
           </div>
         </div>
+      </section>
+
+      {/* MARQUEE - like freebuff's kinetic strip */}
+      <div className="border-y border-zinc-800 bg-[#facc15] overflow-hidden py-2">
+        <motion.div className="flex gap-8 mono text-xs font-black tracking-[0.18em] text-black whitespace-nowrap" animate={{ x: ["0%","-50%"] }} transition={{ duration: 18, repeat: Infinity, ease: "linear" }}>
+          {Array.from({length: 6}).map((_,i)=> (
+            <span key={i} className="flex gap-8 items-center"><span>NC • SC • VA</span><span>•</span><span>DETERMINISTIC ENGINE</span><span>•</span><span>AINSIDE ag/gemini-3.6-flash-high</span><span>•</span><span>PRE-BID OS</span><span>•</span></span>
+          ))}
+        </motion.div>
       </div>
 
-      {/* KPI + recent */}
-      <div className="grid lg:grid-cols-[1fr_340px] gap-6">
-        <div>
-          <div className="grid grid-cols-3 gap-4">
+      {/* KPI - bento brutalist */}
+      <section className="mx-auto max-w-[1400px] px-4 md:px-6 py-8 grid lg:grid-cols-[1.1fr_0.9fr] gap-6">
+        <div className="space-y-6">
+          <div className="grid grid-cols-3 gap-0 border border-zinc-800 bg-black">
             {[
-              { label: "Eligibility checks (30d)", value: "127", sub: "+18 vs last month" },
-              { label: "Blocked bids prevented", value: "34", sub: "~$14M at risk" },
-              { label: "Avg time to readiness", value: "18 days", sub: "NC/SC/VA median" },
+              { label: "Checks 30d", value: "127", sub: "+18 vs last month", accent: "text-emerald-400" },
+              { label: "Blocked bids", value: "34", sub: "~$14M at risk", accent: "text-red-400" },
+              { label: "Avg readiness", value: "18d", sub: "NC/SC/VA median", accent: "text-[#facc15]" },
             ].map(k=> (
-              <div key={k.label} className="rounded-2xl bg-white border border-slate-200 p-5">
-                <div className="text-xs font-bold tracking-wide text-slate-500">{k.label.toUpperCase()}</div>
-                <div className="text-3xl font-black mt-1">{k.value}</div>
-                <div className="text-xs font-medium text-emerald-600 mt-1">{k.sub}</div>
+              <div key={k.label} className="p-5 border-r last:border-r-0 border-zinc-800">
+                <div className="mono text-[10px] tracking-[0.14em] text-zinc-500">{k.label.toUpperCase()}</div>
+                <div className={`text-[28px] font-black tracking-tighter leading-none mt-1 ${k.accent}`}>{k.value}</div>
+                <div className="mono text-[11px] text-zinc-500 mt-1">{k.sub}</div>
               </div>
             ))}
           </div>
-          <div className="mt-6">
-            <EligibilityCard result={result} />
-          </div>
+          <EligibilityCard result={result} />
         </div>
+
         <div className="space-y-4">
-          <div className="rounded-2xl bg-white border border-slate-200 p-5">
-            <h3 className="text-sm font-black">Research Gate — Conditional green light</h3>
-            <p className="text-xs leading-relaxed text-slate-600 mt-2">Market green, timing green, tech green. Competition yellow (Harbor 40k clients, Copliancy $59/site). Biggest risk = data maintenance across thousands of jurisdictions → start narrow (1 trade × 3 states). Next: interview 10 multi-jurisdiction GCs with: <em>“Walk me through last time you considered a job where you hadn’t worked before…”</em></p>
-            <div className="mt-3 grid grid-cols-2 gap-2 text-xs">
-              <span className="rounded-full bg-emerald-50 border border-emerald-200 px-2 py-1 text-center font-bold text-emerald-800">Market: Green</span>
-              <span className="rounded-full bg-emerald-50 border border-emerald-200 px-2 py-1 text-center font-bold text-emerald-800">Timing: Green</span>
-              <span className="rounded-full bg-amber-50 border border-amber-200 px-2 py-1 text-center font-bold text-amber-800">Competition: Yellow</span>
-              <span className="rounded-full bg-red-50 border border-red-200 px-2 py-1 text-center font-bold text-red-800">Data: Red/Yellow</span>
+          <div className="border border-zinc-800 bg-zinc-900 p-5">
+            <h3 className="mono text-[11px] tracking-[0.16em] text-zinc-400">RESEARCH GATE — CONDITIONAL GREEN</h3>
+            <p className="mono text-xs leading-relaxed text-zinc-300 mt-3">Market green, timing green, tech green. Competition yellow — Harbor 40k clients, Copliancy $59/site. Biggest risk is data maintenance → <span className="text-white font-bold">start narrow 1 trade × 3 states</span>. Next: interview 10 multi-jurisdiction supers: <em className="text-zinc-400">Walk me through last time you considered a job where you had not worked before…</em></p>
+            <div className="mt-4 grid grid-cols-2 gap-2 mono text-[10px] font-bold tracking-wide">
+              <span className="border border-emerald-800 bg-emerald-950/40 text-emerald-300 px-2 py-1 text-center">MARKET: GREEN</span>
+              <span className="border border-emerald-800 bg-emerald-950/40 text-emerald-300 px-2 py-1 text-center">TIMING: GREEN</span>
+              <span className="border border-amber-800 bg-amber-950/30 text-amber-300 px-2 py-1 text-center">COMPETITION: YELLOW</span>
+              <span className="border border-red-900 bg-red-950/30 text-red-300 px-2 py-1 text-center">DATA: RED/YELLOW</span>
             </div>
           </div>
-          <div className="rounded-2xl bg-white border border-slate-200 p-5">
-            <h3 className="text-sm font-black">5-thing MVP (in this repo)</h3>
-            <ol className="mt-3 space-y-2 text-sm">
+
+          <div className="border border-zinc-800 bg-black p-5">
+            <h3 className="mono text-[11px] tracking-[0.16em]">5-THING MVP — SHIPPED IN THIS REPO</h3>
+            <ol className="mt-4 space-y-3">
               {[
-                "Company compliance profile (licenses, qualifiers, insurance, foreign qual.)",
-                "Project/job intake (address, value, trade, scope, public/private, role)",
-                "Deterministic rules engine (jurisdiction × trade × value → eligible)",
-                "AI-assisted research with citations to official sources",
-                "Gap checklist + calendar (deadlines, renewals, lead times)",
-              ].map((t,i)=> <li key={i} className="flex gap-2"><span className="h-6 w-6 shrink-0 rounded-full bg-slate-900 text-white flex items-center justify-center text-xs font-bold">{i+1}</span><span className="text-slate-700 leading-tight">{t}</span></li>)}
+                "Company compliance profile — licenses, qualifiers, insurance, foreign qual",
+                "Project intake — address, value, trade, scope, public/private, role",
+                "Deterministic rules engine — jurisdiction × trade × value → eligible",
+                "AI research with citations to official sources — AINSIDE streaming",
+                "Gap checklist + calendar — deadlines, renewals, lead times",
+              ].map((t,i)=> <li key={i} className="flex gap-3"><span className="h-6 w-6 shrink-0 bg-[#facc15] text-black flex items-center justify-center mono text-xs font-black">{i+1}</span><span className="mono text-xs text-zinc-300 leading-tight pt-1">{t}</span></li>)}
             </ol>
           </div>
-          <div className="rounded-2xl bg-slate-900 text-white p-5">
-            <h3 className="text-sm font-black text-amber-300">Why this beats generic compliance</h3>
-            <p className="text-sm leading-relaxed text-slate-300 mt-2">ROI isn’t “saved office hours.” It’s <span className="text-white font-semibold">“prevented a bid you couldn’t legally perform”</span> or <span className="text-white font-semibold">“flagged a $500k job early enough to get licensed.”</span> Embedded in <code className="bg-white/10 px-1 rounded">opportunity → check → go/no-go → licensing work → bid</code>, switching costs compound.</p>
+
+          <div className="border border-[#facc15] bg-[#facc15] p-5">
+            <h3 className="mono text-[11px] tracking-[0.16em] text-black">WHY THIS BEATS GENERIC COMPLIANCE</h3>
+            <p className="mono text-xs leading-relaxed text-black mt-2">ROI is not saved office hours. It is <span className="font-black">prevented a bid you could not legally perform</span> or <span className="font-black">flagged a $500k job early enough to get licensed</span>. Embedded in <span className="bg-black text-[#facc15] px-1">opportunity → check → go/no-go → licensing → bid</span>, switching costs compound.</p>
           </div>
         </div>
-      </div>
+      </section>
+
+      {/* PRICING - bento */}
+      <section className="mx-auto max-w-[1400px] px-4 md:px-6 pb-8">
+        <div className="border border-zinc-800 bg-black p-5 md:p-6">
+          <div className="flex items-center gap-3">
+            <h2 className="text-[18px] font-black tracking-[-0.02em]">PRICING — START NARROW, EXPAND LATER</h2>
+            <span className="mono text-[10px] border border-zinc-800 px-2 py-1 text-zinc-500">HUNDREDS/MO — NOT $10 CONSUMER</span>
+          </div>
+          <div className="mt-5 grid md:grid-cols-3 gap-0 border border-zinc-800">
+            {[
+              { tier: "SOLO", price: "$49-79", detail: "1 state / limited projects", features: ["NC or SC or VA", "10 checks/mo", "Checklist + calendar"] },
+              { tier: "GROWTH", price: "$199-299", detail: "multi-state, unlimited checks", features: ["NC + SC + VA", "Unlimited checks", "Renewal mgmt", "Reciprocity"], highlight: true },
+              { tier: "MULTI-STATE", price: "$499+", detail: "multiple entities, team", features: ["Unlimited entities", "Qualifiers + team", "History + workflows", "New-jurisdiction reports"] },
+            ].map(p=> (
+              <div key={p.tier} className={`p-5 border-r last:border-r-0 border-zinc-800 ${p.highlight ? "bg-zinc-900" : "bg-black"}`}>
+                <div className="mono text-[11px] tracking-[0.16em] text-zinc-500">{p.tier}</div>
+                <div className="text-[26px] font-black tracking-tighter mt-1">{p.price}<span className="text-sm font-bold text-zinc-500">/mo</span></div>
+                <div className="mono text-xs text-zinc-400 mt-1">{p.detail}</div>
+                <div className="mt-4 space-y-1.5 mono text-xs text-zinc-300">
+                  {p.features.map(f=> <div key={f} className="flex gap-2"><span className="text-[#facc15]">›</span>{f}</div>)}
+                </div>
+                {p.highlight && <div className="mt-4 mono text-[10px] bg-[#facc15] text-black text-center py-1 font-black">MOST TEAMS START HERE</div>}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* SOURCES */}
+      <section className="border-t border-zinc-800 bg-black">
+        <div className="mx-auto max-w-[1400px] px-4 md:px-6 py-4 flex flex-wrap gap-2 mono text-[10px] tracking-wide text-zinc-500">
+          <span className="text-zinc-300">SOURCES:</span>
+          <a href="https://www.ncbeec.org/licensing/" target="_blank" className="underline hover:text-white">NCBEEC</a>
+          <span>•</span>
+          <a href="https://www.nclicensing.org/" target="_blank" className="underline hover:text-white">NC PH&FS</a>
+          <span>•</span>
+          <a href="https://llr.sc.gov/" target="_blank" className="underline hover:text-white">SC LLR</a>
+          <span>•</span>
+          <a href="https://www.dpor.virginia.gov/" target="_blank" className="underline hover:text-white">VA DPOR</a>
+          <span className="ml-auto hidden md:inline">JURISDICTION × TRADE × VALUE × CREDENTIALS → ELIGIBILITY</span>
+        </div>
+      </section>
     </div>
   );
 }

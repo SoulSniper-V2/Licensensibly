@@ -15,17 +15,17 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col bg-[#f8fafc] text-slate-900">
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased dark`} style={{ colorScheme: "dark" }}>
+      <body className="min-h-full flex flex-col bg-[#09090b] text-zinc-100">
         <Navbar />
         <main className="flex-1">{children}</main>
-        <footer className="border-t border-slate-200 bg-white">
-          <div className="mx-auto max-w-[1320px] px-6 py-6 text-xs text-slate-500 flex flex-wrap gap-4">
-            <span>© 2026 Gooner — Built for the NC/SC/VA narrow vertical. Nationwide expansion is post-PMF.</span>
-            <span className="ml-auto">Deterministic engine • LLM explains, never decides • <a className="underline" href="https://github.com/SoulSniper-V2/gooner" target="_blank">GitHub</a></span>
+        <footer className="border-t border-zinc-800 bg-[#09090b]">
+          <div className="mx-auto max-w-[1400px] px-4 md:px-6 py-6 text-[11px] mono tracking-wide text-zinc-500 flex flex-wrap gap-4 uppercase">
+            <span>© 2026 GOONER — NC • SC • VA NARROW VERTICAL. NATIONWIDE IS POST-PMF.</span>
+            <span className="ml-auto">DETERMINISTIC ENGINE • LLM EXPLAINS, NEVER DECIDES • <a className="underline hover:text-zinc-200" href="https://github.com/SoulSniper-V2/gooner" target="_blank">GITHUB</a></span>
           </div>
         </footer>
-              <AIAssistant />
+        <AIAssistant />
       </body>
     </html>
   );

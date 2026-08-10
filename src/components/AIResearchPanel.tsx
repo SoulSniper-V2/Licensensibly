@@ -68,27 +68,22 @@ export default function AIResearchPanel({ result, city, state, trade, value }: {
     return () => ac.abort();
   }, [result, city, state, trade, value]);
 
-  // simple markdown-ish rendering: bold, bullets, links
   function renderMarkdown(s: string) {
-    // very light: split lines, handle **bold**, [text](url), bullets
     const lines = s.split("\n");
     return lines.map((line, i) => {
       if (!line.trim()) return <div key={i} className="h-2" />;
-      // headings
-      if (line.startsWith("### ")) return <h4 key={i} className="text-sm font-black mt-3">{line.slice(4)}</h4>;
-      if (line.startsWith("## ")) return <h4 key={i} className="text-sm font-black mt-3">{line.slice(3)}</h4>;
-      if (line.startsWith("1.") || line.startsWith("2.") || line.startsWith("3.") || line.startsWith("4.")) {
-        return <div key={i} className="text-sm leading-relaxed ml-4 list-decimal">{formatInline(line)}</div>;
-      }
+      if (line.startsWith("### ")) return <h4 key={i} className="text-sm font-black mt-3 tracking-tight">{line.slice(4)}</h4>;
+      if (line.startsWith("## ")) return <h4 key={i} className="text-sm font-black mt-3 tracking-tight">{line.slice(3)}</h4>;
       if (line.trim().startsWith("- ") || line.trim().startsWith("• ")) {
-        return <div key={i} className="text-sm leading-relaxed ml-4">• {formatInline(line.trim().slice(2))}</div>;
+        return <div key={i} className="text-sm leading-relaxed ml-4 text-zinc-300">• {formatInline(line.trim().slice(2))}</div>;
       }
-      return <p key={i} className="text-sm leading-relaxed">{formatInline(line)}</p>;
+      if (/^\d+\./.test(line.trim())) {
+        return <div key={i} className="text-sm leading-relaxed ml-4 text-zinc-300">{formatInline(line)}</div>;
+      }
+      return <p key={i} className="text-sm leading-relaxed text-zinc-300">{formatInline(line)}</p>;
     });
   }
-
   function formatInline(s: string) {
-    // handle **bold** and links
     const parts: any[] = [];
     let last = 0;
     const re = /(\*\*.*?\*\*|\[.*?\]\(.*?\))/g;
@@ -98,10 +93,10 @@ export default function AIResearchPanel({ result, city, state, trade, value }: {
       if (m.index > last) parts.push(<span key={idx++}>{s.slice(last, m.index)}</span>);
       const token = m[0];
       if (token.startsWith("**")) {
-        parts.push(<strong key={idx++} className="font-bold text-slate-900">{token.slice(2, -2)}</strong>);
+        parts.push(<strong key={idx++} className="font-bold text-white">{token.slice(2, -2)}</strong>);
       } else {
         const lm = token.match(/\[(.*?)\]\((.*?)\)/);
-        if (lm) parts.push(<a key={idx++} href={lm[2]} target="_blank" className="underline text-sky-700">{lm[1]}</a>);
+        if (lm) parts.push(<a key={idx++} href={lm[2]} target="_blank" className="underline text-[#facc15]">{lm[1]}</a>);
         else parts.push(<span key={idx++}>{token}</span>);
       }
       last = m.index + token.length;
@@ -111,31 +106,31 @@ export default function AIResearchPanel({ result, city, state, trade, value }: {
   }
 
   return (
-    <div className="rounded-2xl bg-white border border-slate-200 p-5">
-      <div className="flex items-center gap-2">
-        <h3 className="text-sm font-black">AINSIDE — Regulatory research</h3>
-        <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-violet-50 border border-violet-200 text-violet-800">ag/gemini-3.6-flash-high</span>
-        {loading && <span className="ml-auto text-xs text-slate-500 animate-pulse">Researching…</span>}
-        {!loading && !error && text && <span className="ml-auto text-xs text-emerald-600">● live via AINSIDE</span>}
+    <div className="border border-zinc-800 bg-zinc-900">
+      <div className="flex items-center gap-2 px-4 py-3 border-b border-zinc-800 bg-black">
+        <div className="h-2 w-2 bg-[#facc15] animate-pulse" />
+        <h3 className="mono text-[11px] tracking-[0.16em]">AINSIDE — REGULATORY RESEARCH</h3>
+        <span className="mono text-[10px] border border-zinc-800 bg-zinc-900 px-2 py-0.5 text-zinc-400">ag/gemini-3.6-flash-high</span>
+        {loading && <span className="ml-auto mono text-[11px] text-zinc-500 animate-pulse">RESEARCHING…</span>}
+        {!loading && !error && text && <span className="ml-auto mono text-[11px] text-emerald-400">● LIVE VIA AINSIDE</span>}
       </div>
-      <p className="text-xs text-slate-600 mt-1">Deterministic engine decided <span className="font-black uppercase">{result.status}</span> — AINSIDE explains & cites. No filing in v1.</p>
-
-      <div className="mt-3 min-h-[120px] rounded-xl border border-slate-200 bg-slate-50 p-4">
-        {loading && !text && <div className="text-sm text-slate-500">Asking AINSIDE at {process.env.NEXT_PUBLIC_AI_BASE_URL || "http://192.168.1.204:20128/v1"}… <span className="inline-block w-2 h-2 bg-slate-400 rounded-full animate-bounce" /></div>}
+      <div className="px-3 py-2 border-b border-zinc-800 mono text-[11px] text-zinc-500">Deterministic engine decided <span className="text-white font-bold uppercase">{result.status}</span> — AINSIDE explains and cites. No filing in v1.</div>
+      <div className="p-4 min-h-[140px] bg-[#0a0a0b]">
+        {loading && !text && <div className="mono text-xs text-zinc-500">Asking AINSIDE at http://192.168.1.204:20128/v1<span className="inline-block w-1.5 h-3 bg-[#facc15] ml-1 animate-pulse align-middle" /></div>}
         {error && (
-          <div className="space-y-2">
-            <div className="text-sm font-semibold text-amber-900">AINSIDE unreachable — showing deterministic fallback.</div>
-            <div className="text-xs text-slate-600">{error}</div>
-            <div className="rounded-lg bg-white border border-slate-200 p-3 text-sm leading-relaxed text-slate-700">
-              For a <strong>${value.toLocaleString()} {trade}</strong> job in <strong>{city}, {state}</strong>, the engine extracted <strong>{result.satisfied.length + result.blockers.length} requirements</strong> and determined <strong className="uppercase">{result.status}</strong>. Primary blocker: <strong>{result.blockers[0]?.requirement.label || "none — ready to bid"}</strong>. Reciprocity {result.reciprocityOpportunities.length ? "available via " + result.reciprocityOpportunities[0].canUse.state : "not available"}.
-              <div className="mt-2 text-xs text-slate-500">Sources: {result.citations.slice(0, 2).map(c => c.authority).join(" & ")} • Verified 2026-08-01</div>
+          <div className="space-y-3">
+            <div className="mono text-xs font-bold text-amber-300 border border-amber-900 bg-amber-950/30 p-3">AINSIDE unreachable — showing deterministic fallback.</div>
+            <div className="mono text-[11px] text-zinc-500 break-all">{error}</div>
+            <div className="border border-zinc-800 bg-zinc-900 p-4 mono text-xs leading-relaxed text-zinc-300">
+              For a <span className="text-white font-bold">${value.toLocaleString()} {trade}</span> job in <span className="text-white font-bold">{city}, {state}</span>, engine evaluated <span className="text-white">{result.satisfied.length + result.blockers.length} requirements</span> → <span className="text-[#facc15] font-bold uppercase">{result.status}</span>. Primary blocker: <span className="text-white">{result.blockers[0]?.requirement.label || "none — ready to bid"}</span>. Reciprocity {result.reciprocityOpportunities.length ? "available via " + result.reciprocityOpportunities[0].canUse.state : "not available"}.
+              <div className="mt-2 text-zinc-500">Sources: {result.citations.slice(0, 2).map(c => c.authority).join(" • ")} • Verified 2026-08-01</div>
             </div>
           </div>
         )}
         {!error && text && <div className="space-y-1">{renderMarkdown(text)}</div>}
-        {!error && !loading && !text && <div className="text-xs text-slate-500">No output.</div>}
+        {!error && !loading && !text && <div className="mono text-xs text-zinc-600">No output.</div>}
       </div>
-      <div className="mt-2 text-[11px] text-slate-500">Model: <span className="font-mono">ag/gemini-3.6-flash-high</span> via <span className="font-mono">http://192.168.1.204:20128/v1</span> • Key server-side only. Streaming. Not legal advice.</div>
+      <div className="px-4 py-2 border-t border-zinc-800 mono text-[10px] text-zinc-600">Model <span className="text-zinc-400">ag/gemini-3.6-flash-high</span> via <span className="text-zinc-400">http://192.168.1.204:20128/v1</span> • Key server-side only. Streaming. Not legal advice.</div>
     </div>
   );
 }

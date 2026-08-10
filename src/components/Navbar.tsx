@@ -1,53 +1,59 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 
-const NAV = [
-  { href: "/", label: "Dashboard" },
-  { href: "/check", label: "Eligibility Check" },
-  { href: "/companies", label: "Companies" },
-  { href: "/projects", label: "Projects" },
-  { href: "/calendar", label: "Calendar" },
+const links = [
+  { href: "/", label: "INDEX" },
+  { href: "/check", label: "CHECK" },
+  { href: "/companies", label: "COMPANIES" },
+  { href: "/projects", label: "PROJECTS" },
+  { href: "/calendar", label: "CALENDAR" },
 ];
 
 export default function Navbar() {
   const pathname = usePathname();
+  const [open, setOpen] = useState(false);
   return (
-    <header className="sticky top-0 z-40 backdrop-blur bg-white/80 border-b border-slate-200">
-      <div className="mx-auto max-w-[1320px] px-6 h-[64px] flex items-center justify-between gap-6">
+    <header className="sticky top-0 z-40 bg-[#09090b]/90 backdrop-blur-xl border-b border-zinc-800">
+      <div className="mx-auto max-w-[1400px] px-4 md:px-6 h-[64px] flex items-center gap-6">
+        {/* logo */}
         <Link href="/" className="flex items-center gap-3">
-          <div className="h-8 w-8 rounded-lg bg-slate-900 flex items-center justify-center text-amber-400 font-black text-sm">⊕</div>
-          <div className="leading-tight">
-            <div className="font-semibold tracking-tight text-slate-900 text-[15px]">GOONER</div>
-            <div className="text-[10px] tracking-[0.14em] text-slate-500 font-medium uppercase">Bid Compliance OS</div>
+          <div className="h-8 w-8 bg-[#facc15] flex items-center justify-center">
+            <span className="mono text-[13px] font-black text-black tracking-tighter">G</span>
           </div>
-          <span className="hidden sm:inline-flex ml-2 rounded-full bg-amber-400 text-slate-900 text-[10px] font-bold px-2 py-1 tracking-wide">NC • SC • VA</span>
+          <div className="leading-none">
+            <div className="text-[15px] font-black tracking-[-0.03em]">GOONER</div>
+            <div className="mono text-[9px] tracking-[0.2em] text-zinc-500 -mt-1">PRE-BID OS</div>
+          </div>
         </Link>
-        <nav className="hidden md:flex items-center gap-1">
-          {NAV.map(n => {
-            const active = pathname === n.href;
+
+        <div className="hidden md:flex items-center gap-1 ml-6">
+          {links.map(l => {
+            const active = pathname === l.href;
             return (
-              <Link key={n.href} href={n.href} className={`px-3 py-2 rounded-full text-sm font-medium transition ${active ? "bg-slate-900 text-white" : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"}`}>
-                {n.label}
+              <Link key={l.href} href={l.href} className={`mono text-[11px] tracking-[0.14em] px-3 py-1.5 border ${active ? "bg-zinc-100 text-black border-zinc-100" : "border-zinc-800 text-zinc-400 hover:text-zinc-100 hover:border-zinc-700"}`}>
+                {l.label}
               </Link>
             );
           })}
-        </nav>
-        <div className="flex items-center gap-2">
-          <div className="hidden sm:flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1.5">
-            <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="text-xs font-medium text-slate-700">Deterministic engine • Not legal advice</span>
-          </div>
-          <Link href="/check" className="rounded-full bg-amber-400 hover:bg-amber-300 text-slate-900 font-bold text-sm px-4 py-2">New Check →</Link>
         </div>
+
+        <div className="ml-auto hidden lg:flex items-center gap-3">
+          <div className="mono text-[10px] tracking-[0.14em] text-zinc-500 border border-zinc-800 px-2 py-1">NC • SC • VA</div>
+          <div className="mono text-[10px] tracking-[0.14em] text-zinc-500">DETERMINISTIC</div>
+          <div className="h-2 w-2 bg-emerald-500 animate-pulse" />
+          <Link href="/check" className="mono text-[11px] tracking-[0.14em] font-bold bg-[#facc15] text-black px-4 py-2 hover:bg-yellow-300 transition-colors">RUN CHECK →</Link>
+        </div>
+
+        <button onClick={()=> setOpen(v=>!v)} className="md:hidden ml-auto mono text-[11px] tracking-[0.2em] border border-zinc-800 px-3 py-2">{open ? "CLOSE" : "MENU"}</button>
       </div>
-      {/* mobile nav */}
-      <div className="md:hidden border-t border-slate-100 bg-white px-3 py-2 flex gap-1 overflow-auto">
-        {NAV.map(n => {
-          const active = pathname === n.href;
-          return <Link key={n.href} href={n.href} className={`whitespace-nowrap px-3 py-1.5 rounded-full text-xs font-semibold ${active ? "bg-slate-900 text-white":"bg-slate-100 text-slate-700"}`}>{n.label}</Link>
-        })}
-      </div>
+      {open && (
+        <div className="md:hidden border-t border-zinc-800 bg-[#09090b] px-4 py-4 grid gap-2">
+          {links.map(l=> <Link key={l.href} href={l.href} onClick={()=>setOpen(false)} className={`mono text-xs tracking-[0.14em] px-3 py-3 border ${pathname===l.href ? "bg-zinc-100 text-black" : "border-zinc-800 text-zinc-300"}`}>{l.label}</Link>)}
+        </div>
+      )}
+      <div className="h-[1px] bg-gradient-to-r from-[#facc15] via-transparent to-transparent opacity-60" />
     </header>
   );
 }
