@@ -37,7 +37,7 @@ export default function SettingsPage() {
                 {company.licenses.map(l=> <span key={l.id} className="rounded-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 px-2.5 py-1 text-xs font-medium">{l.state} {l.trade} {l.classification}</span>)}
               </div>
               <div className="mt-3 text-zinc-600 dark:text-zinc-400">Qualifiers: {company.qualifiers.map(q=> `${q.name} (${q.states.join("/")})`).join(", ")}</div>
-              <button onClick={()=>setShowCompanyPanel(true)} className="mt-4 w-full rounded-full bg-zinc-900 text-white mono text-xs font-semibold py-2.5 hover:bg-black">Open as panel →</button>
+              <button onClick={()=>setShowCompanyPanel(true)} className="mt-4 w-full rounded-full bg-zinc-900 text-white mono text-xs font-semibold py-2.5 hover:bg-zinc-900">Open as panel →</button>
             </div>
             <div className="rounded-xl border border-dashed border-zinc-300 bg-zinc-50 dark:bg-zinc-800 p-4 mono text-xs text-zinc-500 dark:text-zinc-400">Check now opens this as a popup instead of showing it statically — consolidates the surface per your request.</div>
           </div>
@@ -51,7 +51,7 @@ export default function SettingsPage() {
               </div>
               <div className="flex gap-2 pt-2">
                 <Link href="/companies" className="rounded-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 mono text-xs font-semibold px-4 py-2 hover:bg-zinc-50 dark:bg-zinc-800">Manage all → Companies</Link>
-                <Link href="/check" className="rounded-full bg-zinc-900 text-white mono text-xs font-semibold px-4 py-2 hover:bg-black">Back to Check</Link>
+                <Link href="/check" className="rounded-full bg-zinc-900 text-white mono text-xs font-semibold px-4 py-2 hover:bg-zinc-900">Back to Check</Link>
               </div>
             </div>
             <div className="rounded-2xl bg-zinc-900 text-white p-6">
@@ -75,7 +75,7 @@ export default function SettingsPage() {
       )}
       {showCompanyPanel && (
         <div className="fixed inset-0 z-50 flex">
-          <div className="flex-1 bg-black/40 backdrop-blur-sm" onClick={()=>setShowCompanyPanel(false)} />
+          <div className="flex-1 bg-zinc-900/40 backdrop-blur-sm" onClick={()=>setShowCompanyPanel(false)} />
           <div className="w-[420px] max-w-[90vw] bg-white dark:bg-zinc-900 border-l border-zinc-200 dark:border-zinc-800 shadow-2xl p-6 space-y-4 overflow-auto">
             <div className="flex items-center justify-between">
               <h3 className="mono text-xs tracking-[0.14em] text-zinc-500 dark:text-zinc-400 font-semibold">COMPANY PANEL</h3>

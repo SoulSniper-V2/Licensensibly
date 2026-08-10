@@ -69,7 +69,7 @@ export default function CalendarPage() {
           <button
             key={v}
             onClick={() => setFilter(v)}
-            className={`rounded-xl border px-3 py-1.5 text-xs font-bold ${filter === v ? "bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 border-slate-900" : "bg-white dark:bg-zinc-900 text-zinc-700 border-slate-200 hover:bg-black"}`}
+            className={`rounded-xl border px-3 py-1.5 text-xs font-bold ${filter === v ? "bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 border-slate-900" : "bg-white dark:bg-zinc-900 text-zinc-700 border-slate-200 hover:bg-zinc-900"}`}
           >
             {l} <span className="opacity-60">({v === "all" ? all.length : all.filter((e) => e.type === v).length})</span>
           </button>

@@ -80,7 +80,7 @@ export default function ProcessesPage(){
           const id=`run-${Date.now()}`;
           const run:any = {id, templateId:"bid-qualification", title:`Plug-and-play — ${new Date().toLocaleDateString()} • Auto eligibility`, companyId:"co-1", stage:"in_progress", owner:"You", dueDate: new Date(Date.now()+5*86400000).toISOString().slice(0,10), checklist:[{id:"a",title:"Auto: eligibility checked",done:true,required:true},{id:"b",title:"Auto: blockers listed",done:true,required:true},{id:"c",title:"You: resolve blockers",done:false,required:true},{id:"d",title:"Auto: packet ready",done:false,required:true}], createdAt:new Date().toISOString().slice(0,10), updatedAt:new Date().toISOString().slice(0,10), slaStatus:"on_track"};
           setRuns([run, ...runs]);
-        }} className="rounded-2xl bg-zinc-900 text-white font-black px-8 py-4 text-sm hover:bg-black">▶ Start plug-and-play now</button>
+        }} className="rounded-2xl bg-zinc-900 text-white font-black px-8 py-4 text-sm hover:bg-zinc-900">▶ Start plug-and-play now</button>
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-5 gap-3">

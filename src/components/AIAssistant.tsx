@@ -20,7 +20,7 @@ export default function AIAssistant() {
   }
   return (
     <>
-      <button onClick={()=>setOpen(v=>!v)} className="fixed bottom-4 right-4 z-50 bg-zinc-900 text-white px-5 py-3 rounded-full text-sm font-semibold shadow-lg hover:bg-black">{open ? "× Close AINSIDE" : "◐ AINSIDE"}</button>
+      <button onClick={()=>setOpen(v=>!v)} className="fixed bottom-4 right-4 z-50 bg-zinc-900 text-white px-5 py-3 rounded-full text-sm font-semibold shadow-lg hover:bg-zinc-900">{open ? "× Close AINSIDE" : "◐ AINSIDE"}</button>
       {open && (
         <div className="fixed bottom-20 right-4 z-50 w-[380px] max-w-[calc(100vw-24px)] rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 shadow-xl flex flex-col overflow-hidden">
           <div className="px-4 py-3 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-800 flex items-center gap-2">

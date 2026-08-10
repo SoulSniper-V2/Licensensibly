@@ -15,7 +15,7 @@ export default function Dashboard() {
   const result = useMemo(()=> evaluateEligibility(company, project), [company, project]);
 
   return (
-    <div className="bg-white dark:bg-zinc-950">
+    <div className="bg-white dark:bg-zinc-900">
       {/* HERO — anti-slop: left-aligned editorial, not centered hero over dark mesh. Asymmetric split, large type, no purple gradient */}
       <section className="mx-auto max-w-[1200px] px-6 pt-14 md:pt-20 pb-10">
         <div className="grid lg:grid-cols-[1.15fr_0.85fr] gap-10 items-start">
@@ -32,7 +32,7 @@ export default function Dashboard() {
               <span className="font-semibold text-zinc-900 dark:text-zinc-100 dark:text-white">Licensensibly</span> checks if you can take a job. Pick your company and the job — get a clear <span className="font-semibold text-zinc-900 dark:text-zinc-100 dark:text-white">Yes / Maybe / No</span> and a simple checklist of what to fix before you bid.
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
-              <Link href="/check" className="rounded-full bg-zinc-900 text-white font-semibold px-7 py-3 hover:bg-black transition-colors">Run eligibility check →</Link>
+              <Link href="/check" className="rounded-full bg-zinc-900 text-white font-semibold px-7 py-3 hover:bg-zinc-900 transition-colors">Run eligibility check →</Link>
               <Link href="/settings" className="rounded-full border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 font-medium px-6 py-3 hover:bg-white dark:bg-zinc-900">Company in Settings</Link>
             </div>
             <div className="mt-4 flex gap-6 mono text-xs text-zinc-500 dark:text-zinc-400">
@@ -82,7 +82,7 @@ export default function Dashboard() {
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <Link href={`/check?projectId=${project.id}&companyId=${company.id}`} className="flex-1 rounded-full bg-zinc-900 text-white mono text-xs font-semibold py-2.5 text-center hover:bg-black">Open in Check →</Link>
+                  <Link href={`/check?projectId=${project.id}&companyId=${company.id}`} className="flex-1 rounded-full bg-zinc-900 text-white mono text-xs font-semibold py-2.5 text-center hover:bg-zinc-900">Open in Check →</Link>
                   <Link href="/calendar" className="rounded-full border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 mono text-xs font-semibold px-4 py-2.5 hover:bg-white dark:bg-zinc-900">Calendar</Link>
                 </div>
                 <div className="mono text-[11px] text-zinc-500 dark:text-zinc-400">Engine runs on every keystroke. No LLM in decision path.</div>

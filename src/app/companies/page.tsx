@@ -78,11 +78,11 @@ export default function CompaniesPage() {
         {/* list */}
         <div className="space-y-3">
           {companies.map(c=> (
-            <button key={c.id} onClick={()=> setSelectedId(c.id)} className={`w-full text-left rounded-2xl border p-4 transition ${selectedId===c.id ? "bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 border-slate-900" : "bg-white dark:bg-zinc-900 border-slate-200 hover:border-slate-300"}`}>
+            <button key={c.id} onClick={()=> setSelectedId(c.id)} className={`w-full text-left rounded-2xl border p-4 transition ${selectedId===c.id ? "bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 border-slate-900" : "bg-white dark:bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700 hover:border-slate-300"}`}>
               <div className="text-sm font-bold truncate">{c.legalName}</div>
               <div className={`text-xs mt-1 ${selectedId===c.id ? "text-slate-300" : "text-zinc-500 dark:text-zinc-400"}`}>{c.entityType.toUpperCase()} • {c.incorporatedStates.join(", ")} {c.foreignQualifications.length ? `→ ${c.foreignQualifications.join(", ")}` : ""}</div>
               <div className="mt-2 flex flex-wrap gap-1">
-                {c.licenses.map(l=> <span key={l.id} className={`text-[11px] px-2 py-0.5 border font-semibold ${selectedId===c.id ? "bg-white dark:bg-zinc-900/15 border-white/20" : "bg-black border-zinc-200 dark:border-zinc-800"}`}>{l.state}:{l.classification}</span>)}
+                {c.licenses.map(l=> <span key={l.id} className={`text-[11px] px-2 py-0.5 border font-semibold ${selectedId===c.id ? "bg-white dark:bg-zinc-900/15 border-white/20" : "bg-zinc-900 border-zinc-200 dark:border-zinc-800"}`}>{l.state}:{l.classification}</span>)}
                 {c.licenses.length===0 && <span className={`text-[11px] ${selectedId===c.id ? "text-slate-300" : "text-slate-400"}`}>No licenses yet — add to test eligibility</span>}
               </div>
               <div className={`text-[11px] mt-2 ${selectedId===c.id ? "text-slate-400" : "text-slate-400"}`}>{c.licenses.length} licenses • QI: {c.qualifiers.map(q=> q.name).join(", ") || "—"}</div>
@@ -132,7 +132,7 @@ export default function CompaniesPage() {
                     const daysLeft = Math.ceil((exp.getTime() - Date.now())/86400000);
                     const nearExpiry = daysLeft < 60;
                     return (
-                      <div key={l.id} className={`rounded-2xl border p-4 ${nearExpiry ? "bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800" : "bg-black border-slate-200"}`}>
+                      <div key={l.id} className={`rounded-2xl border p-4 ${nearExpiry ? "bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800" : "bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700"}`}>
                         <div className="text-xs font-bold tracking-wide text-zinc-500 dark:text-zinc-400">{l.state} • {l.trade.toUpperCase()} • {l.status.toUpperCase()}</div>
                         <div className="text-sm font-black">{l.classification}</div>
                         <div className="text-xs font-mono mt-1">{l.licenseNumber}</div>
@@ -142,7 +142,7 @@ export default function CompaniesPage() {
                     );
                   })}
                 </div>
-              ) : <div className="rounded-2xl border bg-black border-dashed border-slate-300 p-6 text-sm text-zinc-500 dark:text-zinc-400 text-center">No licenses — eligibility engine will block all NC/SC/VA projects &gt; $40k/$5k. Add a license to go conditional/eligible.</div>}
+              ) : <div className="rounded-2xl border bg-zinc-900 border-dashed border-slate-300 p-6 text-sm text-zinc-500 dark:text-zinc-400 text-center">No licenses — eligibility engine will block all NC/SC/VA projects &gt; $40k/$5k. Add a license to go conditional/eligible.</div>}
 
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="rounded-2xl border bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 p-4">

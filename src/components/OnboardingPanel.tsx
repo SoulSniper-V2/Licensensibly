@@ -79,7 +79,7 @@ export default function OnboardingPanel() {
                 {expanded ? "Collapse" : "Expand"}
               </button>
               <button onClick={reset} className="mono text-xs border border-zinc-200 dark:border-zinc-800 rounded-full px-3 py-1.5 bg-white dark:bg-zinc-900 hover:bg-white dark:bg-zinc-900">Reset</button>
-              <button onClick={dismiss} className="mono text-xs bg-zinc-900 text-white rounded-full px-3 py-1.5 hover:bg-black">Dismiss</button>
+              <button onClick={dismiss} className="mono text-xs bg-zinc-900 text-white rounded-full px-3 py-1.5 hover:bg-zinc-900">Dismiss</button>
             </div>
           </div>
         </div>
@@ -118,7 +118,7 @@ export default function OnboardingPanel() {
               <div className="mono text-xs text-zinc-600 dark:text-zinc-400">
                 <span className="font-semibold text-zinc-900 dark:text-zinc-100">How to keep it updated:</span> add a new entry to <code className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded px-1">ONBOARDING_STEPS</code> — panel, progress, and this copy update automatically. No manual sync.
               </div>
-              <Link href="/check" className="rounded-full bg-zinc-900 text-white mono text-xs font-semibold px-4 py-2 hover:bg-black">Start at Check →</Link>
+              <Link href="/check" className="rounded-full bg-zinc-900 text-white mono text-xs font-semibold px-4 py-2 hover:bg-zinc-900">Start at Check →</Link>
             </div>
           </div>
         )}

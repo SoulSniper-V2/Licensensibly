@@ -42,7 +42,7 @@ function CheckPageInner() {
           <span className="mono text-xs text-zinc-500 dark:text-zinc-400 hidden sm:inline">{company.licenses.length} licenses • {company.licenses.map(l=> `${l.state} ${l.classification}`).join(" • ")}</span>
         </div>
         <div className="flex gap-2">
-          <button onClick={()=> setShowCompanyPanel(true)} className="mono text-xs bg-zinc-900 text-white rounded-full px-4 py-1.5 hover:bg-black">View company panel</button>
+          <button onClick={()=> setShowCompanyPanel(true)} className="mono text-xs bg-zinc-900 text-white rounded-full px-4 py-1.5 hover:bg-zinc-900">View company panel</button>
           <button onClick={()=> setShowIntakePanel(true)} className="mono text-xs border border-zinc-200 dark:border-zinc-800 rounded-full px-4 py-1.5 bg-white dark:bg-zinc-900 hover:bg-zinc-50 dark:bg-zinc-800">Edit intake → panel</button>
         </div>
       </div>
@@ -89,7 +89,7 @@ function CheckPageInner() {
       {/* Company Profile Slide-Over Panel */}
       {showCompanyPanel && (
         <div className="fixed inset-0 z-50 flex">
-          <div className="flex-1 bg-black/40 backdrop-blur-sm" onClick={()=>setShowCompanyPanel(false)} />
+          <div className="flex-1 bg-zinc-900/40 backdrop-blur-sm" onClick={()=>setShowCompanyPanel(false)} />
           <div className="w-[480px] max-w-[90vw] bg-white dark:bg-zinc-900 border-l border-zinc-200 dark:border-zinc-800 shadow-2xl p-6 space-y-4 overflow-auto">
             <div className="flex items-center justify-between">
               <h3 className="mono text-xs tracking-[0.14em] text-zinc-500 dark:text-zinc-400 font-semibold">COMPANY PROFILE — PANEL</h3>
@@ -126,7 +126,7 @@ function CheckPageInner() {
 
       {showIntakePanel && (
         <div className="fixed inset-0 z-50 flex">
-          <div className="flex-1 bg-black/40 backdrop-blur-sm" onClick={()=>setShowIntakePanel(false)} />
+          <div className="flex-1 bg-zinc-900/40 backdrop-blur-sm" onClick={()=>setShowIntakePanel(false)} />
           <div className="w-[520px] max-w-[90vw] bg-white dark:bg-zinc-900 border-l border-zinc-200 dark:border-zinc-800 shadow-2xl p-6 space-y-4 overflow-auto">
             <div className="flex items-center justify-between">
               <h3 className="mono text-xs tracking-[0.14em] text-zinc-500 dark:text-zinc-400 font-semibold">PROJECT INTAKE — PANEL</h3>
@@ -145,7 +145,7 @@ function CheckPageInner() {
               <label className="block mono text-xs font-semibold text-zinc-700">Value $<input type="number" value={form.contractValue} onChange={e=> setForm({...form, contractValue: Number(e.target.value)})} className="mt-1 w-full rounded-xl border border-zinc-200 dark:border-zinc-800 px-3 py-2 text-sm" /></label>
             </div>
             <label className="block mono text-xs font-semibold text-zinc-700">Scope<textarea value={form.scope} onChange={e=> setForm({...form, scope:e.target.value})} rows={3} className="mt-1 w-full rounded-xl border border-zinc-200 dark:border-zinc-800 px-3 py-2 text-sm" /></label>
-            <button onClick={()=>setShowIntakePanel(false)} className="w-full rounded-full bg-zinc-900 text-white mono text-xs font-semibold py-2.5 hover:bg-black">Done</button>
+            <button onClick={()=>setShowIntakePanel(false)} className="w-full rounded-full bg-zinc-900 text-white mono text-xs font-semibold py-2.5 hover:bg-zinc-900">Done</button>
           </div>
         </div>
       )}

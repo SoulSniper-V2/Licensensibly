@@ -100,10 +100,10 @@ export default function ProjectsPage() {
                   <span className="rounded-2xl border bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 rounded-xl px-2.5 py-1">{p.trade}</span>
                   <span className="border bg-zinc-800 border-zinc-200 dark:border-zinc-800 rounded-xl px-2.5 py-1">${p.contractValue.toLocaleString()}</span>
                   <span className="border bg-zinc-800 border-zinc-200 dark:border-zinc-800 rounded-xl px-2.5 py-1">{p.role}</span>
-                  {p.isPublicWorks ? <span className="border bg-violet-50 border-violet-200 text-violet-700 rounded-xl px-2.5 py-1">Public works</span> : <span className="rounded-2xl border bg-black border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 rounded-xl px-2.5 py-1">Private</span>}
+                  {p.isPublicWorks ? <span className="border bg-violet-50 border-violet-200 text-violet-700 rounded-xl px-2.5 py-1">Public works</span> : <span className="rounded-2xl border bg-zinc-900 border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 rounded-xl px-2.5 py-1">Private</span>}
                 </div>
               </div>
-              <div className="mx-5 mt-4 border bg-black border-zinc-200 dark:border-zinc-800 p-3">
+              <div className="mx-5 mt-4 border bg-zinc-900 border-zinc-200 dark:border-zinc-800 p-3">
                 <div className="text-[11px] font-bold tracking-wide text-zinc-500 dark:text-zinc-400">CLASSIFICATION NEEDED</div>
                 <div className="text-sm font-bold text-zinc-900 dark:text-zinc-100 mt-0.5">{needed}</div>
                 <div className="text-xs text-zinc-600 dark:text-zinc-400 mt-1">{res.estimatedReadiness.label} • {res.blockers.length} blocker(s){res.reciprocityOpportunities.length?` • ${res.reciprocityOpportunities.length} reciprocity`:""}</div>

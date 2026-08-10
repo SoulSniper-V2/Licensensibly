@@ -39,7 +39,7 @@ export default function Navbar() {
   const [openMenu, setOpenMenu] = useState<string | null>(null);
 
   return (
-    <header className="sticky top-0 z-40 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-xl border-b border-zinc-200 dark:border-zinc-800">
+    <header className="sticky top-0 z-40 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl border-b border-zinc-200 dark:border-zinc-800">
       <div className="mx-auto max-w-[1200px] px-4 md:px-6 h-[52px] flex items-center gap-2 md:gap-4">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 shrink-0">
@@ -99,7 +99,7 @@ export default function Navbar() {
           <ThemeToggle />
           <Link
             href="/check"
-            className="bg-zinc-900 text-white text-sm font-semibold px-4 py-1.5 rounded-full hover:bg-black dark:bg-white dark:bg-zinc-900 dark:text-zinc-900 transition-colors"
+            className="bg-zinc-900 text-white text-sm font-semibold px-4 py-1.5 rounded-full hover:bg-zinc-800 dark:bg-white dark:bg-zinc-900 dark:text-zinc-900 transition-colors"
           >
             Run check →
           </Link>
@@ -107,7 +107,7 @@ export default function Navbar() {
       </div>
 
       {/* Mobile menu */}
-      <div className="md:hidden border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 px-4 py-3 grid gap-1">
+      <div className="md:hidden border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-4 py-3 grid gap-1">
         {menuGroups.flatMap((g) => g.items).map((it) => {
           const Icon = it.icon;
           const active = pathname === it.href;
