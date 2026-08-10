@@ -42,7 +42,7 @@ export default function Navbar() {
       <div className="mx-auto max-w-[1200px] px-4 md:px-6 h-[52px] flex items-center gap-2 md:gap-4">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 shrink-0">
-          <div className="h-7 w-7 bg-zinc-900 flex items-center justify-center rounded-md">
+          <div className="h-7 w-7 bg-zinc-900 flex items-center justify-center rounded-2xl">
             <span className="text-white text-[13px] font-black">G</span>
           </div>
           <span className="text-[15px] font-bold tracking-tight">licensensibly</span>
@@ -56,7 +56,7 @@ export default function Navbar() {
               <button
                 onClick={() => setOpenMenu(openMenu === g.label ? null : g.label)}
                 onMouseEnter={() => setOpenMenu(g.label)}
-                className={`text-sm px-3 py-1.5 rounded-md transition-colors ${
+                className={`text-sm px-3 py-1.5 rounded-2xl transition-colors ${
                   openMenu === g.label
                     ? "bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100"
                     : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100"
@@ -73,7 +73,7 @@ export default function Navbar() {
                       <Link
                         key={it.label}
                         href={it.href}
-                        className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm ${
+                        className={`flex items-center gap-2.5 px-3 py-2 rounded-2xl text-sm ${
                           active
                             ? "bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 font-medium"
                             : "text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:bg-zinc-800 dark:hover:bg-zinc-800/60"
@@ -114,7 +114,7 @@ export default function Navbar() {
             <Link
               key={it.label}
               href={it.href}
-              className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm ${
+              className={`flex items-center gap-2.5 px-3 py-2 rounded-2xl text-sm ${
                 active ? "bg-zinc-100 dark:bg-zinc-800 font-medium" : "text-zinc-600 dark:text-zinc-400"
               }`}
             >
