@@ -16,7 +16,7 @@ export default function Dashboard() {
   return (
     <div className="bg-white">
       {/* HERO - freebuff-like: centered, airy, big type, no dark grid */}
-      <section className="mx-auto max-w-[1200px] px-6 pt-14 pb-10 text-center">
+      <section className="mx-auto max-w-[1200px] px-6 pt-20 md:pt-24 pb-16 text-center">
         <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1 mono text-xs tracking-wide text-zinc-600">
           <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" /> Pre-bid, not post-hold • NC SC VA
         </div>
@@ -36,13 +36,13 @@ export default function Dashboard() {
         <div className="mt-3 mono text-xs text-zinc-500">No signup needed to try • Engine runs locally • AINSIDE streams explanations</div>
 
         {/* trust stats like freebuff's $0 vs others */}
-        <div className="mt-10 grid grid-cols-3 gap-3 max-w-[720px] mx-auto">
+        <div className="mt-16 grid grid-cols-3 gap-6 max-w-[720px] mx-auto">
           {[
             { k: "521k", v: "Specialty establishments", sub: "Census, employer" },
             { k: "22k+", v: "Regulatory filings", sub: "Harbor benchmark" },
             { k: "$499", v: "Multi-state tier", sub: "Wedge validates ROI" },
           ].map(s=> (
-            <div key={s.k} className="rounded-2xl border border-zinc-200 bg-zinc-50 p-4 text-center">
+            <div key={s.k} className="rounded-2xl border border-zinc-200 bg-zinc-50 p-6 text-center">
               <div className="text-2xl font-bold tracking-tight">{s.k}</div>
               <div className="mono text-xs text-zinc-600">{s.v}</div>
               <div className="mono text-[11px] text-zinc-400">{s.sub}</div>
@@ -54,8 +54,8 @@ export default function Dashboard() {
       {/* LIVE DEMO - the working AI shit, like freebuff's interactive calculator */}
       <section className="mx-auto max-w-[1200px] px-6 py-12">
         <div className="rounded-[24px] border border-zinc-200 bg-zinc-50 p-3 md:p-6 shadow-sm border border-zinc-200 bg-zinc-50 p-3 md:p-4">
-          <div className="grid lg:grid-cols-[380px_1fr] gap-4">
-            <div className="rounded-2xl bg-white border border-zinc-200 p-5">
+          <div className="grid lg:grid-cols-[400px_1fr] gap-8">
+            <div className="rounded-2xl bg-white border border-zinc-200 p-8">
               <div className="mono text-xs tracking-[0.14em] text-zinc-500">LIVE — DETERMINISTIC ENGINE</div>
               <div className="mt-3 rounded-xl bg-zinc-900 text-white px-3 py-2 flex items-center justify-between">
                 <span className="mono text-xs tracking-wide">AT RISK</span>
@@ -105,13 +105,13 @@ export default function Dashboard() {
       </section>
 
       {/* how it works + gate - like freebuff's sections */}
-      <section className="mx-auto max-w-[1200px] px-6 pb-12 grid lg:grid-cols-[1.2fr_0.8fr] gap-8">
+      <section className="mx-auto max-w-[1200px] px-6 py-12 grid lg:grid-cols-[1.2fr_0.8fr] gap-8">
         <div>
           <h2 className="text-2xl font-bold tracking-tight">The wedge is the bid, not the license</h2>
           <p className="mt-3 text-sm leading-relaxed text-zinc-600 max-w-[62ch]">
             Existing tools answer “how do I maintain licenses I already have?” Gooner answers <span className="font-semibold text-zinc-900">“We just got this $800k Charlotte electrical job — are we legal to bid, and what’s missing?”</span> That decision happens before any tracker. Embed there, and switching costs compound: company credentials, jurisdiction history, qualifiers, prior checks.
           </p>
-          <div className="mt-6 grid md:grid-cols-3 gap-3">
+          <div className="mt-8 grid md:grid-cols-3 gap-6">
             {[
               { n: "01", t: "Drop job", d: "Address, value, trade, scope, public/private, role" },
               { n: "02", t: "Engine decides", d: "Jurisdiction × trade × value × credentials → eligible" },
@@ -154,13 +154,13 @@ export default function Dashboard() {
         <div className="rounded-[24px] border border-zinc-200 bg-zinc-50 p-3 md:p-6 shadow-sm border border-zinc-200 p-6 md:p-8 bg-white">
           <h2 className="text-xl font-bold tracking-tight text-center">Pricing — start narrow, expand later</h2>
           <p className="mono text-xs text-zinc-500 text-center mt-1">Hundreds/mo — not $10 consumer. Validates wedge ROI.</p>
-          <div className="mt-6 grid md:grid-cols-3 gap-4 max-w-[900px] mx-auto">
+          <div className="mt-8 grid md:grid-cols-3 gap-6 max-w-[900px] mx-auto">
             {[
               { tier: "Solo", price: "$49–79", detail: "1 state • limited projects", features: ["NC or SC or VA", "10 checks/mo", "Checklist + calendar"], cta: "Start solo" },
               { tier: "Growth", price: "$199–299", detail: "multi-state • unlimited", features: ["NC + SC + VA", "Unlimited checks", "Renewal + reciprocity"], highlight: true, cta: "Most teams" },
               { tier: "Multi-state", price: "$499+", detail: "multiple entities", features: ["Unlimited entities", "Team + qualifiers", "New-jurisdiction reports"], cta: "Contact" },
             ].map(p=> (
-              <div key={p.tier} className={`rounded-2xl border p-6 flex flex-col hover:shadow-md transition-shadow ${p.highlight ? "bg-zinc-900 text-white border-zinc-900" : "bg-zinc-50 border-zinc-200"}`}>
+              <div key={p.tier} className={`rounded-2xl border p-7 flex flex-col hover:shadow-md transition-shadow ${p.highlight ? "bg-zinc-900 text-white border-zinc-900" : "bg-zinc-50 border-zinc-200"}`}>
                 <div className="mono text-xs tracking-[0.14em] opacity-60">{p.tier.toUpperCase()}</div>
                 <div className="text-2xl font-bold mt-1">{p.price}<span className="text-sm font-medium opacity-60">/mo</span></div>
                 <div className="mono text-xs mt-1 opacity-60">{p.detail}</div>
