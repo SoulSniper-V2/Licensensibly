@@ -44,7 +44,7 @@ export default function OnboardingPanel() {
   if (dismissed) {
     return (
       <div className="mx-auto max-w-[1200px] px-6 py-3 flex justify-end">
-        <button onClick={reopen} className="mono text-xs tracking-wide border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 rounded-full px-3 py-1 hover:bg-zinc-50 dark:bg-zinc-800">
+        <button onClick={reopen} className="mono text-xs tracking-wide border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 rounded-full px-3 py-1 hover:bg-white dark:bg-zinc-900">
           Show onboarding — {done}/{total} done
         </button>
       </div>
@@ -55,9 +55,9 @@ export default function OnboardingPanel() {
     <div className="mx-auto max-w-[1200px] px-6 py-8">
       <div className="rounded-[24px] border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 overflow-hidden shadow-sm">
         {/* header — airier like freebuff */}
-        <div className="px-6 md:px-8 py-6 flex flex-wrap gap-4 items-start justify-between border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-800/50">
+        <div className="px-6 md:px-8 py-6 flex flex-wrap gap-4 items-start justify-between border-b border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
           <div className="max-w-[62ch]">
-            <div className="inline-flex items-center gap-2 mono text-[11px] tracking-[0.14em] text-zinc-500 dark:text-zinc-400">
+            <div className="inline-flex items-center gap-2 mono text-[11px] tracking-[0.14em] text-zinc-900 dark:text-zinc-100">
               <span className="h-2 w-2 rounded-full bg-white dark:bg-zinc-900 animate-pulse" /> ONBOARDING — START HERE
               <span className="hidden sm:inline">• auto-updates when new features ship</span>
             </div>
@@ -75,10 +75,10 @@ export default function OnboardingPanel() {
               </div>
             </div>
             <div className="flex gap-2">
-              <button onClick={() => setExpanded(v => !v)} className="mono text-xs border border-zinc-200 dark:border-zinc-800 rounded-full px-3 py-1.5 bg-white dark:bg-zinc-900 hover:bg-zinc-50 dark:bg-zinc-800">
+              <button onClick={() => setExpanded(v => !v)} className="mono text-xs border border-zinc-200 dark:border-zinc-800 rounded-full px-3 py-1.5 bg-white dark:bg-zinc-900 hover:bg-white dark:bg-zinc-900">
                 {expanded ? "Collapse" : "Expand"}
               </button>
-              <button onClick={reset} className="mono text-xs border border-zinc-200 dark:border-zinc-800 rounded-full px-3 py-1.5 bg-white dark:bg-zinc-900 hover:bg-zinc-50 dark:bg-zinc-800">Reset</button>
+              <button onClick={reset} className="mono text-xs border border-zinc-200 dark:border-zinc-800 rounded-full px-3 py-1.5 bg-white dark:bg-zinc-900 hover:bg-white dark:bg-zinc-900">Reset</button>
               <button onClick={dismiss} className="mono text-xs bg-zinc-900 text-white rounded-full px-3 py-1.5 hover:bg-black">Dismiss</button>
             </div>
           </div>
@@ -91,7 +91,7 @@ export default function OnboardingPanel() {
               {ONBOARDING_STEPS.map((s, i) => {
                 const isDone = completed.includes(s.id);
                 return (
-                  <div key={s.id} className={`rounded-2xl border p-6 flex flex-col gap-3 hover:shadow-md transition-shadow ${isDone ? "bg-zinc-900 text-white border-zinc-900" : "bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-800"}`}>
+                  <div key={s.id} className={`rounded-2xl border p-6 flex flex-col gap-3 hover:shadow-md transition-shadow ${isDone ? "bg-zinc-900 text-white border-zinc-900" : "bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800"}`}>
                     <div className="flex items-start justify-between gap-2">
                       <div className={`h-7 w-7 rounded-full flex items-center justify-center mono text-xs font-bold shrink-0 ${isDone ? "bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100" : "bg-zinc-900 text-white"}`}>
                         {String(i + 1).padStart(2, "0")}
@@ -114,7 +114,7 @@ export default function OnboardingPanel() {
               })}
             </div>
 
-            <div className="mt-8 rounded-2xl bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 p-4 flex flex-wrap gap-3 items-center justify-between">
+            <div className="mt-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 p-4 flex flex-wrap gap-3 items-center justify-between">
               <div className="mono text-xs text-zinc-600 dark:text-zinc-400">
                 <span className="font-semibold text-zinc-900 dark:text-zinc-100">How to keep it updated:</span> add a new entry to <code className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded px-1">ONBOARDING_STEPS</code> — panel, progress, and this copy update automatically. No manual sync.
               </div>
