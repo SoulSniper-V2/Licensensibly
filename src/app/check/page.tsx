@@ -5,6 +5,7 @@ import { MOCK_COMPANIES, MOCK_PROJECTS } from "@/lib/mock-data";
 import { evaluateEligibility } from "@/lib/eligibility-engine";
 import EligibilityCard from "@/components/EligibilityCard";
 import { ProjectInput, Trade } from "@/lib/types";
+import AIResearchPanel from "@/components/AIResearchPanel";
 
 function CheckPageInner() {
   const searchParams = useSearchParams();
@@ -99,17 +100,7 @@ function CheckPageInner() {
 
         <div>
           <EligibilityCard result={result} />
-          <div className="mt-4 rounded-2xl bg-white border border-slate-200 p-5">
-            <h3 className="text-sm font-black">AI-assisted regulatory research (mock v1)</h3>
-            <p className="text-xs text-slate-600 mt-1">Per spec: LLMs extract, research, summarize, explain — with citations to official government sources. v1 keeps filing <span className="font-semibold">out</span>.</p>
-            <div className="mt-3 space-y-2 text-sm">
-              <div className="rounded-xl border border-slate-200 p-3">
-                <div className="text-xs font-bold text-slate-500">AI SUMMARY FOR {form.city.toUpperCase()}, {form.state}</div>
-                <div className="mt-1 leading-relaxed text-slate-700">For a <span className="font-semibold">${form.contractValue.toLocaleString()} {form.trade}</span> job in <span className="font-semibold">{form.city}, {form.state}</span>, the system extracted <span className="font-semibold">{result.satisfied.length + result.blockers.length} state/local requirements</span> and determined <span className="font-black uppercase">{result.status}</span>. Primary blocker: <span className="font-semibold">{result.blockers[0]?.requirement.label || "none — ready to bid"}</span>. Reciprocity {result.reciprocityOpportunities.length ? "available via " + result.reciprocityOpportunities[0].canUse.state : "not available"}.</div>
-                <div className="mt-2 text-xs text-slate-500">Sources verified against {result.citations.slice(0,2).map(c=> c.authority).join(" & ")} on 2026-08-01.</div>
-              </div>
-            </div>
-          </div>
+          <AIResearchPanel result={result} city={form.city} state={form.state} trade={form.trade} value={form.contractValue} />
         </div>
       </div>
     </div>

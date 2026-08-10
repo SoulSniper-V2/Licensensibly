@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import AIAssistant from "@/components/AIAssistant";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
@@ -24,6 +25,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <span className="ml-auto">Deterministic engine • LLM explains, never decides • <a className="underline" href="https://github.com/SoulSniper-V2/gooner" target="_blank">GitHub</a></span>
           </div>
         </footer>
+              <AIAssistant />
       </body>
     </html>
   );
