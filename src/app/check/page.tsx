@@ -47,29 +47,31 @@ function CheckPageInner() {
         </div>
       </div>
 
-      <div className="grid lg:grid-cols-[380px_1fr] gap-6 items-start">
+      {/* Horizontal splits — per 5:00 AM request: was vertical [380px_1fr], now stacked */}
+      <div className="space-y-6">
         <div className="space-y-4">
-          {/* Intake now collapsible — static form kept but with toggle, plus panel alternative */}
+          {/* Intake — now full-width horizontal */}
           <div className="rounded-2xl border border-zinc-200 bg-white p-5 space-y-3">
             <div className="flex items-center justify-between">
               <h2 className="mono text-xs tracking-[0.14em] text-zinc-500 font-semibold">02 — PROJECT / JOB INTAKE</h2>
               <button onClick={()=> setShowIntakePanel(true)} className="mono text-[11px] text-zinc-500 underline">open as panel</button>
             </div>
             <label className="block mono text-xs font-semibold text-zinc-700">Project title<input value={form.title} onChange={e=> setForm({...form, title:e.target.value})} className="mt-1 w-full rounded-xl border border-zinc-200 px-3 py-2 text-sm" /></label>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-3 gap-3">
               <label className="block mono text-xs font-semibold text-zinc-700">City<input value={form.city} onChange={e=> setForm({...form, city:e.target.value})} className="mt-1 w-full rounded-xl border border-zinc-200 px-3 py-2 text-sm" /></label>
               <label className="block mono text-xs font-semibold text-zinc-700">State<select value={form.state} onChange={e=> setForm({...form, state:e.target.value as any})} className="mt-1 w-full rounded-xl border border-zinc-200 px-3 py-2 text-sm font-semibold"><option value="NC">NC</option><option value="SC">SC</option><option value="VA">VA</option></select></label>
+              <label className="block mono text-xs font-semibold text-zinc-700">County<input value={form.county} onChange={e=> setForm({...form, county:e.target.value})} className="mt-1 w-full rounded-xl border border-zinc-200 px-3 py-2 text-sm" placeholder="Mecklenburg" /></label>
             </div>
             <label className="block mono text-xs font-semibold text-zinc-700">Address<input value={form.address} onChange={e=> setForm({...form, address:e.target.value})} className="mt-1 w-full rounded-xl border border-zinc-200 px-3 py-2 text-sm" /></label>
-            <label className="block mono text-xs font-semibold text-zinc-700">County<input value={form.county} onChange={e=> setForm({...form, county:e.target.value})} className="mt-1 w-full rounded-xl border border-zinc-200 px-3 py-2 text-sm" placeholder="Mecklenburg" /></label>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-3 gap-3">
               <label className="block mono text-xs font-semibold text-zinc-700">Trade<select value={form.trade} onChange={e=> setForm({...form, trade:e.target.value as Trade})} className="mt-1 w-full rounded-xl border border-zinc-200 px-3 py-2 text-sm"><option value="electrical">Electrical</option><option value="hvac">HVAC / Mechanical</option><option value="fire-protection">Fire Protection</option></select></label>
               <label className="block mono text-xs font-semibold text-zinc-700">Contract value $<input type="number" value={form.contractValue} onChange={e=> setForm({...form, contractValue: Number(e.target.value)})} className="mt-1 w-full rounded-xl border border-zinc-200 px-3 py-2 text-sm font-semibold" /></label>
+              <label className="block mono text-xs font-semibold text-zinc-700">Role<select value={form.role} onChange={e=> setForm({...form, role:e.target.value as any})} className="mt-1 w-full rounded-xl border border-zinc-200 px-3 py-2 text-sm"><option value="subcontractor">Subcontractor</option><option value="general-contractor">General Contractor</option><option value="prime">Prime</option></select></label>
             </div>
             <label className="block mono text-xs font-semibold text-zinc-700">Scope<textarea value={form.scope} onChange={e=> setForm({...form, scope:e.target.value})} rows={2} className="mt-1 w-full rounded-xl border border-zinc-200 px-3 py-2 text-sm" /></label>
             <div className="grid grid-cols-2 gap-3">
-              <label className="block mono text-xs font-semibold text-zinc-700">Role<select value={form.role} onChange={e=> setForm({...form, role:e.target.value as any})} className="mt-1 w-full rounded-xl border border-zinc-200 px-3 py-2 text-sm"><option value="subcontractor">Subcontractor</option><option value="general-contractor">General Contractor</option><option value="prime">Prime</option></select></label>
-              <label className="flex items-center gap-2 mono text-xs font-semibold text-zinc-700 mt-6"><input type="checkbox" checked={!!form.isPublicWorks} onChange={e=> setForm({...form, isPublicWorks:e.target.checked})} /> Public works?</label>
+              <label className="flex items-center gap-2 mono text-xs font-semibold text-zinc-700 mt-2"><input type="checkbox" checked={!!form.isPublicWorks} onChange={e=> setForm({...form, isPublicWorks:e.target.checked})} /> Public works?</label>
+              <span className="mono text-xs text-zinc-500 flex items-center">Horizontal split — intake now 3-col</span>
             </div>
             <div className="grid grid-cols-2 gap-3">
               <label className="block mono text-xs font-semibold text-zinc-700">Bid date<input type="date" value={form.bidDate||""} onChange={e=> setForm({...form, bidDate:e.target.value})} className="mt-1 w-full rounded-xl border border-zinc-200 px-3 py-2 text-sm" /></label>
