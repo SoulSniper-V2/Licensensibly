@@ -5,6 +5,7 @@ import { MOCK_COMPANIES, MOCK_PROJECTS } from "@/lib/mock-data";
 import { evaluateEligibility } from "@/lib/eligibility-engine";
 import EligibilityCard from "@/components/EligibilityCard";
 import { classificationNeeded } from "@/lib/regulatory-data";
+import OnboardingPanel from "@/components/OnboardingPanel";
 
 export default function Dashboard() {
   const [companyIdx, setCompanyIdx] = useState(0);
@@ -50,6 +51,8 @@ export default function Dashboard() {
           ))}
         </div>
       </section>
+
+      <OnboardingPanel />
 
       {/* LIVE DEMO - the working AI shit, like freebuff's interactive calculator */}
       <section className="mx-auto max-w-[1200px] px-6 py-12">
