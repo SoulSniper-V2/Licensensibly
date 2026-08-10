@@ -52,11 +52,15 @@ export default function Dashboard() {
       </section>
 
       {/* LIVE DEMO - the working AI shit, like freebuff's interactive calculator */}
-      <section className="mx-auto max-w-[1200px] px-6 pb-12">
-        <div className="rounded-[24px] border border-zinc-200 bg-zinc-50 p-3 md:p-4">
+      <section className="mx-auto max-w-[1200px] px-6 py-12">
+        <div className="rounded-[24px] border border-zinc-200 bg-zinc-50 p-3 md:p-6 shadow-sm border border-zinc-200 bg-zinc-50 p-3 md:p-4">
           <div className="grid lg:grid-cols-[380px_1fr] gap-4">
             <div className="rounded-2xl bg-white border border-zinc-200 p-5">
               <div className="mono text-xs tracking-[0.14em] text-zinc-500">LIVE — DETERMINISTIC ENGINE</div>
+              <div className="mt-3 rounded-xl bg-zinc-900 text-white px-3 py-2 flex items-center justify-between">
+                <span className="mono text-xs tracking-wide">AT RISK</span>
+                <span className="text-sm font-bold">${project.contractValue.toLocaleString()} • {result.status.toUpperCase()}</span>
+              </div>
               <div className="mt-4 space-y-4">
                 <div>
                   <div className="mono text-xs font-semibold text-zinc-700">Company</div>
@@ -146,8 +150,8 @@ export default function Dashboard() {
       </section>
 
       {/* pricing like freebuff's comparison */}
-      <section className="mx-auto max-w-[1200px] px-6 pb-12">
-        <div className="rounded-[24px] border border-zinc-200 p-6 md:p-8 bg-white">
+      <section className="mx-auto max-w-[1200px] px-6 py-12">
+        <div className="rounded-[24px] border border-zinc-200 bg-zinc-50 p-3 md:p-6 shadow-sm border border-zinc-200 p-6 md:p-8 bg-white">
           <h2 className="text-xl font-bold tracking-tight text-center">Pricing — start narrow, expand later</h2>
           <p className="mono text-xs text-zinc-500 text-center mt-1">Hundreds/mo — not $10 consumer. Validates wedge ROI.</p>
           <div className="mt-6 grid md:grid-cols-3 gap-4 max-w-[900px] mx-auto">
@@ -156,7 +160,7 @@ export default function Dashboard() {
               { tier: "Growth", price: "$199–299", detail: "multi-state • unlimited", features: ["NC + SC + VA", "Unlimited checks", "Renewal + reciprocity"], highlight: true, cta: "Most teams" },
               { tier: "Multi-state", price: "$499+", detail: "multiple entities", features: ["Unlimited entities", "Team + qualifiers", "New-jurisdiction reports"], cta: "Contact" },
             ].map(p=> (
-              <div key={p.tier} className={`rounded-2xl border p-5 flex flex-col ${p.highlight ? "bg-zinc-900 text-white border-zinc-900" : "bg-zinc-50 border-zinc-200"}`}>
+              <div key={p.tier} className={`rounded-2xl border p-6 flex flex-col hover:shadow-md transition-shadow ${p.highlight ? "bg-zinc-900 text-white border-zinc-900" : "bg-zinc-50 border-zinc-200"}`}>
                 <div className="mono text-xs tracking-[0.14em] opacity-60">{p.tier.toUpperCase()}</div>
                 <div className="text-2xl font-bold mt-1">{p.price}<span className="text-sm font-medium opacity-60">/mo</span></div>
                 <div className="mono text-xs mt-1 opacity-60">{p.detail}</div>
