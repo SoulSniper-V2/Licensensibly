@@ -15,14 +15,10 @@ export default function AIResearchPanel({ result, city, state, trade, value }: {
     setLoading(true);
     setError(null);
     setText("");
-
     const payload = {
       companyName: result.company.legalName,
       projectTitle: result.project.title,
-      city,
-      state,
-      trade,
-      value,
+      city, state, trade, value,
       status: result.status,
       blockers: result.blockers.map(b => ({ label: b.requirement.label, reason: b.reason, remediation: b.remediation })),
       warnings: result.warnings.map(w => ({ label: w.requirement.label, reason: w.reason })),
@@ -31,74 +27,35 @@ export default function AIResearchPanel({ result, city, state, trade, value }: {
       reciprocity: result.reciprocityOpportunities.map(r => `${r.requirement.label} via ${r.canUse.state} ${r.canUse.licenseNumber} — ${r.note}`),
       estimatedReadiness: result.estimatedReadiness.label,
     };
-
     (async () => {
       try {
-        const res = await fetch("/api/research", {
-          method: "POST",
-          headers: { "content-type": "application/json", accept: "text/plain" },
-          body: JSON.stringify(payload),
-          signal: ac.signal,
-        });
-        if (!res.ok) {
-          const j = await res.json().catch(() => ({}));
-          throw new Error(j.error || `Research upstream ${res.status}`);
-        }
+        const res = await fetch("/api/research", { method: "POST", headers: { "content-type": "application/json", accept: "text/plain" }, body: JSON.stringify(payload), signal: ac.signal });
+        if (!res.ok) { const j = await res.json().catch(()=>({})); throw new Error(j.error || `Research upstream ${res.status}`); }
         const reader = res.body?.getReader();
-        if (!reader) {
-          const t = await res.text();
-          if (!ac.signal.aborted) setText(t);
-          return;
-        }
-        const decoder = new TextDecoder();
-        let acc = "";
-        while (true) {
-          const { done, value: chunk } = await reader.read();
-          if (done) break;
-          acc += decoder.decode(chunk, { stream: true });
-          if (!ac.signal.aborted) setText(acc);
-        }
-      } catch (e: any) {
-        if (e?.name === "AbortError") return;
-        setError(e?.message || String(e));
-      } finally {
-        if (!ac.signal.aborted) setLoading(false);
-      }
+        if (!reader) { const t = await res.text(); if (!ac.signal.aborted) setText(t); return; }
+        const decoder = new TextDecoder(); let acc = "";
+        while (true) { const { done, value: chunk } = await reader.read(); if (done) break; acc += decoder.decode(chunk, { stream: true }); if (!ac.signal.aborted) setText(acc); }
+      } catch (e: any) { if (e?.name === "AbortError") return; setError(e?.message || String(e)); } finally { if (!ac.signal.aborted) setLoading(false); }
     })();
     return () => ac.abort();
   }, [result, city, state, trade, value]);
 
   function renderMarkdown(s: string) {
-    const lines = s.split("\n");
-    return lines.map((line, i) => {
+    return s.split("\n").map((line, i) => {
       if (!line.trim()) return <div key={i} className="h-2" />;
-      if (line.startsWith("### ")) return <h4 key={i} className="text-sm font-black mt-3 tracking-tight">{line.slice(4)}</h4>;
-      if (line.startsWith("## ")) return <h4 key={i} className="text-sm font-black mt-3 tracking-tight">{line.slice(3)}</h4>;
-      if (line.trim().startsWith("- ") || line.trim().startsWith("• ")) {
-        return <div key={i} className="text-sm leading-relaxed ml-4 text-zinc-300">• {formatInline(line.trim().slice(2))}</div>;
-      }
-      if (/^\d+\./.test(line.trim())) {
-        return <div key={i} className="text-sm leading-relaxed ml-4 text-zinc-300">{formatInline(line)}</div>;
-      }
-      return <p key={i} className="text-sm leading-relaxed text-zinc-300">{formatInline(line)}</p>;
+      if (line.startsWith("### ") || line.startsWith("## ")) return <h4 key={i} className="text-sm font-bold mt-3">{line.replace(/^#+\s/, "")}</h4>;
+      if (line.trim().startsWith("- ") || line.trim().startsWith("• ")) return <div key={i} className="text-sm leading-relaxed ml-4 text-zinc-700">• {formatInline(line.trim().slice(2))}</div>;
+      if (/^\d+\./.test(line.trim())) return <div key={i} className="text-sm leading-relaxed ml-4 text-zinc-700">{formatInline(line)}</div>;
+      return <p key={i} className="text-sm leading-relaxed text-zinc-700">{formatInline(line)}</p>;
     });
   }
   function formatInline(s: string) {
-    const parts: any[] = [];
-    let last = 0;
-    const re = /(\*\*.*?\*\*|\[.*?\]\(.*?\))/g;
-    let m: RegExpExecArray | null;
-    let idx = 0;
+    const parts: any[] = []; let last = 0; const re = /(\*\*.*?\*\*|\[.*?\]\(.*?\))/g; let m: RegExpExecArray | null; let idx=0;
     while ((m = re.exec(s))) {
       if (m.index > last) parts.push(<span key={idx++}>{s.slice(last, m.index)}</span>);
       const token = m[0];
-      if (token.startsWith("**")) {
-        parts.push(<strong key={idx++} className="font-bold text-white">{token.slice(2, -2)}</strong>);
-      } else {
-        const lm = token.match(/\[(.*?)\]\((.*?)\)/);
-        if (lm) parts.push(<a key={idx++} href={lm[2]} target="_blank" className="underline text-[#facc15]">{lm[1]}</a>);
-        else parts.push(<span key={idx++}>{token}</span>);
-      }
+      if (token.startsWith("**")) parts.push(<strong key={idx++} className="font-semibold text-zinc-900">{token.slice(2,-2)}</strong>);
+      else { const lm = token.match(/\[(.*?)\]\((.*?)\)/); if (lm) parts.push(<a key={idx++} href={lm[2]} target="_blank" className="underline text-sky-700">{lm[1]}</a>); else parts.push(<span key={idx++}>{token}</span>); }
       last = m.index + token.length;
     }
     if (last < s.length) parts.push(<span key={idx++}>{s.slice(last)}</span>);
@@ -106,31 +63,31 @@ export default function AIResearchPanel({ result, city, state, trade, value }: {
   }
 
   return (
-    <div className="border border-zinc-800 bg-zinc-900">
-      <div className="flex items-center gap-2 px-4 py-3 border-b border-zinc-800 bg-black">
-        <div className="h-2 w-2 bg-[#facc15] animate-pulse" />
-        <h3 className="mono text-[11px] tracking-[0.16em]">AINSIDE — REGULATORY RESEARCH</h3>
-        <span className="mono text-[10px] border border-zinc-800 bg-zinc-900 px-2 py-0.5 text-zinc-400">ag/gemini-3.6-flash-high</span>
-        {loading && <span className="ml-auto mono text-[11px] text-zinc-500 animate-pulse">RESEARCHING…</span>}
-        {!loading && !error && text && <span className="ml-auto mono text-[11px] text-emerald-400">● LIVE VIA AINSIDE</span>}
+    <div className="rounded-2xl border border-zinc-200 bg-white overflow-hidden">
+      <div className="flex items-center gap-2 px-5 py-3 border-b border-zinc-200 bg-zinc-50">
+        <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+        <h3 className="mono text-xs tracking-[0.14em] font-semibold">AINSIDE — REGULATORY RESEARCH</h3>
+        <span className="mono text-[11px] border border-zinc-200 bg-white rounded-full px-2 py-0.5 text-zinc-500">ag/gemini-3.6-flash-high</span>
+        {loading && <span className="ml-auto mono text-xs text-zinc-500 animate-pulse">Researching…</span>}
+        {!loading && !error && text && <span className="ml-auto mono text-xs text-emerald-600">● live</span>}
       </div>
-      <div className="px-3 py-2 border-b border-zinc-800 mono text-[11px] text-zinc-500">Deterministic engine decided <span className="text-white font-bold uppercase">{result.status}</span> — AINSIDE explains and cites. No filing in v1.</div>
-      <div className="p-4 min-h-[140px] bg-[#0a0a0b]">
-        {loading && !text && <div className="mono text-xs text-zinc-500">Asking AINSIDE at http://192.168.1.204:20128/v1<span className="inline-block w-1.5 h-3 bg-[#facc15] ml-1 animate-pulse align-middle" /></div>}
+      <div className="px-5 py-2 mono text-xs text-zinc-500 border-b border-zinc-100">Engine decided <span className="text-zinc-900 font-semibold uppercase">{result.status}</span> — AINSIDE explains and cites.</div>
+      <div className="p-5 min-h-[140px] bg-white">
+        {loading && !text && <div className="mono text-sm text-zinc-500">Asking AINSIDE… <span className="inline-block w-2 h-2 bg-zinc-300 rounded-full animate-bounce" /></div>}
         {error && (
           <div className="space-y-3">
-            <div className="mono text-xs font-bold text-amber-300 border border-amber-900 bg-amber-950/30 p-3">AINSIDE unreachable — showing deterministic fallback.</div>
-            <div className="mono text-[11px] text-zinc-500 break-all">{error}</div>
-            <div className="border border-zinc-800 bg-zinc-900 p-4 mono text-xs leading-relaxed text-zinc-300">
-              For a <span className="text-white font-bold">${value.toLocaleString()} {trade}</span> job in <span className="text-white font-bold">{city}, {state}</span>, engine evaluated <span className="text-white">{result.satisfied.length + result.blockers.length} requirements</span> → <span className="text-[#facc15] font-bold uppercase">{result.status}</span>. Primary blocker: <span className="text-white">{result.blockers[0]?.requirement.label || "none — ready to bid"}</span>. Reciprocity {result.reciprocityOpportunities.length ? "available via " + result.reciprocityOpportunities[0].canUse.state : "not available"}.
-              <div className="mt-2 text-zinc-500">Sources: {result.citations.slice(0, 2).map(c => c.authority).join(" • ")} • Verified 2026-08-01</div>
+            <div className="mono text-sm font-medium text-amber-800 bg-amber-50 border border-amber-200 rounded-xl p-3">AINSIDE unreachable — showing deterministic fallback.</div>
+            <div className="mono text-xs text-zinc-500 break-all">{error}</div>
+            <div className="rounded-xl bg-zinc-50 border border-zinc-200 p-4 text-sm leading-relaxed text-zinc-700">
+              For a <span className="font-semibold">${value.toLocaleString()} {trade}</span> job in <span className="font-semibold">{city}, {state}</span>, engine determined <span className="font-semibold uppercase">{result.status}</span>. Primary blocker: <span className="font-semibold">{result.blockers[0]?.requirement.label || "none — ready to bid"}</span>.
+              <div className="mono text-xs text-zinc-500 mt-2">Sources: {result.citations.slice(0,2).map(c=>c.authority).join(" • ")} • Verified 2026-08-01</div>
             </div>
           </div>
         )}
         {!error && text && <div className="space-y-1">{renderMarkdown(text)}</div>}
-        {!error && !loading && !text && <div className="mono text-xs text-zinc-600">No output.</div>}
+        {!error && !loading && !text && <div className="mono text-xs text-zinc-400">No output.</div>}
       </div>
-      <div className="px-4 py-2 border-t border-zinc-800 mono text-[10px] text-zinc-600">Model <span className="text-zinc-400">ag/gemini-3.6-flash-high</span> via <span className="text-zinc-400">http://192.168.1.204:20128/v1</span> • Key server-side only. Streaming. Not legal advice.</div>
+      <div className="px-5 py-2 bg-zinc-50 border-t border-zinc-200 mono text-[11px] text-zinc-500">Model ag/gemini-3.6-flash-high via http://192.168.1.204:20128/v1 • Streaming • Not legal advice</div>
     </div>
   );
 }

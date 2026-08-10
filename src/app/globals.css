@@ -1,54 +1,26 @@
 @import "tailwindcss";
-
 :root {
-  --background: #09090b;
-  --foreground: #fafafa;
-  --muted: #27272a;
-  --border: #27272a;
-  --accent: #facc15;
-  --accent-foreground: #09090b;
+  --background: #ffffff;
+  --foreground: #0a0a0a;
+  --muted: #f4f4f5;
+  --border: #e4e4e7;
 }
-
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
-
-* { scrollbar-width: thin; scrollbar-color: #3f3f46 transparent; }
 body {
-  background: #09090b;
-  color: #fafafa;
+  background: #ffffff;
+  color: #0a0a0a;
   font-family: var(--font-geist-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
 }
-
-/* grid pattern */
 .bg-grid {
   background-image:
-    linear-gradient(to right, rgba(63,63,70,0.15) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(63,63,70,0.15) 1px, transparent 1px);
-  background-size: 40px 40px;
+    linear-gradient(to right, rgba(228,228,231,0.6) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(228,228,231,0.6) 1px, transparent 1px);
+  background-size: 32px 32px;
 }
-
-/* brutalist hairline */
-.hairline { border-color: #27272a; }
-.hairline-light { border-color: #3f3f46; }
-
-/* mono */
 .mono { font-family: var(--font-geist-mono), ui-monospace, monospace; }
-
-/* noise */
-.noise::before {
-  content:"";
-  position:absolute; inset:0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
-  pointer-events:none;
-  opacity:0.5;
-}
-
-::-webkit-scrollbar { width: 8px; height: 8px; }
-::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 0; }
-::-webkit-scrollbar-track { background: #09090b; }

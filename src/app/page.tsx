@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
 import { useState, useMemo } from "react";
-import { motion } from "motion/react";
 import { MOCK_COMPANIES, MOCK_PROJECTS } from "@/lib/mock-data";
 import { evaluateEligibility } from "@/lib/eligibility-engine";
 import EligibilityCard from "@/components/EligibilityCard";
@@ -15,214 +14,157 @@ export default function Dashboard() {
   const result = useMemo(()=> evaluateEligibility(company, project), [company, project]);
 
   return (
-    <div className="bg-[#09090b]">
-      {/* HERO - ASYMMETRIC SPLIT like freebuff but industrial */}
-      <section className="relative overflow-hidden border-b border-zinc-800 bg-[#09090b]">
-        <div className="absolute inset-0 bg-grid opacity-40" />
-        {/* scanline */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#09090b]" />
-        
-        <div className="relative mx-auto max-w-[1400px] px-4 md:px-6 pt-10 md:pt-14 pb-8">
-          <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-8 lg:gap-6 items-start">
-            {/* LEFT: editorial */}
-            <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: [0.16,1,0.3,1] }} className="min-w-0">
-              <div className="inline-flex items-center gap-2 border border-[#facc15] bg-[#facc15] text-black mono text-[10px] tracking-[0.18em] px-3 py-1 font-black">
-                <span className="h-2 w-2 bg-black animate-pulse" /> THE WEDGE — PRE-BID, NOT POST-HOLD
-              </div>
-              <h1 className="mt-5 text-[42px] md:text-[64px] font-black leading-[0.85] tracking-[-0.04em]">
-                CAN WE<br/>
-                <span className="bg-[#facc15] text-black px-2 inline-block -rotate-[0.5deg]">LEGALLY BID</span><br/>
-                THIS JOB?
-              </h1>
-              <p className="mt-5 mono text-[13px] leading-relaxed text-zinc-400 max-w-[52ch] border-l-2 border-zinc-800 pl-4">
-                Gooner is an <span className="text-white font-bold">AI-native pre-bid compliance OS</span> for specialty contractors.
-                Drop address, value, trade, company profile — get deterministic <span className="text-white bg-zinc-800 px-1">ELIGIBLE / CONDITIONAL / INELIGIBLE</span> with blockers, reciprocity, lead time, checklist, citations. Built narrow: <span className="text-[#facc15] font-bold">Electrical + HVAC • NC SC VA</span> — LLM explains, <span className="underline decoration-[#facc15] underline-offset-4">engine decides</span>.
-              </p>
-              <div className="mt-6 flex flex-wrap gap-3">
-                <Link href="/check" className="mono text-[13px] tracking-[0.12em] font-black bg-[#facc15] text-black px-7 py-3 hover:bg-yellow-300 border border-[#facc15] shadow-[4px_4px_0px_0px_rgba(250,204,21,0.2)] hover:shadow-[6px_6px_0px_0px_rgba(250,204,21,0.25)] transition-all">RUN ELIGIBILITY CHECK →</Link>
-                <Link href="/companies" className="mono text-[13px] tracking-[0.12em] font-bold border border-zinc-700 text-zinc-300 px-7 py-3 hover:bg-zinc-900 hover:text-white">COMPANY PROFILE</Link>
-              </div>
+    <div className="bg-white">
+      {/* HERO - freebuff-like: centered, airy, big type, no dark grid */}
+      <section className="mx-auto max-w-[1200px] px-6 pt-14 pb-10 text-center">
+        <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1 mono text-xs tracking-wide text-zinc-600">
+          <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" /> Pre-bid, not post-hold • NC SC VA
+        </div>
+        <h1 className="mt-6 text-[44px] md:text-[64px] font-bold tracking-[-0.04em] leading-[0.9]">
+          Can we<br/>legally bid<br/><span className="bg-zinc-900 text-white px-3 rounded-xl">this job?</span>
+        </h1>
+        <p className="mt-5 text-[16px] leading-relaxed text-zinc-600 max-w-[56ch] mx-auto">
+          <span className="font-semibold text-zinc-900">Gooner</span> is the pre-bid compliance OS for specialty contractors.
+          Drop an address, value, trade, and company profile — get a deterministic <span className="font-semibold text-zinc-900">Eligible / Conditional / Ineligible</span> with blockers, reciprocity, lead time, checklist, and citations. LLM explains, <span className="underline decoration-zinc-300">engine decides</span>.
+        </p>
+        <div className="mt-7 flex justify-center gap-3">
+          <Link href="/check" className="rounded-full bg-zinc-900 text-white font-semibold px-7 py-3 hover:bg-black">Run eligibility check →</Link>
+          <Link href="/companies" className="rounded-full border border-zinc-200 bg-white font-medium px-7 py-3 hover:bg-zinc-50">Manage company profile</Link>
+        </div>
+        <div className="mt-3 mono text-xs text-zinc-500">No signup needed to try • Engine runs locally • AINSIDE streams explanations</div>
 
-              {/* stats - brutalist grid */}
-              <div className="mt-8 grid grid-cols-3 gap-0 border border-zinc-800 max-w-[560px] bg-black">
-                {[
-                  { k: "521K", v: "Specialty trade establishments", sub: "Census 2023" },
-                  { k: "22K+", v: "Regulatory filings", sub: "Harbor benchmark" },
-                  { k: "$499", v: "Multi-state tier", sub: "Wedge validates ROI" },
-                ].map(s=> (
-                  <div key={s.k} className="p-4 border-r last:border-r-0 border-zinc-800">
-                    <div className="text-[22px] font-black tracking-tighter leading-none">{s.k}</div>
-                    <div className="mono text-[10px] tracking-[0.08em] leading-tight text-zinc-400 mt-1">{s.v}</div>
-                    <div className="mono text-[9px] text-zinc-600 mt-1">{s.sub}</div>
-                  </div>
-                ))}
-              </div>
+        {/* trust stats like freebuff's $0 vs others */}
+        <div className="mt-10 grid grid-cols-3 gap-3 max-w-[720px] mx-auto">
+          {[
+            { k: "521k", v: "Specialty establishments", sub: "Census, employer" },
+            { k: "22k+", v: "Regulatory filings", sub: "Harbor benchmark" },
+            { k: "$499", v: "Multi-state tier", sub: "Wedge validates ROI" },
+          ].map(s=> (
+            <div key={s.k} className="rounded-2xl border border-zinc-200 bg-zinc-50 p-4 text-center">
+              <div className="text-2xl font-bold tracking-tight">{s.k}</div>
+              <div className="mono text-xs text-zinc-600">{s.v}</div>
+              <div className="mono text-[11px] text-zinc-400">{s.sub}</div>
+            </div>
+          ))}
+        </div>
+      </section>
 
-              <div className="mt-4 mono text-[10px] tracking-[0.14em] text-zinc-600 flex gap-4">
-                <span>521,315 employer establishments</span>
-                <span className="hidden sm:inline">•</span>
-                <span className="hidden sm:inline">Deterministic • No LLM decision</span>
-              </div>
-            </motion.div>
-
-            {/* RIGHT: live terminal - the working AI shit */}
-            <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1, ease: [0.16,1,0.3,1] }} className="border border-zinc-800 bg-black overflow-hidden">
-              {/* terminal chrome */}
-              <div className="flex items-center gap-2 px-4 py-3 border-b border-zinc-800 bg-zinc-900">
-                <div className="flex gap-1.5"><span className="h-2.5 w-2.5 bg-red-500" /><span className="h-2.5 w-2.5 bg-yellow-500" /><span className="h-2.5 w-2.5 bg-green-500" /></div>
-                <span className="mono text-[10px] tracking-[0.14em] text-zinc-500 ml-2">gooner --deterministic --live</span>
-                <span className="ml-auto mono text-[10px] bg-emerald-500 text-black px-2 py-0.5 font-bold animate-pulse">● LIVE ENGINE</span>
-              </div>
-
-              <div className="p-4 space-y-4">
+      {/* LIVE DEMO - the working AI shit, like freebuff's interactive calculator */}
+      <section className="mx-auto max-w-[1200px] px-6 pb-12">
+        <div className="rounded-[24px] border border-zinc-200 bg-zinc-50 p-3 md:p-4">
+          <div className="grid lg:grid-cols-[380px_1fr] gap-4">
+            <div className="rounded-2xl bg-white border border-zinc-200 p-5">
+              <div className="mono text-xs tracking-[0.14em] text-zinc-500">LIVE — DETERMINISTIC ENGINE</div>
+              <div className="mt-4 space-y-4">
                 <div>
-                  <div className="mono text-[10px] tracking-[0.14em] text-zinc-500">COMPANY</div>
-                  <select value={companyIdx} onChange={e=> setCompanyIdx(Number(e.target.value))} className="mt-1 w-full bg-zinc-900 border border-zinc-800 mono text-xs font-bold text-white px-3 py-2.5 focus:outline-none focus:border-zinc-600">
+                  <div className="mono text-xs font-semibold text-zinc-700">Company</div>
+                  <select value={companyIdx} onChange={e=> setCompanyIdx(Number(e.target.value))} className="mt-1 w-full rounded-xl border border-zinc-200 bg-white px-3 py-2.5 text-sm font-medium">
                     {MOCK_COMPANIES.map((c,i)=> <option key={c.id} value={i}>{c.legalName} — {c.licenses.map(l=> `${l.state}:${l.classification}`).join(", ")}</option>)}
                   </select>
                 </div>
                 <div>
-                  <div className="mono text-[10px] tracking-[0.14em] text-zinc-500">PROJECT</div>
-                  <select value={projectIdx} onChange={e=> setProjectIdx(Number(e.target.value))} className="mt-1 w-full bg-zinc-900 border border-zinc-800 mono text-xs font-bold text-white px-3 py-2.5 focus:outline-none focus:border-zinc-600">
-                    {MOCK_PROJECTS.map((p,i)=> <option key={p.id} value={i}>{p.state} • ${p.contractValue.toLocaleString()} • {p.trade} — {p.title.slice(0,42)}</option>)}
+                  <div className="mono text-xs font-semibold text-zinc-700">Project (job opportunity)</div>
+                  <select value={projectIdx} onChange={e=> setProjectIdx(Number(e.target.value))} className="mt-1 w-full rounded-xl border border-zinc-200 bg-white px-3 py-2.5 text-sm font-medium">
+                    {MOCK_PROJECTS.map((p,i)=> <option key={p.id} value={i}>{p.state} • ${p.contractValue.toLocaleString()} • {p.trade} — {p.title.slice(0,44)}</option>)}
                   </select>
                 </div>
-
                 <div className="grid grid-cols-2 gap-3">
-                  <div className="border border-zinc-800 bg-[#0a0a0b] p-3">
-                    <div className="mono text-[10px] tracking-[0.14em] text-zinc-500">CLASS NEEDED</div>
-                    <div className="mono text-xs font-black text-white mt-1 leading-tight">{classificationNeeded(project.state, project.trade, project.contractValue)}</div>
+                  <div className="rounded-xl bg-zinc-50 border border-zinc-200 p-3">
+                    <div className="mono text-[11px] text-zinc-500">Classification needed</div>
+                    <div className="text-sm font-semibold mt-1">{classificationNeeded(project.state, project.trade, project.contractValue)}</div>
                   </div>
-                  <div className="border border-zinc-800 bg-[#0a0a0b] p-3">
-                    <div className="mono text-[10px] tracking-[0.14em] text-zinc-500">JURISDICTION</div>
-                    <div className="mono text-xs font-black text-white mt-1">{project.city}, {project.state}</div>
-                    <div className="mono text-[10px] text-zinc-600">${project.contractValue.toLocaleString()} • {project.trade}</div>
+                  <div className="rounded-xl bg-zinc-50 border border-zinc-200 p-3">
+                    <div className="mono text-[11px] text-zinc-500">Jurisdiction</div>
+                    <div className="text-sm font-semibold mt-1">{project.city}, {project.state}</div>
+                    <div className="mono text-xs text-zinc-500">${project.contractValue.toLocaleString()} • {project.trade}</div>
                   </div>
                 </div>
-
-                <div className="border border-zinc-800 p-3 bg-zinc-950">
-                  <div className="flex items-center justify-between">
-                    <span className={`mono text-[11px] tracking-[0.12em] font-black px-2 py-1 border ${result.status==="eligible" ? "bg-emerald-500 text-black border-emerald-600" : result.status==="conditional" ? "bg-[#facc15] text-black border-yellow-600" : "bg-red-600 text-white border-red-700"}`}>{result.status.toUpperCase()}</span>
-                    <span className="mono text-[11px] font-bold border border-zinc-800 bg-black px-2 py-1">{result.estimatedReadiness.label}</span>
-                  </div>
-                  <div className="mono text-[11px] text-zinc-500 mt-2">Blockers: <span className="text-red-400 font-bold">{result.blockers.length}</span> • Warnings: {result.warnings.length} • Satisfied: {result.satisfied.length}</div>
-                  {result.blockers[0] && (
-                    <div className="mono text-xs text-zinc-300 mt-2 leading-relaxed border-l-2 border-[#facc15] pl-2">
-                      → {result.blockers[0].requirement.label}: <span className="text-zinc-500">{result.blockers[0].reason.slice(0,90)}</span>
-                    </div>
-                  )}
+                <div className="rounded-xl border border-zinc-200 p-3 flex items-center justify-between">
+                  <span className={`mono text-xs font-bold px-2.5 py-1 rounded-full ${result.status==="eligible" ? "bg-emerald-500 text-white" : result.status==="conditional" ? "bg-amber-400 text-zinc-900" : "bg-red-500 text-white"}`}>{result.status.toUpperCase()}</span>
+                  <span className="mono text-xs bg-zinc-900 text-white px-2.5 py-1 rounded-full">{result.estimatedReadiness.label}</span>
                 </div>
-
-                <Link href={`/check?projectId=${project.id}&companyId=${company.id}`} className="block text-center mono text-xs tracking-[0.14em] font-black bg-white text-black py-3 hover:bg-zinc-200 border border-white">OPEN FULL CHECK →</Link>
-
-                <div className="mono text-[10px] leading-relaxed text-zinc-500 border border-amber-900/50 bg-amber-950/20 p-2">
-                  Not another renewal tracker. Harbor wins <span className="text-amber-200">maintain what you have</span>. Gooner wins <span className="text-white">$800k Charlotte electrical — are we legal?</span>
+                <div className="mono text-xs text-zinc-500">Blockers <span className="text-red-600 font-bold">{result.blockers.length}</span> • Warnings {result.warnings.length} • Satisfied {result.satisfied.length}</div>
+                <Link href={`/check?projectId=${project.id}&companyId=${company.id}`} className="block text-center rounded-full bg-zinc-900 text-white text-sm font-semibold py-2.5 hover:bg-black">Open full check →</Link>
+                <div className="rounded-xl bg-amber-50 border border-amber-200 p-3 mono text-xs leading-relaxed text-amber-900">
+                  Not another renewal tracker. Harbor wins “maintain what you have.” Gooner wins the <span className="font-semibold">job-level go/no-go</span>.
                 </div>
               </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* MARQUEE - like freebuff's kinetic strip */}
-      <div className="border-y border-zinc-800 bg-[#facc15] overflow-hidden py-2">
-        <motion.div className="flex gap-8 mono text-xs font-black tracking-[0.18em] text-black whitespace-nowrap" animate={{ x: ["0%","-50%"] }} transition={{ duration: 18, repeat: Infinity, ease: "linear" }}>
-          {Array.from({length: 6}).map((_,i)=> (
-            <span key={i} className="flex gap-8 items-center"><span>NC • SC • VA</span><span>•</span><span>DETERMINISTIC ENGINE</span><span>•</span><span>AINSIDE ag/gemini-3.6-flash-high</span><span>•</span><span>PRE-BID OS</span><span>•</span></span>
-          ))}
-        </motion.div>
-      </div>
-
-      {/* KPI - bento brutalist */}
-      <section className="mx-auto max-w-[1400px] px-4 md:px-6 py-8 grid lg:grid-cols-[1.1fr_0.9fr] gap-6">
-        <div className="space-y-6">
-          <div className="grid grid-cols-3 gap-0 border border-zinc-800 bg-black">
-            {[
-              { label: "Checks 30d", value: "127", sub: "+18 vs last month", accent: "text-emerald-400" },
-              { label: "Blocked bids", value: "34", sub: "~$14M at risk", accent: "text-red-400" },
-              { label: "Avg readiness", value: "18d", sub: "NC/SC/VA median", accent: "text-[#facc15]" },
-            ].map(k=> (
-              <div key={k.label} className="p-5 border-r last:border-r-0 border-zinc-800">
-                <div className="mono text-[10px] tracking-[0.14em] text-zinc-500">{k.label.toUpperCase()}</div>
-                <div className={`text-[28px] font-black tracking-tighter leading-none mt-1 ${k.accent}`}>{k.value}</div>
-                <div className="mono text-[11px] text-zinc-500 mt-1">{k.sub}</div>
-              </div>
-            ))}
-          </div>
-          <EligibilityCard result={result} />
-        </div>
-
-        <div className="space-y-4">
-          <div className="border border-zinc-800 bg-zinc-900 p-5">
-            <h3 className="mono text-[11px] tracking-[0.16em] text-zinc-400">RESEARCH GATE — CONDITIONAL GREEN</h3>
-            <p className="mono text-xs leading-relaxed text-zinc-300 mt-3">Market green, timing green, tech green. Competition yellow — Harbor 40k clients, Copliancy $59/site. Biggest risk is data maintenance → <span className="text-white font-bold">start narrow 1 trade × 3 states</span>. Next: interview 10 multi-jurisdiction supers: <em className="text-zinc-400">Walk me through last time you considered a job where you had not worked before…</em></p>
-            <div className="mt-4 grid grid-cols-2 gap-2 mono text-[10px] font-bold tracking-wide">
-              <span className="border border-emerald-800 bg-emerald-950/40 text-emerald-300 px-2 py-1 text-center">MARKET: GREEN</span>
-              <span className="border border-emerald-800 bg-emerald-950/40 text-emerald-300 px-2 py-1 text-center">TIMING: GREEN</span>
-              <span className="border border-amber-800 bg-amber-950/30 text-amber-300 px-2 py-1 text-center">COMPETITION: YELLOW</span>
-              <span className="border border-red-900 bg-red-950/30 text-red-300 px-2 py-1 text-center">DATA: RED/YELLOW</span>
+            </div>
+            <div>
+              <EligibilityCard result={result} />
+              <div className="mt-3 mono text-xs text-zinc-500 text-center">AINSIDE streams the explanation below on <Link href="/check" className="underline hover:text-zinc-900">/check</Link> — try changing value/city/trade</div>
             </div>
           </div>
-
-          <div className="border border-zinc-800 bg-black p-5">
-            <h3 className="mono text-[11px] tracking-[0.16em]">5-THING MVP — SHIPPED IN THIS REPO</h3>
-            <ol className="mt-4 space-y-3">
-              {[
-                "Company compliance profile — licenses, qualifiers, insurance, foreign qual",
-                "Project intake — address, value, trade, scope, public/private, role",
-                "Deterministic rules engine — jurisdiction × trade × value → eligible",
-                "AI research with citations to official sources — AINSIDE streaming",
-                "Gap checklist + calendar — deadlines, renewals, lead times",
-              ].map((t,i)=> <li key={i} className="flex gap-3"><span className="h-6 w-6 shrink-0 bg-[#facc15] text-black flex items-center justify-center mono text-xs font-black">{i+1}</span><span className="mono text-xs text-zinc-300 leading-tight pt-1">{t}</span></li>)}
-            </ol>
-          </div>
-
-          <div className="border border-[#facc15] bg-[#facc15] p-5">
-            <h3 className="mono text-[11px] tracking-[0.16em] text-black">WHY THIS BEATS GENERIC COMPLIANCE</h3>
-            <p className="mono text-xs leading-relaxed text-black mt-2">ROI is not saved office hours. It is <span className="font-black">prevented a bid you could not legally perform</span> or <span className="font-black">flagged a $500k job early enough to get licensed</span>. Embedded in <span className="bg-black text-[#facc15] px-1">opportunity → check → go/no-go → licensing → bid</span>, switching costs compound.</p>
-          </div>
         </div>
       </section>
 
-      {/* PRICING - bento */}
-      <section className="mx-auto max-w-[1400px] px-4 md:px-6 pb-8">
-        <div className="border border-zinc-800 bg-black p-5 md:p-6">
-          <div className="flex items-center gap-3">
-            <h2 className="text-[18px] font-black tracking-[-0.02em]">PRICING — START NARROW, EXPAND LATER</h2>
-            <span className="mono text-[10px] border border-zinc-800 px-2 py-1 text-zinc-500">HUNDREDS/MO — NOT $10 CONSUMER</span>
-          </div>
-          <div className="mt-5 grid md:grid-cols-3 gap-0 border border-zinc-800">
+      {/* how it works + gate - like freebuff's sections */}
+      <section className="mx-auto max-w-[1200px] px-6 pb-12 grid lg:grid-cols-[1.2fr_0.8fr] gap-8">
+        <div>
+          <h2 className="text-2xl font-bold tracking-tight">The wedge is the bid, not the license</h2>
+          <p className="mt-3 text-sm leading-relaxed text-zinc-600 max-w-[62ch]">
+            Existing tools answer “how do I maintain licenses I already have?” Gooner answers <span className="font-semibold text-zinc-900">“We just got this $800k Charlotte electrical job — are we legal to bid, and what’s missing?”</span> That decision happens before any tracker. Embed there, and switching costs compound: company credentials, jurisdiction history, qualifiers, prior checks.
+          </p>
+          <div className="mt-6 grid md:grid-cols-3 gap-3">
             {[
-              { tier: "SOLO", price: "$49-79", detail: "1 state / limited projects", features: ["NC or SC or VA", "10 checks/mo", "Checklist + calendar"] },
-              { tier: "GROWTH", price: "$199-299", detail: "multi-state, unlimited checks", features: ["NC + SC + VA", "Unlimited checks", "Renewal mgmt", "Reciprocity"], highlight: true },
-              { tier: "MULTI-STATE", price: "$499+", detail: "multiple entities, team", features: ["Unlimited entities", "Qualifiers + team", "History + workflows", "New-jurisdiction reports"] },
-            ].map(p=> (
-              <div key={p.tier} className={`p-5 border-r last:border-r-0 border-zinc-800 ${p.highlight ? "bg-zinc-900" : "bg-black"}`}>
-                <div className="mono text-[11px] tracking-[0.16em] text-zinc-500">{p.tier}</div>
-                <div className="text-[26px] font-black tracking-tighter mt-1">{p.price}<span className="text-sm font-bold text-zinc-500">/mo</span></div>
-                <div className="mono text-xs text-zinc-400 mt-1">{p.detail}</div>
-                <div className="mt-4 space-y-1.5 mono text-xs text-zinc-300">
-                  {p.features.map(f=> <div key={f} className="flex gap-2"><span className="text-[#facc15]">›</span>{f}</div>)}
-                </div>
-                {p.highlight && <div className="mt-4 mono text-[10px] bg-[#facc15] text-black text-center py-1 font-black">MOST TEAMS START HERE</div>}
+              { n: "01", t: "Drop job", d: "Address, value, trade, scope, public/private, role" },
+              { n: "02", t: "Engine decides", d: "Jurisdiction × trade × value × credentials → eligible" },
+              { n: "03", t: "AINSIDE explains", d: "Streams blockers, reciprocity, citations to the board" },
+            ].map(s=> (
+              <div key={s.n} className="rounded-2xl border border-zinc-200 p-4">
+                <div className="mono text-xs font-bold text-zinc-400">{s.n}</div>
+                <div className="text-sm font-semibold mt-1">{s.t}</div>
+                <div className="mono text-xs text-zinc-500 mt-1">{s.d}</div>
               </div>
             ))}
           </div>
         </div>
+        <div className="space-y-4">
+          <div className="rounded-2xl border border-zinc-200 p-5">
+            <h3 className="text-sm font-bold">Research gate — conditional green</h3>
+            <p className="mono text-xs leading-relaxed text-zinc-600 mt-2">Market green, timing green, tech green. Competition yellow — Harbor 40k clients, Copliancy $59/site. Biggest risk is data maintenance → start narrow 1 trade × 3 states.</p>
+            <div className="mt-3 grid grid-cols-2 gap-2 mono text-xs font-medium">
+              <span className="rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 px-2 py-1 text-center">Market: Green</span>
+              <span className="rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 px-2 py-1 text-center">Timing: Green</span>
+              <span className="rounded-full bg-amber-50 border border-amber-200 text-amber-800 px-2 py-1 text-center">Competition: Yellow</span>
+              <span className="rounded-full bg-red-50 border border-red-200 text-red-800 px-2 py-1 text-center">Data: Red/Yellow</span>
+            </div>
+          </div>
+          <div className="rounded-2xl bg-zinc-900 text-white p-5">
+            <h3 className="text-sm font-semibold text-amber-300">5-thing MVP — shipped</h3>
+            <ol className="mt-3 space-y-1.5 mono text-xs text-zinc-300">
+              <li>01 — Company profile (licenses, qualifiers, insurance)</li>
+              <li>02 — Project intake (address, value, trade, scope)</li>
+              <li>03 — Deterministic engine (no LLM decision)</li>
+              <li>04 — AI research with citations (AINSIDE streaming)</li>
+              <li>05 — Gap checklist + calendar</li>
+            </ol>
+          </div>
+        </div>
       </section>
 
-      {/* SOURCES */}
-      <section className="border-t border-zinc-800 bg-black">
-        <div className="mx-auto max-w-[1400px] px-4 md:px-6 py-4 flex flex-wrap gap-2 mono text-[10px] tracking-wide text-zinc-500">
-          <span className="text-zinc-300">SOURCES:</span>
-          <a href="https://www.ncbeec.org/licensing/" target="_blank" className="underline hover:text-white">NCBEEC</a>
-          <span>•</span>
-          <a href="https://www.nclicensing.org/" target="_blank" className="underline hover:text-white">NC PH&FS</a>
-          <span>•</span>
-          <a href="https://llr.sc.gov/" target="_blank" className="underline hover:text-white">SC LLR</a>
-          <span>•</span>
-          <a href="https://www.dpor.virginia.gov/" target="_blank" className="underline hover:text-white">VA DPOR</a>
-          <span className="ml-auto hidden md:inline">JURISDICTION × TRADE × VALUE × CREDENTIALS → ELIGIBILITY</span>
+      {/* pricing like freebuff's comparison */}
+      <section className="mx-auto max-w-[1200px] px-6 pb-12">
+        <div className="rounded-[24px] border border-zinc-200 p-6 md:p-8 bg-white">
+          <h2 className="text-xl font-bold tracking-tight text-center">Pricing — start narrow, expand later</h2>
+          <p className="mono text-xs text-zinc-500 text-center mt-1">Hundreds/mo — not $10 consumer. Validates wedge ROI.</p>
+          <div className="mt-6 grid md:grid-cols-3 gap-4 max-w-[900px] mx-auto">
+            {[
+              { tier: "Solo", price: "$49–79", detail: "1 state • limited projects", features: ["NC or SC or VA", "10 checks/mo", "Checklist + calendar"], cta: "Start solo" },
+              { tier: "Growth", price: "$199–299", detail: "multi-state • unlimited", features: ["NC + SC + VA", "Unlimited checks", "Renewal + reciprocity"], highlight: true, cta: "Most teams" },
+              { tier: "Multi-state", price: "$499+", detail: "multiple entities", features: ["Unlimited entities", "Team + qualifiers", "New-jurisdiction reports"], cta: "Contact" },
+            ].map(p=> (
+              <div key={p.tier} className={`rounded-2xl border p-5 flex flex-col ${p.highlight ? "bg-zinc-900 text-white border-zinc-900" : "bg-zinc-50 border-zinc-200"}`}>
+                <div className="mono text-xs tracking-[0.14em] opacity-60">{p.tier.toUpperCase()}</div>
+                <div className="text-2xl font-bold mt-1">{p.price}<span className="text-sm font-medium opacity-60">/mo</span></div>
+                <div className="mono text-xs mt-1 opacity-60">{p.detail}</div>
+                <div className="mt-4 space-y-1.5 flex-1">
+                  {p.features.map(f=> <div key={f} className="flex gap-2 mono text-xs"><span className={p.highlight ? "text-zinc-400" : "text-zinc-500"}>•</span>{f}</div>)}
+                </div>
+                <div className={`mt-5 text-center rounded-full px-4 py-2 mono text-xs font-semibold ${p.highlight ? "bg-white text-zinc-900" : "bg-zinc-900 text-white"}`}>{p.cta}</div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     </div>

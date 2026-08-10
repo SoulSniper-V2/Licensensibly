@@ -7,7 +7,7 @@ import { MOCK_COMPANIES, MOCK_PROJECTS } from "@/lib/mock-data";
 type Filter = "all" | "bid-deadline" | "renewal" | "application";
 
 function typeBadge(t: string) {
-  if (t === "bid-deadline") return { label: "BID DEADLINE", cls: "bg-amber-400 text-white border-amber-400" };
+  if (t === "bid-deadline") return { label: "BID DEADLINE", cls: "bg-amber-400 text-zinc-900 border-amber-400" };
   if (t === "renewal") return { label: "RENEWAL", cls: "bg-red-50 text-red-700 border-red-200" };
   return { label: "APPLICATION", cls: "bg-sky-50 text-sky-700 border-sky-200" };
 }
@@ -39,24 +39,24 @@ export default function CalendarPage() {
   const upcoming = filtered.slice(0, 6);
 
   return (
-    <div className="mx-auto max-w-[1400px] px-4 md:px-6 py-8 space-y-6">
+    <div className="mx-auto max-w-[1200px] px-6 py-8 space-y-6">
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
           <h1 className="text-[20px] font-black tracking-[-0.02em]">Compliance Calendar</h1>
-          <p className="text-sm text-zinc-400 mt-1 max-w-[70ch]">
+          <p className="text-sm text-zinc-600 mt-1 max-w-[70ch]">
             MVP #5 — Deterministic deadlines derived from license renewals, GL insurance expiry, bid dates, and checklist
             lead times. Events are sorted chronologically; <span className="font-semibold">bid-deadline = amber</span>,{" "}
             <span className="font-semibold">renewal = red (&lt;60d amber)</span>, application = sky. Grouped by month via{" "}
             <span className="font-mono text-xs">eventsByMonth()</span>.
           </p>
         </div>
-        <Link href="/check" className="border bg-amber-400 hover:bg-amber-300 text-white font-bold px-5 py-2.5 text-sm">
+        <Link href="/check" className="border bg-amber-400 hover:bg-amber-300 text-zinc-900 font-bold px-5 py-2.5 text-sm">
           Run Eligibility Check →
         </Link>
       </div>
 
       {/* Filters + quick stats */}
-      <div className="border bg-zinc-900 border border-zinc-800 p-4 flex flex-wrap items-center gap-3">
+      <div className="border bg-white border border-zinc-200 p-4 flex flex-wrap items-center gap-3">
         <div className="text-xs font-black tracking-wide text-zinc-500">FILTER</div>
         {(
           [
@@ -69,7 +69,7 @@ export default function CalendarPage() {
           <button
             key={v}
             onClick={() => setFilter(v)}
-            className={`border border px-3 py-1.5 text-xs font-bold ${filter === v ? "bg-white text-black border-slate-900" : "bg-white text-zinc-300 border-slate-200 hover:bg-black"}`}
+            className={`border border px-3 py-1.5 text-xs font-bold ${filter === v ? "bg-white text-black border-slate-900" : "bg-white text-zinc-700 border-slate-200 hover:bg-black"}`}
           >
             {l} <span className="opacity-60">({v === "all" ? all.length : all.filter((e) => e.type === v).length})</span>
           </button>
@@ -96,7 +96,7 @@ export default function CalendarPage() {
               const b = typeBadge(e.type);
               const d = daysUntil(e.date);
               return (
-                <div key={e.id} className="border bg-white text-white p-3 border border-white/10">
+                <div key={e.id} className="border bg-white text-zinc-900 p-3 border border-white/10">
                   <div className="flex items-center gap-2">
                     <span className={`border border px-2 py-0.5 text-[10px] font-black tracking-wide ${b.cls}`}>{b.label}</span>
                     <span className={`text-xs font-bold ${d < 0 ? "text-red-600" : d < 14 ? "text-amber-600" : "text-zinc-500"}`}>{d < 0 ? `${Math.abs(d)}d overdue` : d === 0 ? "today" : `${d}d`}</span>
@@ -115,7 +115,7 @@ export default function CalendarPage() {
       {/* Grouped by month */}
       {months.length === 0 ? (
         <div className="border bg-white border border-dashed border-slate-300 p-10 text-center">
-          <div className="text-sm font-bold text-zinc-300">No events match the current filter.</div>
+          <div className="text-sm font-bold text-zinc-700">No events match the current filter.</div>
           <p className="text-xs text-zinc-500 mt-1">Try “All” or add a bid date to a project in <Link href="/projects" className="underline font-semibold">/projects</Link> or a license expiry in <Link href="/companies" className="underline font-semibold">/companies</Link>.</p>
         </div>
       ) : (
@@ -138,25 +138,25 @@ export default function CalendarPage() {
                     const urgency = d < 0 ? "OVERDUE" : d < 7 ? "THIS WEEK" : d < 30 ? "THIS MONTH" : "";
                     return (
                       <div key={e.id} className={`border border p-4 flex gap-3 ${colorFor(e)}`}>
-                        <div className="flex-shrink-0 h-12 w-12 border bg-zinc-900 border border-zinc-800 flex flex-col items-center justify-center">
+                        <div className="flex-shrink-0 h-12 w-12 border bg-white border border-zinc-200 flex flex-col items-center justify-center">
                           <div className="text-[10px] font-black tracking-wide text-zinc-500">{new Date(e.date).toLocaleDateString("en-US", { month: "short" }).toUpperCase()}</div>
                           <div className="text-lg font-black leading-none">{new Date(e.date).getDate()}</div>
                         </div>
                         <div className="min-w-0 flex-1">
                           <div className="flex flex-wrap items-center gap-2">
                             <span className={`border border px-2 py-0.5 text-[10px] font-black tracking-wide ${b.cls}`}>{b.label}</span>
-                            {urgency && <span className={`border px-2 py-0.5 text-[10px] font-black ${d < 0 ? "bg-red-600 text-white" : "bg-amber-400 text-white"}`}>{urgency}</span>}
+                            {urgency && <span className={`border px-2 py-0.5 text-[10px] font-black ${d < 0 ? "bg-red-600 text-zinc-900" : "bg-amber-400 text-zinc-900"}`}>{urgency}</span>}
                             <span className="text-xs text-zinc-500 font-mono ml-auto">{e.date}</span>
                           </div>
                           <div className="text-sm font-semibold leading-snug mt-1">{e.title}</div>
                           <div className="mt-2 flex gap-2">
                             {e.projectId && (
-                              <Link href={`/check?projectId=${e.projectId}`} className="text-xs font-bold underline text-zinc-300">
+                              <Link href={`/check?projectId=${e.projectId}`} className="text-xs font-bold underline text-zinc-700">
                                 Open check →
                               </Link>
                             )}
                             {e.licenseId && (
-                              <Link href="/companies" className="text-xs font-bold underline text-zinc-300">
+                              <Link href="/companies" className="text-xs font-bold underline text-zinc-700">
                                 Manage license →
                               </Link>
                             )}
@@ -173,19 +173,19 @@ export default function CalendarPage() {
         </div>
       )}
 
-      <div className="border bg-zinc-900 border border-zinc-800 p-5">
+      <div className="border bg-white border border-zinc-200 p-5">
         <h3 className="text-sm font-black">How this calendar is built</h3>
-        <p className="text-xs text-zinc-400 mt-1 leading-relaxed">
-          <span className="font-mono text-[11px] bg-zinc-800 border border-zinc-800 rounded px-1.5 py-0.5">buildCalendarEvents()</span> collects (a) every{" "}
+        <p className="text-xs text-zinc-600 mt-1 leading-relaxed">
+          <span className="font-mono text-[11px] bg-zinc-800 border border-zinc-200 rounded px-1.5 py-0.5">buildCalendarEvents()</span> collects (a) every{" "}
           <span className="font-semibold">license expiry</span> and <span className="font-semibold">GL insurance expiry</span> for all companies, (b) every project{" "}
           <span className="font-semibold">bidDate</span>, and (c) checklist <span className="font-semibold">dueDates</span> derived from the deterministic engine&apos;s lead-time estimates (e.g., foreign qualification 5–14 days before bid). All events are sorted chronologically;{" "}
-          <span className="font-mono text-[11px] bg-zinc-800 border border-zinc-800 rounded px-1.5 py-0.5">eventsByMonth()</span> groups by <span className="font-mono">YYYY-MM</span>. Renewals &lt;60 days get an amber warning in eligibility results too.
+          <span className="font-mono text-[11px] bg-zinc-800 border border-zinc-200 rounded px-1.5 py-0.5">eventsByMonth()</span> groups by <span className="font-mono">YYYY-MM</span>. Renewals &lt;60 days get an amber warning in eligibility results too.
         </p>
         <div className="mt-3 flex flex-wrap gap-2 text-xs">
           <Link href="/projects" className="border bg-white text-black px-4 py-2 font-bold">
             Browse projects
           </Link>
-          <Link href="/companies" className="border bg-zinc-900 border border-zinc-800 px-4 py-2 font-bold">
+          <Link href="/companies" className="border bg-white border border-zinc-200 px-4 py-2 font-bold">
             Manage companies
           </Link>
           <span className="text-zinc-500 self-center ml-2">Seed: {MOCK_COMPANIES.length} companies · {MOCK_PROJECTS.length} projects · {all.length} events</span>
