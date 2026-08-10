@@ -9,7 +9,7 @@ type Filter = "all" | "bid-deadline" | "renewal" | "application";
 function typeBadge(t: string) {
   if (t === "bid-deadline") return { label: "BID DEADLINE", cls: "bg-amber-400 text-zinc-900 dark:text-zinc-100 border-amber-400" };
   if (t === "renewal") return { label: "RENEWAL", cls: "bg-red-50 text-red-700 border-red-200" };
-  return { label: "APPLICATION", cls: "bg-sky-50 text-sky-700 border-sky-200" };
+  return { label: "APPLICATION", cls: "bg-white dark:bg-zinc-900 text-sky-700 border-zinc-200 dark:border-zinc-800" };
 }
 
 function daysUntil(iso: string) {
@@ -18,13 +18,13 @@ function daysUntil(iso: string) {
 
 function colorFor(e: { type: string; date: string }) {
   const d = daysUntil(e.date);
-  if (e.type === "bid-deadline") return d < 14 ? "border-amber-300 bg-amber-50" : "border-slate-200 bg-white dark:bg-zinc-900";
+  if (e.type === "bid-deadline") return d < 14 ? "border-amber-300 bg-white dark:bg-zinc-900" : "border-slate-200 bg-white dark:bg-zinc-900";
   if (e.type === "renewal") {
     if (d < 0) return "border-red-300 bg-red-50";
-    if (d < 60) return "border-amber-300 bg-amber-50";
+    if (d < 60) return "border-amber-300 bg-white dark:bg-zinc-900";
     return "border-slate-200 bg-white dark:bg-zinc-900";
   }
-  return "border-sky-200 bg-sky-50/50";
+  return "border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/50";
 }
 
 export default function CalendarPage() {

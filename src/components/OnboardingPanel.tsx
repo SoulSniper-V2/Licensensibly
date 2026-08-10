@@ -58,7 +58,7 @@ export default function OnboardingPanel() {
         <div className="px-6 md:px-8 py-6 flex flex-wrap gap-4 items-start justify-between border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50/50">
           <div className="max-w-[62ch]">
             <div className="inline-flex items-center gap-2 mono text-[11px] tracking-[0.14em] text-zinc-500 dark:text-zinc-400">
-              <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" /> ONBOARDING — START HERE
+              <span className="h-2 w-2 rounded-full bg-white dark:bg-zinc-9000 animate-pulse" /> ONBOARDING — START HERE
               <span className="hidden sm:inline">• auto-updates when new features ship</span>
             </div>
             <h2 className="mt-2 text-xl md:text-2xl font-bold tracking-tight">Every step to use Gooner</h2>

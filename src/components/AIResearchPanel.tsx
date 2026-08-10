@@ -65,7 +65,7 @@ export default function AIResearchPanel({ result, city, state, trade, value }: {
   return (
     <div className="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 overflow-hidden">
       <div className="flex items-center gap-2 px-5 py-3 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50">
-        <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+        <span className="h-2 w-2 rounded-full bg-white dark:bg-zinc-9000 animate-pulse" />
         <h3 className="mono text-xs tracking-[0.14em] font-semibold">AINSIDE — REGULATORY RESEARCH</h3>
         <span className="mono text-[11px] border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 rounded-full px-2 py-0.5 text-zinc-500 dark:text-zinc-400">ag/gemini-3.6-flash-high</span>
         {loading && <span className="ml-auto mono text-xs text-zinc-500 dark:text-zinc-400 animate-pulse">Researching…</span>}
@@ -76,7 +76,7 @@ export default function AIResearchPanel({ result, city, state, trade, value }: {
         {loading && !text && <div className="mono text-sm text-zinc-500 dark:text-zinc-400">Asking AINSIDE… <span className="inline-block w-2 h-2 bg-zinc-300 rounded-full animate-bounce" /></div>}
         {error && (
           <div className="space-y-3">
-            <div className="mono text-sm font-medium text-amber-800 bg-amber-50 border border-amber-200 rounded-xl p-3">AINSIDE unreachable — showing deterministic fallback.</div>
+            <div className="mono text-sm font-medium text-amber-800 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-3">AINSIDE unreachable — showing deterministic fallback.</div>
             <div className="mono text-xs text-zinc-500 dark:text-zinc-400 break-all">{error}</div>
             <div className="rounded-xl bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 p-4 text-sm leading-relaxed text-zinc-700">
               For a <span className="font-semibold">${value.toLocaleString()} {trade}</span> job in <span className="font-semibold">{city}, {state}</span>, engine determined <span className="font-semibold uppercase">{result.status}</span>. Primary blocker: <span className="font-semibold">{result.blockers[0]?.requirement.label || "none — ready to bid"}</span>.

@@ -12,7 +12,7 @@ export default function EligibilityCard({ result }: { result: EligibilityResult 
       <div className={`px-6 py-5 flex flex-wrap gap-4 items-center justify-between ${isEligible ? "bg-emerald-50" : isConditional ? "bg-amber-50" : "bg-red-50"}`}>
         <div>
           <div className="mono text-[11px] tracking-[0.14em] text-zinc-500 dark:text-zinc-400">BID ELIGIBILITY • DETERMINISTIC ENGINE</div>
-          <div className={`text-xl font-bold tracking-tight mt-1 ${isEligible ? "text-emerald-700" : isConditional ? "text-amber-700" : "text-red-700"}`}>{statusLabel}</div>
+          <div className={`text-xl font-bold tracking-tight mt-1 ${isEligible ? "text-emerald-700" : isConditional ? "text-zinc-700 dark:text-zinc-300" : "text-red-700"}`}>{statusLabel}</div>
           <div className="text-sm text-zinc-600 dark:text-zinc-400 mt-1">{result.company.legalName} → {result.project.title}</div>
         </div>
         <div className="text-right">
@@ -25,14 +25,14 @@ export default function EligibilityCard({ result }: { result: EligibilityResult 
         <div className="p-6 space-y-4 bg-white dark:bg-zinc-900 border-t lg:border-t-0 lg:border-r border-zinc-200 dark:border-zinc-800">
           <h3 className="mono text-xs tracking-[0.14em] text-zinc-500 dark:text-zinc-400">BLOCKERS BEFORE BID <span className="ml-2 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-zinc-900 text-white text-xs px-1.5">{result.blockers.length}</span></h3>
           {result.blockers.length === 0 ? (
-            <div className="rounded-xl bg-emerald-50 border border-emerald-200 p-4 text-sm text-emerald-800">No blockers — appears eligible. Verify local AHJ before submission.</div>
+            <div className="rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-4 text-sm text-zinc-900 dark:text-zinc-100">No blockers — appears eligible. Verify local AHJ before submission.</div>
           ) : result.blockers.map(b => (
-            <div key={b.requirement.id} className="rounded-xl border border-zinc-200 dark:border-zinc-800 p-4 bg-zinc-50">
+            <div key={b.requirement.id} className="rounded-xl border border-zinc-200 dark:border-zinc-800 p-4 bg-white dark:bg-zinc-900">
               <div className="flex items-start justify-between gap-3">
                 <div className="text-sm font-semibold">{b.requirement.label}</div>
                 <a href={b.requirement.sourceUrl} target="_blank" className="mono text-[11px] text-zinc-500 dark:text-zinc-400 underline shrink-0">SOURCE ↗</a>
               </div>
-              <div className="text-xs text-amber-700 mt-1 font-medium">{b.reason}</div>
+              <div className="text-xs text-zinc-700 dark:text-zinc-300 mt-1 font-medium">{b.reason}</div>
               <div className="text-sm text-zinc-700 mt-2 leading-relaxed">{b.remediation}</div>
               <div className="mt-3 flex flex-wrap gap-2 mono text-xs">
                 <span className="rounded-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 px-2.5 py-1">{b.estimatedDays} days</span>
@@ -42,19 +42,19 @@ export default function EligibilityCard({ result }: { result: EligibilityResult 
             </div>
           ))}
           {result.reciprocityOpportunities.length>0 && (
-            <div className="rounded-xl bg-sky-50 border border-sky-200 p-4">
-              <div className="text-sm font-semibold text-sky-900">Reciprocity pathway</div>
+            <div className="rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-4">
+              <div className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">Reciprocity pathway</div>
               {result.reciprocityOpportunities.map((r,i)=> <div key={i} className="text-sm text-zinc-700 mt-1">Use <span className="font-semibold">{r.canUse.state} {r.canUse.classification} ({r.canUse.licenseNumber})</span> to endorse into {r.requirement.label}. <span className="mono text-xs text-zinc-500 dark:text-zinc-400">{r.note}</span></div>)}
             </div>
           )}
           {result.warnings.length>0 && (
             <div className="space-y-2">
               <div className="mono text-xs tracking-[0.14em] text-amber-600">WARNINGS</div>
-              {result.warnings.map(w=> <div key={w.requirement.id} className="rounded-xl border border-amber-200 bg-amber-50 p-3 mono text-xs text-amber-800">{w.requirement.label}: {w.reason}</div>)}
+              {result.warnings.map(w=> <div key={w.requirement.id} className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-3 mono text-xs text-zinc-700 dark:text-zinc-300">{w.requirement.label}: {w.reason}</div>)}
             </div>
           )}
         </div>
-        <div className="p-6 space-y-6 bg-zinc-50 border-t lg:border-t-0 border-zinc-200 dark:border-zinc-800">
+        <div className="p-6 space-y-6 bg-white dark:bg-zinc-900 border-t lg:border-t-0 border-zinc-200 dark:border-zinc-800">
           <div>
             <h4 className="mono text-xs tracking-[0.14em] text-zinc-500 dark:text-zinc-400">CHECKLIST</h4>
             <div className="mt-3 space-y-2">
@@ -86,7 +86,7 @@ export default function EligibilityCard({ result }: { result: EligibilityResult 
                 </a>
               ))}
             </div>
-            <div className="mt-3 rounded-xl bg-amber-50 border border-amber-200 p-3 mono text-xs leading-relaxed text-amber-800">
+            <div className="mt-3 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-3 mono text-xs leading-relaxed text-zinc-700 dark:text-zinc-300">
               Not legal advice. Conservative heuristics from primary sources. Confirm with issuing board before bidding.
             </div>
           </div>

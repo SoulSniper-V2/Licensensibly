@@ -79,7 +79,7 @@ export default function CompaniesPage() {
               <div className={`text-[11px] mt-2 ${selectedId===c.id ? "text-slate-400" : "text-slate-400"}`}>{c.licenses.length} licenses • QI: {c.qualifiers.map(q=> q.name).join(", ") || "—"}</div>
             </button>
           ))}
-          <div className="border bg-amber-50 border border-amber-200 p-4 text-xs leading-relaxed text-amber-900">
+          <div className="border bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-4 text-xs leading-relaxed text-amber-900">
             <span className="font-bold">Data moat hint:</span> This profile + the regulatory DB is the proprietary mapping. Harbor has 22k requirements; your edge is wiring them to <em>this company’s live credentials</em> for a job-level answer.
           </div>
         </div>
@@ -105,7 +105,7 @@ export default function CompaniesPage() {
                     const daysLeft = Math.ceil((exp.getTime() - Date.now())/86400000);
                     const nearExpiry = daysLeft < 60;
                     return (
-                      <div key={l.id} className={`border border p-4 ${nearExpiry ? "bg-amber-50 border-amber-200" : "bg-black border-slate-200"}`}>
+                      <div key={l.id} className={`border border p-4 ${nearExpiry ? "bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800" : "bg-black border-slate-200"}`}>
                         <div className="text-xs font-bold tracking-wide text-zinc-500 dark:text-zinc-400">{l.state} • {l.trade.toUpperCase()} • {l.status.toUpperCase()}</div>
                         <div className="text-sm font-black">{l.classification}</div>
                         <div className="text-xs font-mono mt-1">{l.licenseNumber}</div>

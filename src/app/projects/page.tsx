@@ -19,8 +19,8 @@ export default function ProjectsPage() {
 
   function badgeFor(p: typeof MOCK_PROJECTS[number]) {
     const res = evaluateEligibility(company, p);
-    if(res.status==="eligible") return {label:"ELIGIBLE", cls:"bg-emerald-50 border-emerald-200 text-emerald-700"};
-    if(res.status==="conditional") return {label:"CONDITIONAL", cls:"bg-amber-50 border-amber-300 text-amber-700"};
+    if(res.status==="eligible") return {label:"ELIGIBLE", cls:"bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 text-emerald-700"};
+    if(res.status==="conditional") return {label:"CONDITIONAL", cls:"bg-white dark:bg-zinc-900 border-amber-300 text-amber-700"};
     return {label:"NOT ELIGIBLE", cls:"bg-red-50 border-red-300 text-red-700"};
   }
 

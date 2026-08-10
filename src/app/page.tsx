@@ -20,7 +20,7 @@ export default function Dashboard() {
         <div className="grid lg:grid-cols-[1.15fr_0.85fr] gap-10 items-start">
           <div>
             <div className="inline-flex items-center gap-2 rounded-full border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-3 py-1 mono text-[11px] tracking-[0.14em] text-zinc-600 dark:text-zinc-400">
-              <span className="h-2 w-2 rounded-full bg-emerald-500" /> FOR CONTRACTORS • NC SC VA
+              <span className="h-2 w-2 rounded-full bg-white dark:bg-zinc-9000" /> FOR CONTRACTORS • NC SC VA
             </div>
             <h1 className="mt-5 text-[46px] md:text-[68px] font-[800] tracking-[-0.05em] leading-[0.88]">
               <span className="block text-zinc-900 dark:text-zinc-100">Can we</span>
@@ -56,7 +56,7 @@ export default function Dashboard() {
             <div className="rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 overflow-hidden">
               <div className="px-5 py-3 flex items-center justify-between bg-zinc-900 text-white">
                 <span className="mono text-[11px] tracking-[0.14em]">CHECK A JOB</span>
-                <span className={`mono text-xs font-bold px-2.5 py-1 rounded-full ${result.status==='eligible'?'bg-emerald-500':result.status==='conditional'?'bg-amber-500':'bg-red-500'}`}>{result.status.toUpperCase()}</span>
+                <span className={`mono text-xs font-bold px-2.5 py-1 rounded-full ${result.status==='eligible'?'bg-white dark:bg-zinc-9000':result.status==='conditional'?'bg-white dark:bg-zinc-9000':'bg-red-500'}`}>{result.status.toUpperCase()}</span>
               </div>
               <div className="p-5 space-y-4">
                 <div className="grid grid-cols-2 gap-3">
@@ -75,7 +75,7 @@ export default function Dashboard() {
                   <div className="font-semibold text-zinc-900 dark:text-zinc-100">{project.title}</div>
                   <div className="text-zinc-500 dark:text-zinc-400">{project.city}, {project.state} • {project.trade} • ${project.contractValue.toLocaleString()}</div>
                   <div className="mt-2 flex flex-wrap gap-1.5">
-                    <span className={`rounded-full px-2.5 py-1 text-xs font-medium border ${result.status==='eligible'?'bg-emerald-50 border-emerald-200 text-emerald-700':result.status==='conditional'?'bg-amber-50 border-amber-200 text-amber-700':'bg-red-50 border-red-200 text-red-700'}`}>{result.status}</span>
+                    <span className={`rounded-full px-2.5 py-1 text-xs font-medium border ${result.status==='eligible'?'bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 text-emerald-700':result.status==='conditional'?'bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-800 text-amber-700':'bg-red-50 border-red-200 text-red-700'}`}>{result.status}</span>
                     <span className="rounded-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 px-2.5 py-1 text-xs">{result.blockers.length} blockers</span>
                     <span className="rounded-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 px-2.5 py-1 text-xs">{result.estimatedReadiness.label}</span>
                   </div>
