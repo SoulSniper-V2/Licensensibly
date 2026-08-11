@@ -1,5 +1,6 @@
 "use client";
 import { useState, useRef } from "react";
+import { X, PaperPlaneRight, Sparkle } from "@phosphor-icons/react";
 type Msg = { role: "user" | "assistant"; content: string };
 export default function AIAssistant() {
   const [open, setOpen] = useState(false);
@@ -20,20 +21,26 @@ export default function AIAssistant() {
   }
   return (
     <>
-      <button onClick={()=>setOpen(v=>!v)} className="fixed bottom-4 right-4 z-50 bg-zinc-900 text-white px-5 py-3 rounded-full text-sm font-semibold shadow-lg hover:bg-zinc-900">{open ? "× Close AINSIDE" : "◐ AINSIDE"}</button>
+      <button onClick={()=>setOpen(v=>!v)} className={`fixed bottom-5 right-5 z-50 inline-flex items-center gap-2 rounded-full px-5 py-3 text-[13px] font-semibold shadow-lift active:scale-[0.98] transition-all ${open ? "bg-[var(--surface)] text-[var(--ink)] border border-[var(--border)]" : "bg-[var(--ink)] text-white dark:bg-white dark:text-black"}`}>
+        {open ? <><X size={14} weight="bold"/> Close</> : <><span className="h-2 w-2 rounded-full bg-[var(--accent)] animate-pulse"/> AINSIDE</>}
+      </button>
       {open && (
-        <div className="fixed bottom-20 right-4 z-50 w-[380px] max-w-[calc(100vw-24px)] rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 shadow-xl flex flex-col overflow-hidden">
-          <div className="px-4 py-3 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-800 flex items-center gap-2">
-            <span className="h-2 w-2 rounded-full bg-white dark:bg-zinc-900 animate-pulse" />
-            <span className="text-sm font-bold">AINSIDE</span><span className="mono text-[11px] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-full px-2 py-0.5">ag/gemini-3.6-flash-high</span><span className="ml-auto mono text-[11px] text-zinc-500 dark:text-zinc-400">NC SC VA</span>
+        <div className="fixed bottom-[76px] right-5 z-50 w-[380px] max-w-[calc(100vw-24px)] rounded-[24px] border border-[var(--border)] bg-[var(--surface)] shadow-lift flex flex-col overflow-hidden">
+          <div className="px-4 py-3 border-b border-[var(--border)] bg-[var(--surface-2)] flex items-center gap-2">
+            <span className="h-2 w-2 rounded-full bg-[var(--success)] animate-pulse" />
+            <span className="text-[13px] font-bold tracking-tight flex items-center gap-1.5"><Sparkle size={12} weight="fill" className="text-[var(--muted)]"/> AINSIDE</span>
+            <span className="mono text-[10px] bg-[var(--surface)] border border-[var(--border)] rounded-full px-2 py-0.5 text-[var(--muted)]">ag/gemini-3.6-flash-high</span>
+            <span className="ml-auto mono text-[10px] tracking-wide text-[var(--muted-2)]">NC SC VA</span>
           </div>
-          <div ref={listRef} className="h-[360px] overflow-auto p-3 space-y-3 bg-white dark:bg-zinc-900">
-            {msgs.map((m,i)=> <div key={i} className={`max-w-[86%] px-3 py-2 rounded-2xl text-sm leading-relaxed ${m.role==="user" ? "ml-auto bg-zinc-900 text-white" : "bg-zinc-100 text-zinc-800"}`}>{m.content}</div>)}
-            {busy && <div className="mono text-xs text-zinc-500 dark:text-zinc-400 animate-pulse">Thinking…</div>}
+          <div ref={listRef} className="h-[360px] overflow-auto p-3 space-y-3 bg-[var(--surface)]">
+            {msgs.map((m,i)=> <div key={i} className={`max-w-[86%] px-3.5 py-2.5 rounded-2xl text-[13px] leading-relaxed ${m.role==="user" ? "ml-auto bg-[var(--ink)] text-white dark:bg-white dark:text-black" : "bg-[var(--surface-2)] border border-[var(--border)] text-[var(--ink)]"}`}>{m.content}</div>)}
+            {busy && <div className="mono text-[11px] text-[var(--muted)] animate-pulse flex items-center gap-1.5"><span className="h-1.5 w-1.5 rounded-full bg-[var(--muted-2)] animate-pulse"/> Thinking…</div>}
           </div>
-          <div className="p-2 border-t border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 flex gap-2">
-            <input value={input} onChange={e=>setInput(e.target.value)} onKeyDown={e=>e.key==="Enter"&&send()} placeholder="Ask NC/SC/VA scope, reciprocity..." className="flex-1 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-full px-3 py-2 text-sm focus:outline-none focus:border-zinc-300" />
-            <button onClick={send} disabled={busy||!input.trim()} className="bg-zinc-900 text-white rounded-full px-4 text-sm font-semibold disabled:opacity-40">Send</button>
+          <div className="p-2.5 border-t border-[var(--border)] bg-[var(--surface)] flex gap-2">
+            <input value={input} onChange={e=>setInput(e.target.value)} onKeyDown={e=>e.key==="Enter"&&send()} placeholder="Ask NC/SC/VA scope, reciprocity..." className="flex-1 bg-[var(--surface-2)] border border-[var(--border)] rounded-full px-4 py-2.5 text-[13px] placeholder:text-[var(--muted-2)] focus:outline-none focus:border-[var(--ink)] focus:ring-2 focus:ring-[var(--ink)]/10" />
+            <button onClick={send} disabled={busy||!input.trim()} className="h-10 w-10 rounded-full bg-[var(--ink)] text-white dark:bg-white dark:text-black flex items-center justify-center shrink-0 disabled:opacity-40 active:scale-95 transition-transform">
+              <PaperPlaneRight size={16} weight="fill" />
+            </button>
           </div>
         </div>
       )}

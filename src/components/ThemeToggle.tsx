@@ -15,8 +15,9 @@ export default function ThemeToggle(){
     localStorage.setItem("licensensibly-theme", next?"dark":"light");
   };
   return (
-    <button onClick={toggle} aria-label="Toggle dark mode" className="rounded-full border border-zinc-200 bg-white dark:bg-zinc-900 dark:border-zinc-700 dark:text-white px-3 py-1.5 mono text-xs hover:bg-zinc-50 dark:bg-zinc-800 dark:hover:bg-zinc-800 transition-colors">
-      {dark ? "☀ Light" : "● Dark"}
+    <button onClick={toggle} aria-label="Toggle dark mode" className="inline-flex items-center gap-1.5 rounded-full border border-[var(--border)] bg-[var(--surface)] px-3 py-1.5 mono text-[11px] tracking-[0.06em] font-medium text-[var(--muted)] hover:text-[var(--ink)] hover:border-[var(--border-2)] active:scale-[0.98] transition-all">
+      <span className={`h-2 w-2 rounded-full transition-colors ${dark ? "bg-amber-400" : "bg-[var(--ink)]"}`} />
+      {dark ? "Light" : "Dark"}
     </button>
   );
 }
